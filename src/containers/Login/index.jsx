@@ -70,7 +70,7 @@ export default function Login({checkLoginDetails,LoginDetails}) {
           <div className="position-relative">
             {/* shape Hero */}
             <section className="section section-shaped pb-150">
-              <div className="shape shape-style-1 shape-default">
+              <div className="shape shape-style-1" style={{"background-color":"#333333"}}>
                 <span />
                 <span />
                 <span />
@@ -85,10 +85,10 @@ export default function Login({checkLoginDetails,LoginDetails}) {
                 <div className="col px-0">
                   <Row>
                     <Col lg="6">
-                      <Card className="bg-secondary shadow border-0 floating">
+                      <Card className="bg-secondary shadow border-0 mt-5 floating">
                         <CardHeader className="bg-white">
                           <div className="text-muted text-center">
-                            <h2>Sign in with</h2>
+                            <h2 >Sign in with</h2>
                           </div>
                         </CardHeader>
                         <CardBody className="px-lg-5 py-lg-5">
@@ -137,7 +137,7 @@ export default function Login({checkLoginDetails,LoginDetails}) {
                             <div className="text-center">
                               <Button
                                 className="my-4"
-                                color="primary"
+                                color="danger"
                                 type="submit"
                                 
                               >
@@ -167,11 +167,16 @@ export default function Login({checkLoginDetails,LoginDetails}) {
                         </Col>
                       </Row>
                     </Col>
-                    <Col lg="6 py-lg-5">
-                      <h1 className="display-3 text-white">
+                    <Col lg="6">
+                      {/* <h1 className="display-3 text-white">
                         Online Multibanking System
                         <span>Multiple Accounts On One Website</span>
-                      </h1>
+                      </h1> */}
+                      <img
+                    alt="..."
+                    className="img-fluid"
+                    src={require("../../assets/img/kisspng-liverpool-f-c-fujinon-xf-56mm-f1-2-r-football-pla-soccer-player-5a68fb3f489053.7406375815168295032972.png")}
+                  />
                     </Col>
                   </Row>
                 </div>
@@ -187,7 +192,7 @@ export default function Login({checkLoginDetails,LoginDetails}) {
                   y="0"
                 >
                   <polygon
-                    className="fill-white"
+                    className="fill-dark"
                     points="2560 0 2560 100 0 100"
                   />
                 </svg>
@@ -196,23 +201,23 @@ export default function Login({checkLoginDetails,LoginDetails}) {
             {/* 1st Hero Variation */}
           </div>
 
-          <section className="section">
+          <section className="section bg-dark">
             <Container>
               <Row className="row-grid align-items-center">
                 <Col className="order-md-2" md="6">
                   <img
                     alt="..."
                     className="img-fluid floating"
-                    src={require("../../assets/img/theme/promo-1.png")}
+                    src={require("../../assets/img/kisspng-running-london-marathon-the-color-run-sport-5ae3e0ec20cd22.8534516715248836921344.png")}
                   />
                 </Col>
                 <Col className="order-md-1" md="6">
                   <div className="pr-md-5">
-                    <h3>Awesome features</h3><hr/>
+                    <h3 className="text-danger font-weight-bold">Awesome features</h3><hr/>
                     <ul className="list-unstyled mt-5">
                       <li className="py-2">
                         <div className="d-flex align-items-center">
-                            <h5 className="mb-0">
+                            <h5 className="text-danger mb-0 font-weight-light">
                                 The Multi Banking System Interface is targeted to the future banking solution
                                 for the users who is having multiple bank accounts in multiple banks. 
                             </h5>
@@ -220,7 +225,7 @@ export default function Login({checkLoginDetails,LoginDetails}) {
                       </li>
                       <li className="py-2">
                         <div className="d-flex align-items-center">
-                            <h5 className="mb-0">
+                            <h5 className="text-danger mb-0 font-weight-light">
                                 This interface integrates all existing banks and provides business solutions
                                 for both retail and corporate. 
                             </h5>
@@ -228,7 +233,7 @@ export default function Login({checkLoginDetails,LoginDetails}) {
                       </li>
                       <li className="py-2">
                         <div className="d-flex align-items-center">
-                            <h5 className="mb-0">
+                            <h5 className="text-danger mb-0 font-weight-light">
                                 This system acts as a standard interface between the clients and all the banks,
                                 By using this portal any client who maintain accounts in various banks
                                 can directly log on to Multi Banking System Interface and make any kind of transactions.
@@ -241,14 +246,14 @@ export default function Login({checkLoginDetails,LoginDetails}) {
               </Row>
             </Container>
           </section>
-          <section className="section bg-secondary">
+          <section className="section" style={{"background-color":"#333333"}}>
             <Container>
               <Row className="row-grid align-items-center">
                 <Col md="6">
-                  <Card className="bg-default shadow border-0">
+                  <Card className="bg-dark shadow border-0">
                     <CardImg
                       alt="..."
-                      src={require("../../assets/img/theme/img-2-1200x1000.jpg")}
+                      src={require("../../assets/img/kisspng-indian-premier-league-baseball-bat-cricket-vector-hand-painted-baseball-5a8b5d501e2a31.9417828915190828321236.png")}
                       top
                     />
                     <blockquote className="card-blockquote">
@@ -268,7 +273,7 @@ export default function Login({checkLoginDetails,LoginDetails}) {
                           points="0,42 583,95 683,0 0,95"
                         />
                       </svg>
-                      <h3 className="display-3 font-weight-bold text-white">
+                      <h3 className="display-3 font-weight-bold text-white mb-0">
                         OBJECTIVES OF SYSTEM
                       </h3>
                     </blockquote>
@@ -277,12 +282,12 @@ export default function Login({checkLoginDetails,LoginDetails}) {
                 <Col md="6">
                   <div className="pl-md-5">
                     <hr/>
-                    <h5>
+                    <h5 className="text-white mb-0 font-weight-light">
                         The objective of this proposal is to provide the overview of blockchain technology
                         with its benefits emphasizing on the applications of the technology in the Indian Banking Sector.
                     </h5>
                     <hr/>
-                    <h5>
+                    <h5 className="text-white mb-0 font-weight-light"> 
                         The proposal gives the insight of various challenges and global perspective of blockchain technology
                         in Banking Industry.
                     </h5>
@@ -292,11 +297,11 @@ export default function Login({checkLoginDetails,LoginDetails}) {
               </Row>
             </Container>
           </section>
-          <section className="section">
+          <section className="section bg-dark">
             <Container>
               <Row className="justify-content-center text-center mb-md">
                 <Col lg="8">
-                  <h2 className="display-3">Our Partners</h2>
+                  <h2 className="display-3 text-danger mb-0 font-weight-bold">Our Partners</h2>
                 </Col>
               </Row>
               <Row>
@@ -426,8 +431,8 @@ export default function Login({checkLoginDetails,LoginDetails}) {
             </Container>
           </section>
 
-          <section className="section bg-gradient-default pb-300">
-            {/* SVG separator */}
+          {/* <section className="section bg-gradient-default pb-300">
+
             <div className="separator separator-bottom separator-skew zindex-100">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -443,10 +448,10 @@ export default function Login({checkLoginDetails,LoginDetails}) {
                 />
               </svg>
             </div>
-          </section>
-          <section id="contact" className="section pt-lg-0 section-contact-us">
+          </section> */}
+          <section id="contact" className="section section section-contact-us" style={{"background-color":"#333333"}}>
             <Container>
-              <Row className="justify-content-center mt--300">
+              <Row className="justify-content-center">
                 <Col lg="8">
                   <Card className="bg-gradient-secondary shadow">
                     <CardBody className="p-lg-5">
@@ -501,6 +506,22 @@ export default function Login({checkLoginDetails,LoginDetails}) {
                 </Col>
               </Row>
             </Container>
+                          {/* SVG separator */}
+                          <div className="separator separator-bottom separator-skew">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="none"
+                  version="1.1"
+                  viewBox="0 0 2560 100"
+                  x="0"
+                  y="0"
+                >
+                  <polygon
+                    className="fill-dark"
+                    points="2560 0 2560 100 0 100"
+                  />
+                </svg>
+              </div>
           </section>
         </main>
     );

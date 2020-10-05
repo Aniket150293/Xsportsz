@@ -21,7 +21,7 @@ let App = () => (
     <Router>
           <Header/>
           <Laoading/>
-          <div className="pt-5">
+          {/* <div className="pt-5"> */}
 
                <Route path="/" exact component={Login} />
 
@@ -45,8 +45,8 @@ let App = () => (
 
                <Route path="/transfer-money/" component={TransferMoney} />
                <Route path="/transfer-money-all/" component={TransferMoney} />
-
-          </div>
+{/* 
+          </div> */}
           <Footer/>
       </Router>
 );

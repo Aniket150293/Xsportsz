@@ -38,7 +38,7 @@ export default function Header({logout}) {
                   <UncontrolledDropdown nav>
                     <DropdownToggle nav>
                       <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">Customer List</span>
+                      <span className="font-weight-bold nav-link-inner--text">Customer List</span>
                     </DropdownToggle>      
                     <DropdownMenu>
                       <DropdownItem to="/customer-list" tag={Link}>
@@ -53,7 +53,7 @@ export default function Header({logout}) {
                   <UncontrolledDropdown nav>
                     <DropdownToggle nav>
                       <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">Bank</span>
+                      <span className="font-weight-bold nav-link-inner--text">Bank</span>
                     </DropdownToggle>      
                     <DropdownMenu>
                       <DropdownItem to="/bank-list" tag={Link}>
@@ -71,7 +71,7 @@ export default function Header({logout}) {
                   <UncontrolledDropdown nav>
                     <DropdownToggle nav>
                       <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">Bank Admin</span>
+                      <span className="font-weight-bold nav-link-inner--text">Bank Admin</span>
                     </DropdownToggle>      
                     <DropdownMenu>
                       <DropdownItem to="/bank-admin-list" tag={Link}>
@@ -89,7 +89,7 @@ export default function Header({logout}) {
                   <UncontrolledDropdown nav>
                     <DropdownToggle nav>
                       <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">Reports</span>
+                      <span className="font-weight-bold nav-link-inner--text">Reports</span>
                     </DropdownToggle>      
                     <DropdownMenu>
                       <DropdownItem to="/report" tag={Link}>
@@ -106,7 +106,7 @@ export default function Header({logout}) {
                   <UncontrolledDropdown nav>
                     <DropdownToggle nav>
                       <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">My Accounts List</span>
+                      <span className="font-weight-bold nav-link-inner--text">My Accounts List</span>
                     </DropdownToggle>
                     <DropdownMenu>
                       <DropdownItem to="/customer-registered-bank-list" tag={Link}>
@@ -121,7 +121,7 @@ export default function Header({logout}) {
                   <UncontrolledDropdown nav>
                     <DropdownToggle nav>
                       <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">Transfer Fund</span>
+                      <span className="font-weight-bold nav-link-inner--text">Transfer Fund</span>
                     </DropdownToggle>      
                     <DropdownMenu>
                     <DropdownItem to="/transfer-money" tag={Link}>
@@ -141,7 +141,7 @@ export default function Header({logout}) {
         <UncontrolledDropdown nav>
           <DropdownToggle nav>
             <i className="ni ni-collection d-lg-none mr-1" />
-            <span className="nav-link-inner--text">Customer List</span>
+            <span className="font-weight-bold nav-link-inner--text">Customer List</span>
           </DropdownToggle>      
           <DropdownMenu>
             <DropdownItem to="/customer-list" tag={Link}>
@@ -172,7 +172,7 @@ if (localStorage.getItem("role") != null){
       <UncontrolledDropdown nav>
         <DropdownToggle nav>
           <i className="ni ni-collection d-lg-none mr-1" />
-          <span className="nav-link-inner--text">User Settings</span>
+          <span className="font-weight-bold nav-link-inner--text">User Settings</span>
         </DropdownToggle>
         <DropdownMenu>
           <DropdownItem to={"/register/"+localStorage.getItem('userid')} tag={Link}>
@@ -191,7 +191,7 @@ if (localStorage.getItem("role") != null){
   <UncontrolledDropdown nav>
     <DropdownToggle nav>
       <i className="ni ni-collection d-lg-none mr-1" />
-      <span className="nav-link-inner--text">Contact Us</span>
+      <span className="font-weight-bold nav-link-inner--text">Contact Us</span>
     </DropdownToggle>
     <DropdownMenu>
       <DropdownItem to={"/#contact"} tag={Link}>
@@ -206,7 +206,7 @@ if (localStorage.getItem("role") != null){
     <UncontrolledDropdown nav>
       <DropdownToggle nav>
         <i className="ni ni-collection d-lg-none mr-1" />
-        <span className="nav-link-inner--text">About Us</span>
+        <span className="font-weight-bold nav-link-inner--text">About Us</span>
       </DropdownToggle>
       <DropdownMenu>
         <DropdownItem to={"/#about"} tag={Link}>
@@ -223,8 +223,9 @@ if (localStorage.getItem("role") != null){
         <div>
         <header>
           <Navbar
-            className="shadow navbar-main fixed-top navbar-expand-lg navbar-dark bg-gradient-primary headroom"
+            className="shadow navbar-main fixed-top navbar-expand-lg navbar-dark headroom"
             expand="lg"
+            style={{"border-radius": "100px","margin": "10px 50px","padding": "0px","background-color":"#E92929"}}
           >
             <Container>
               <NavbarBrand className="mr-lg-5" to="/" tag={Link}>
