@@ -48,110 +48,112 @@ export default function Header({logout}) {
                   </UncontrolledDropdown>
                 </Nav> 
                 )  
-      tabBar1= (  
-                <Nav className="navbar-nav-hover align-items-lg-center" navbar>
-                  <UncontrolledDropdown nav>
-                    <DropdownToggle nav>
-                      <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="font-weight-bold nav-link-inner--text">Bank</span>
-                    </DropdownToggle>      
-                    <DropdownMenu>
-                      <DropdownItem to="/bank-list" tag={Link}>
-                        Bank List
-                      </DropdownItem>
-                      <DropdownItem to="/register-bank" tag={Link}>
-                        Register Bank
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                </Nav> 
-                )
-      tabBar2= (
-                <Nav className="navbar-nav-hover align-items-lg-center" navbar>
-                  <UncontrolledDropdown nav>
-                    <DropdownToggle nav>
-                      <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="font-weight-bold nav-link-inner--text">Bank Admin</span>
-                    </DropdownToggle>      
-                    <DropdownMenu>
-                      <DropdownItem to="/bank-admin-list" tag={Link}>
-                        Bank Admin List
-                      </DropdownItem>
-                      <DropdownItem to="/register-bank-admin" tag={Link}>
-                        Register Bank Admin
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                </Nav>   
-                )
-        tabBar3= ( 
-                <Nav className="navbar-nav-hover align-items-lg-center" navbar>
-                  <UncontrolledDropdown nav>
-                    <DropdownToggle nav>
-                      <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="font-weight-bold nav-link-inner--text">Reports</span>
-                    </DropdownToggle>      
-                    <DropdownMenu>
-                      <DropdownItem to="/report" tag={Link}>
-                        Reports
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                </Nav>  
-                ) 
+
+      // tabBar2= (
+      //           <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+      //             <UncontrolledDropdown nav>
+      //               <DropdownToggle nav>
+      //                 <i className="ni ni-collection d-lg-none mr-1" />
+      //                 <span className="font-weight-bold nav-link-inner--text">Bank Admin</span>
+      //               </DropdownToggle>      
+      //               <DropdownMenu>
+      //                 <DropdownItem to="/bank-admin-list" tag={Link}>
+      //                   Bank Admin List
+      //                 </DropdownItem>
+      //                 <DropdownItem to="/register-bank-admin" tag={Link}>
+      //                   Register Bank Admin
+      //                 </DropdownItem>
+      //               </DropdownMenu>
+      //             </UncontrolledDropdown>
+      //           </Nav>   
+      //           )
+        // tabBar3= ( 
+        //         <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+        //           <UncontrolledDropdown nav>
+        //             <DropdownToggle nav>
+        //               <i className="ni ni-collection d-lg-none mr-1" />
+        //               <span className="font-weight-bold nav-link-inner--text">Reports</span>
+        //             </DropdownToggle>      
+        //             <DropdownMenu>
+        //               <DropdownItem to="/report" tag={Link}>
+        //                 Reports
+        //               </DropdownItem>
+        //             </DropdownMenu>
+        //           </UncontrolledDropdown>
+        //         </Nav>  
+        //         ) 
          
   }else if (localStorage.getItem("role") === 'user'){
-    tabBar= (
-                <Nav className="navbar-nav-hover align-items-lg-center" navbar>
-                  <UncontrolledDropdown nav>
-                    <DropdownToggle nav>
-                      <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="font-weight-bold nav-link-inner--text">My Accounts List</span>
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem to="/customer-registered-bank-list" tag={Link}>
-                        My Accounts List
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                </Nav>                         
-              )
-    tabBar1= (  
-                <Nav className="navbar-nav-hover align-items-lg-center" navbar>
-                  <UncontrolledDropdown nav>
-                    <DropdownToggle nav>
-                      <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="font-weight-bold nav-link-inner--text">Transfer Fund</span>
-                    </DropdownToggle>      
-                    <DropdownMenu>
-                    <DropdownItem to="/transfer-money" tag={Link}>
-                        Transfer Fund To My Accounts
-                      </DropdownItem>
-                      <DropdownItem to="/transfer-money-all" tag={Link}>
-                        Transfer Fund To Other User Accounts
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                </Nav> 
-                )
+    // tabBar1= (  
+    //   <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+    //     <UncontrolledDropdown nav>
+    //       <DropdownToggle nav>
+    //         <i className="ni ni-collection d-lg-none mr-1" />
+    //         <span className="font-weight-bold nav-link-inner--text">Bank</span>
+    //       </DropdownToggle>      
+    //       <DropdownMenu>
+    //         <DropdownItem to="/bank-list" tag={Link}>
+    //           Bank List
+    //         </DropdownItem>
+    //         <DropdownItem to="/register-bank" tag={Link}>
+    //           Register Bank
+    //         </DropdownItem>
+    //       </DropdownMenu>
+    //     </UncontrolledDropdown>
+    //   </Nav> 
+    //   )
+    // tabBar= (
+    //             <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+    //               <UncontrolledDropdown nav>
+    //                 <DropdownToggle nav>
+    //                   <i className="ni ni-collection d-lg-none mr-1" />
+    //                   <span className="font-weight-bold nav-link-inner--text">My Accounts List</span>
+    //                 </DropdownToggle>
+    //                 <DropdownMenu>
+    //                   <DropdownItem to="/customer-registered-bank-list" tag={Link}>
+    //                     My Accounts List
+    //                   </DropdownItem>
+    //                 </DropdownMenu>
+    //               </UncontrolledDropdown>
+    //             </Nav>                         
+    //           )
+    // tabBar1= (  
+    //             <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+    //               <UncontrolledDropdown nav>
+    //                 <DropdownToggle nav>
+    //                   <i className="ni ni-collection d-lg-none mr-1" />
+    //                   <span className="font-weight-bold nav-link-inner--text">Transfer Fund</span>
+    //                 </DropdownToggle>      
+    //                 <DropdownMenu>
+    //                 <DropdownItem to="/transfer-money" tag={Link}>
+    //                     Transfer Fund To My Accounts
+    //                   </DropdownItem>
+    //                   <DropdownItem to="/transfer-money-all" tag={Link}>
+    //                     Transfer Fund To Other User Accounts
+    //                   </DropdownItem>
+    //                 </DropdownMenu>
+    //               </UncontrolledDropdown>
+    //             </Nav> 
+    //             )
 
-  }else if (localStorage.getItem("role") === 'bank_admin'){
-    tabBar= (    
-      <Nav className="navbar-nav-hover align-items-lg-center" navbar>
-        <UncontrolledDropdown nav>
-          <DropdownToggle nav>
-            <i className="ni ni-collection d-lg-none mr-1" />
-            <span className="font-weight-bold nav-link-inner--text">Customer List</span>
-          </DropdownToggle>      
-          <DropdownMenu>
-            <DropdownItem to="/customer-list" tag={Link}>
-              Customer List
-            </DropdownItem>
-          </DropdownMenu>
-        </UncontrolledDropdown>
-      </Nav> 
-      )  
   }
+  // else if (localStorage.getItem("role") === 'bank_admin'){
+  //   tabBar= (    
+  //     <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+  //       <UncontrolledDropdown nav>
+  //         <DropdownToggle nav>
+  //           <i className="ni ni-collection d-lg-none mr-1" />
+  //           <span className="font-weight-bold nav-link-inner--text">Customer List</span>
+  //         </DropdownToggle>      
+  //         <DropdownMenu>
+  //           <DropdownItem to="/customer-list" tag={Link}>
+  //             Customer List
+  //           </DropdownItem>
+  //         </DropdownMenu>
+  //       </UncontrolledDropdown>
+  //     </Nav> 
+  //     )  
+  // }
 
 if (localStorage.getItem("role") != null){
   logoutBtn=(
@@ -229,10 +231,11 @@ if (localStorage.getItem("role") != null){
           >
             <Container>
               <NavbarBrand className="mr-lg-5" to="/" tag={Link}>
-                <img
+                {/* <img
                   alt="..."
                   src={require("../../assets/img/logo.jpg")}
-                />
+                /> */}
+                <span className="font-weight-bold">Xsportsz</span>
               </NavbarBrand>
               <button className="navbar-toggler"  id="navbar_global">
                 <span className="navbar-toggler-icon" />

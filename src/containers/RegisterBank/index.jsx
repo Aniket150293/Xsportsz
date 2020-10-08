@@ -6,7 +6,7 @@ import {
   Input,
   Container,
   Row,Col,
-  Button,Modal
+  Button,Modal,Card,CardBody,CardTitle
 } from "reactstrap";
 import { Form } from "react-bootstrap";
 
@@ -114,8 +114,34 @@ export default function Register({registerBankByAdmin,registeredBankDetailsByAdm
                 </button>
               </div>
             </Modal>
-            <Container className="bg-secondary shadow card mt-5">
-            <div className="card-body">
+
+            <Container className="mt-5">
+            <Row>
+                <Col lg="6">
+                  <Card className="bg-danger shadow card-stats mb-4 mb-xl-0">
+                    <CardBody>
+                      <Row>
+                        <div className="col">
+                          <CardTitle
+                            tag="h5"
+                            className="text-white text-uppercase text-muted mb-0"
+                          >
+                            New Users
+                          </CardTitle>
+                          <span className="text-white h2 font-weight-bold mb-0">
+                           
+                          </span>
+                        </div>
+                      </Row>
+                      <p className="mt-3 mb-0 text-muted text-sm">
+                        <span className="text-white text-nowrap">Since last month</span>
+                      </p>
+                    </CardBody>
+                  </Card>
+                  </Col>
+                  <Col lg="6">
+<div class="bg-secondary shadow card">
+<div className="card-body">
               <div className="mb-3">
                 <small className="text-uppercase font-weight-bold">
                   Sports Details
@@ -163,11 +189,16 @@ export default function Register({registerBankByAdmin,registeredBankDetailsByAdm
 
               <br></br>
 
-                <Button color="primary" type="submit" className="">
-                    Register Bank
+                <Button color="danger" type="submit" className="">
+                    Register Sport
                 </Button>
             </Form>
         </div>
+</div>
+                  </Col>
+                
+              </Row>
+
         </Container>
     </div>
     );

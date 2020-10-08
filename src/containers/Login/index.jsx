@@ -40,10 +40,11 @@ export default function Login({checkLoginDetails,LoginDetails}) {
             if(LoginDetails.data.role === 'super_user'){
                 history.push("/customer-list");
             }else if(LoginDetails.data.role === 'user'){
-                history.push("/customer-registered-bank-list");
-            }else if(LoginDetails.data.role === 'bank_admin'){
-                history.push("/customer-list");
+                history.push("/register-sport");
             }
+            // else if(LoginDetails.data.role === 'bank_admin'){
+            //     history.push("/customer-list");
+            // }
         }else{
             setMsg('Incorrect Credentials');
         }
@@ -494,7 +495,7 @@ export default function Login({checkLoginDetails,LoginDetails}) {
                         <Button
                           block
                           className="btn-round"
-                          color="default"
+                          color="danger"
                           size="lg"
                           type="button"
                         >

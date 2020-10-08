@@ -62,7 +62,7 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
   }
 
     return (
-        <div className="container-fluid py-5 ">
+        <div className="container-fluid py-5 " style={{"background-color":"#333333"}}>
                        <Modal
               className="modal-dialog modal-danger"
               contentClassName={Class}
@@ -84,7 +84,7 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
                 </button>
               </div>
             </Modal>
-            <Form className="shadow card">
+            <Form className="shadow card mt-5">
                 <div className="card-header">List Of Users</div>
                 <div className="card-body">
                 <Table responsive striped bordered hover>
