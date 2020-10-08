@@ -10,20 +10,16 @@ router.post('/registerBankByAdmin', function(req, res, next) {
             if(err){
               res.send({status:403 , msg: 'Forbidden'});
             }else{
-              var a = connection.query('INSERT INTO registered_bank '+
-              '( bank_registration_applied_by, bank, email, phone_number, alternate_phone_number, ' +
-              'location, accounts_starts_with, ifsc, city, state, zip_code, is_active, is_blocked, '+
-              'created_at,modified_at ) '+
-              'VALUES (?,?,?,?,?,?,?,?,?,?,?,1,0,now(),now()) ',
-
-              [req.body.userid, req.body.bankName, req.body.email,
-                req.body.phoneNo, req.body.alternatePhoneNo, req.body.location , req.body.accountStartWith,
-                req.body.ifsc,req.body.city, req.body.state, req.body.zip],
+              var a = connection.query('INSERT INTO user_sport_mapping '+
+              '( user_id, sport_id, years_age, months_age, specialization_id, ' +
+              'is_active, created_date, updated_date ) '+
+              'VALUES (?,?,?,?,?,1,now(),now()) ',
+              [req.body.userid, req.body.sport, req.body.years, req.body.months, req.body.spetialization],
               function (err, rows) {
                 if(err){
                   res.send({status:500 , data:err});
                 }else{
-                  res.send({status:200 , data: rows, msg: 'Bank Registered Successfully'});
+                  res.send({status:200 , data: rows, msg: 'User Registered Successfully'});
                 }
               })
             }

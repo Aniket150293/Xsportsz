@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import { registerBankByAdmin } from '../../actions'
+import { registerBankByAdmin,getSports,getSpetialization } from '../../actions'
 import { useHistory } from "react-router";
 import {
   Input,
@@ -11,38 +11,49 @@ import {
 import { Form } from "react-bootstrap";
 
 
-export default function Register({registerBankByAdmin,registeredBankDetailsByAdmin}) {
+export default function Register({registerBankByAdmin,registeredBankDetailsByAdmin,getSports,getSportsSucsses,getSpetializationSucsses,getSpetialization}) {
 
-  const [bankName, setBankName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNo, setPhoneNo] = useState("");
-  const [alternatePhoneNo, setAlternatePhoneNo] = useState("");
-  const [location, setLocation] = useState("");
-  const [accountStartWith, setAccountStartWith] = useState("");
-  const [ifsc, setIfsc] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zip, setZip] = useState("");
+  const [sport, setSport] = useState("");
+  const [years, setYears] = useState("");
+  const [months, setMonths] = useState("");
+  const [spetialization, setSpetialization] = useState("");
+  // const [location, setLocation] = useState("");
+
 
   var validateMsgValid=(<Form.Control.Feedback>Looks good!</Form.Control.Feedback>)
   var validateMsgInvalid=(<Form.Control.Feedback type="invalid">Please provide a valid Input.</Form.Control.Feedback>)
+
+  useEffect(() => {
+    getSports({"userid":localStorage.getItem("userid")},localStorage.getItem("token"))
+
+  },[]);
+
+  const [data1, setdata1] = useState();
+  
+  React.useEffect(() => {
+      if(getSportsSucsses)if(getSportsSucsses.status==200){
+          setdata1(getSportsSucsses.data)
+        }
+  }, [getSportsSucsses])
+
+  const [data2, setdata2] = useState();
+  
+  React.useEffect(() => {
+      if(getSpetializationSucsses)if(getSpetializationSucsses.status==200){
+          setdata2(getSpetializationSucsses.data)
+        }
+  }, [getSpetializationSucsses])
 
   function handleSubmit(e) {
     e.preventDefault();
     if(e.currentTarget.checkValidity()){
     var data = {
         "userid":localStorage.getItem('userid'),
-        "bankName":bankName,
-        "email":email,
-        "phoneNo":phoneNo,
-        "alternatePhoneNo":alternatePhoneNo,
-        "location":location,
-        "accountStartWith":accountStartWith,
-        "ifsc":ifsc,
-        "city":city,
-        "state":state,
-        "zip":zip
+        "sport":sport,
+        "years":years,
+        "months":months,
+        "spetialization":spetialization,
+        // "location":location,
     }
     registerBankByAdmin(data,localStorage.getItem("token"))
     }
@@ -67,17 +78,11 @@ export default function Register({registerBankByAdmin,registeredBankDetailsByAdm
     if(registeredBankDetailsByAdmin)if(isSubmit){
       if(registeredBankDetailsByAdmin.status==200){
         NotificationModel("bg-success","Bank Added Sucssesfully")
-        setBankName("");
-        setEmail("");
-        setPhoneNo("");
-        setAlternatePhoneNo("");
-        setLocation("");
-        setAccountStartWith ("");
-        setIfsc("");
-        setAddress("");
-        setCity("");
-        setState("");
-        setZip("");
+        setSport("");
+        setYears("");
+        setMonths("");
+        setSpetialization("");
+        // setLocation("");
       }else{
         NotificationModel("bg-danger","Bank Not Added")
       }
@@ -87,7 +92,7 @@ export default function Register({registerBankByAdmin,registeredBankDetailsByAdm
 
 
     return (
-        <div className="py-5 ">
+        <div className="py-5 " style={{"background-color":"#333333"}}>
                 <Modal
               className="modal-dialog modal-danger"
               contentClassName={Class}
@@ -109,89 +114,54 @@ export default function Register({registerBankByAdmin,registeredBankDetailsByAdm
                 </button>
               </div>
             </Modal>
-            <Container className="bg-secondary shadow card">
+            <Container className="bg-secondary shadow card mt-5">
             <div className="card-body">
               <div className="mb-3">
                 <small className="text-uppercase font-weight-bold">
-                  Bank Information
+                  Sports Details
                 </small>
               </div>
 
                 <Form noValidate validated={isSubmit} onSubmit={handleSubmit}>
                 <Row>
-                <Form.Group as={Col} lg="6" sm="6">
-                    <Input required value={bankName} className="form-control-alternative" type="text" placeholder="Enter Bank Name" onChange={e => setBankName(e.target.value)}/>
-                  {validateMsgValid}
-                  {validateMsgInvalid}
-                </Form.Group>
-                <Form.Group as={Col} lg="6" sm="6">
-                    <Input required value={email} className="form-control-alternative" type="email" placeholder="Enter email" onChange={e => setEmail(e.target.value)}/>
-                  {validateMsgValid}
-                  {validateMsgInvalid}
-                </Form.Group>
-                </Row>
-                <Row>
-                <Form.Group as={Col} lg="6" sm="6">
-                        <Input required value={phoneNo} className="form-control-alternative" type="text" placeholder="Phone No" onChange={e => setPhoneNo(e.target.value)}/>
-                  {validateMsgValid}
-                  {validateMsgInvalid}
-                </Form.Group>
-
-                <Form.Group as={Col} lg="6" sm="6">
-                        <Input required value={alternatePhoneNo} className="form-control-alternative" type="text" placeholder="Alternate Phone No" onChange={e => setAlternatePhoneNo(e.target.value)}/>
-                  {validateMsgValid}
-                  {validateMsgInvalid}
-                </Form.Group>
-                </Row>
-
-              <div className="mb-3">
-                <small className="text-uppercase font-weight-bold">
-                  Bank Location Information
-                </small>
-              </div>
-
-                <Row>
-                <Form.Group as={Col} lg="4" sm="6">
-                    <Input required value={location} className="form-control-alternative" type="textarea" placeholder="Enter Location" onChange={e => setLocation(e.target.value)}/>
-                  {validateMsgValid}
-                  {validateMsgInvalid}
-                </Form.Group>
-
-                <Form.Group as={Col} lg="4" sm="6">
-                    <Input required value={accountStartWith} className="form-control-alternative" type="text" placeholder="Enter Account Starts Number" onChange={e => setAccountStartWith(e.target.value)} />
-                  {validateMsgValid}
-                  {validateMsgInvalid}
-                </Form.Group>
-
-                <Form.Group as={Col} lg="4" sm="6">
-                    <Input required value={ifsc} className="form-control-alternative" type="text" placeholder="IFSC Code" onChange={e => setIfsc(e.target.value)}/>
+                <Form.Group as={Col} lg="12" sm="12">
+                    <Input required value={sport} className="form-control-alternative" type="select" placeholder="Select Sport" onChange={e => {setSport(e.target.value);getSpetialization({"sport_id":e.target.value,"userid":localStorage.getItem("userid")},localStorage.getItem("token"))}}>
+                    <option value=''>Select Sport</option>
+                        {data1 ? data1.map((item) => 
+                          (<option value={item.id}>{item.name}</option>)
+                          ): 'Not Available'}
+                          </Input>
                   {validateMsgValid}
                   {validateMsgInvalid}
                 </Form.Group>
                 </Row>
                 <Row>
-                <Form.Group as={Col} lg="4" sm="6">
-                    <Input required value={city} className="form-control-alternative" type="text" placeholder="City" onChange={e => setCity(e.target.value)}/>
+                <Form.Group as={Col} lg="6" sm="6">
+                    <Input required value={years} className="form-control-alternative" type="text" placeholder="Enter Age Years" onChange={e => setYears(e.target.value)}/>
                   {validateMsgValid}
                   {validateMsgInvalid}
                 </Form.Group>
 
-                <Form.Group as={Col} lg="4" sm="6">
-                    <Input required value={state} className="form-control-alternative" type="select" onChange={e => setState(e.target.value)}>
-                        <option value="">State</option>
-                        <option value="1">Maharashtra</option>
-                    </Input>
-                  {validateMsgValid}
-                  {validateMsgInvalid}
-                </Form.Group>
-
-                <Form.Group as={Col} lg="4" sm="6">
-                    <Input required value={zip} className="form-control-alternative" type="text" placeholder="Zip Code" onChange={e => setZip(e.target.value)}/>
+                <Form.Group as={Col} lg="6" sm="6">
+                        <Input required value={months} className="form-control-alternative" type="text" placeholder="Enter Age Months" onChange={e => setMonths(e.target.value)}/>
                   {validateMsgValid}
                   {validateMsgInvalid}
                 </Form.Group>
                 </Row>
-                <br></br>
+                <Row>
+                <Form.Group as={Col} lg="12" sm="12">
+                        <Input required value={spetialization} className="form-control-alternative" type="select" placeholder="Select Spetialization" onChange={e => setSpetialization(e.target.value)}>
+                        <option value=''>Select Spetialization</option>
+                        {data2 ? data2.map((item) => 
+                          (<option value={item.id}>{item.name}</option>)
+                          ): 'Not Available'}
+                          </Input>
+                  {validateMsgValid}
+                  {validateMsgInvalid}
+                </Form.Group>
+                </Row>
+
+              <br></br>
 
                 <Button color="primary" type="submit" className="">
                     Register Bank
@@ -205,10 +175,14 @@ export default function Register({registerBankByAdmin,registeredBankDetailsByAdm
 
 const mapDispatchToProps =  {
     registerBankByAdmin : registerBankByAdmin,
+    getSports : getSports,
+    getSpetialization : getSpetialization
 }
 
 const mapStateToProps = (state) => ({
-  registeredBankDetailsByAdmin:state.registeredBankDetailsByAdmin
+  registeredBankDetailsByAdmin:state.registeredBankDetailsByAdmin,
+  getSportsSucsses:state.getSportsSucsses,
+  getSpetializationSucsses:state.getSpetializationSucsses
 })
 
 Register = connect(

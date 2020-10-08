@@ -36,6 +36,11 @@ const reducer = (state = INITIAL_STATE, action) => {
     case'getHomeDetailsSucsses':
       return { ...state,getHomeDetailsSucsses:action.json,loading:false}
 
+      case'getSportsSucsses':
+      return { ...state,getSportsSucsses:action.json,loading:false}
+      case'getSpetializationSucsses':
+      return { ...state,getSpetializationSucsses:action.json,loading:false}
+
     case 'LOGOUT_SUCCESS':
         return { INITIAL_STATE,loading: false };
 

@@ -262,7 +262,7 @@ NotificationModel("bg-danger","Server Error")
     }
 }
     return (
-        <div className="py-5 ">
+        <div className="py-5" style={{"background-color":"#333333"}}>
         <Modal
               className="modal-dialog modal-danger"
               contentClassName={Class}
@@ -284,7 +284,7 @@ NotificationModel("bg-danger","Server Error")
                 </button>
               </div>
             </Modal>
-            <Container className="bg-secondary shadow card">
+            <Container className="bg-secondary shadow card mt-5">
             <div className="card-body">
               <div className="mb-3">
                 <small className="text-uppercase font-weight-bold">
@@ -296,7 +296,7 @@ NotificationModel("bg-danger","Server Error")
 
             <Row>
                 
-                <Form.Group as={Col} lg="9" >
+                <Form.Group as={Col} lg="12" >
                 <Row>
                 
                     <Form.Group as={Col} lg="6" >
@@ -337,7 +337,7 @@ NotificationModel("bg-danger","Server Error")
                 {validateMsgInvalid}</Row>
                 </Form.Group>
 
-                <Form.Group as={Col} lg="3">
+                {/* <Form.Group as={Col} lg="3">
                       <div className="row justify-content-center card-profile-image">
                           <img
                             alt={profile}
@@ -354,7 +354,7 @@ NotificationModel("bg-danger","Server Error")
 
                 {validateMsgValid}
                 {validateMsgInvalid}      </div>
-                </Form.Group>
+                </Form.Group> */}
                 
             </Row>
 

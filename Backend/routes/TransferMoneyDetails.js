@@ -85,4 +85,46 @@ router.post('/searchAccount',(req,res,next)=>{
   }
 })
 });
+
+
+
+
+
+
+
+router.post('/getSports',(req,res,next)=>{
+  jwt.verify(req.headers['authorization'],toString(req.body.userid),function(err,data){
+    if(err){
+      res.send({status:403 , msg: 'Forbidden'});
+    }else{
+  connection.query('SELECT * FROM sports_master',
+     function (err, rows) {
+      if (err) {
+        res.send({status:500 , data:{}});
+      } else {
+        res.send({status:200 , data: rows, msg: 'getAccounts Successfully'});
+      }
+    })
+  }
+})
+});
+
+
+router.post('/getSpetialization',(req,res,next)=>{
+  jwt.verify(req.headers['authorization'],toString(req.body.userid),function(err,data){
+    if(err){
+      res.send({status:403 , msg: 'Forbidden'});
+    }else{
+  connection.query('SELECT * FROM specialization_master where sport_id = ?',[req.body.sport_id],
+     function (err, rows) {
+      if (err) {
+        res.send({status:500 , data:{}});
+      } else {
+        res.send({status:200 , data: rows, msg: 'getAccounts Successfully'});
+      }
+    })
+  }
+})
+});
+
 module.exports = router;
