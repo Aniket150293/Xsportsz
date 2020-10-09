@@ -214,30 +214,27 @@ export default function Login({checkLoginDetails,LoginDetails}) {
                 </Col>
                 <Col className="order-md-1" md="6">
                   <div className="pr-md-5">
-                    <h3 className="text-danger font-weight-bold">Awesome features</h3><hr/>
+                    <h3 className="text-danger font-weight-bold">WE ARE HERE NOT ONLY FOR ENTERTAINMENT, BUT ALSO FOR BETTERMENT of SPORTS AND SPORTSMAN</h3><hr/>
                     <ul className="list-unstyled mt-5">
                       <li className="py-2">
                         <div className="d-flex align-items-center">
-                            <h5 className="text-danger mb-0 font-weight-light">
-                                The Multi Banking System Interface is targeted to the future banking solution
-                                for the users who is having multiple bank accounts in multiple banks. 
+                            <h5 className="text-white mb-0 font-weight-light">
+                            Xsportz is an online ‘fantasy games’ company of new era, which not only makes sports ‘better’, for the fans by enabling them to close interface, engagement with the sports they love by online gaming. 
+                            But it aims to give a worldwide platform to ‘The Hidden jewels’ that are spread all over the world.
                             </h5>
                         </div>
                       </li>
                       <li className="py-2">
                         <div className="d-flex align-items-center">
-                            <h5 className="text-danger mb-0 font-weight-light">
-                                This interface integrates all existing banks and provides business solutions
-                                for both retail and corporate. 
+                            <h5 className="text-white mb-0 font-weight-light">
+                            Having ‘passion’ for sports and possessing the ‘Talents, genius and aspirations for striving for excellence in their respective sports skills. dreaming and expecting worldwide recognition and fame.
                             </h5>
                         </div>
                       </li>
                       <li className="py-2">
                         <div className="d-flex align-items-center">
-                            <h5 className="text-danger mb-0 font-weight-light">
-                                This system acts as a standard interface between the clients and all the banks,
-                                By using this portal any client who maintain accounts in various banks
-                                can directly log on to Multi Banking System Interface and make any kind of transactions.
+                            <h5 className="text-white mb-0 font-weight-light">
+                            We are here not only for entertainment and commerce, but also for the betterment and good future of sports, sportsmen. We possess so many innovative ideas with us for future of the sports. 
                             </h5>
                         </div>
                       </li>
@@ -274,7 +271,7 @@ export default function Login({checkLoginDetails,LoginDetails}) {
                           points="0,42 583,95 683,0 0,95"
                         />
                       </svg>
-                      <h3 className="display-3 font-weight-bold text-white mb-0">
+                      <h3 className="display-3 font-weight-bold text-danger mb-0">
                         OBJECTIVES OF SYSTEM
                       </h3>
                     </blockquote>
@@ -284,13 +281,11 @@ export default function Login({checkLoginDetails,LoginDetails}) {
                   <div className="pl-md-5">
                     <hr/>
                     <h5 className="text-white mb-0 font-weight-light">
-                        The objective of this proposal is to provide the overview of blockchain technology
-                        with its benefits emphasizing on the applications of the technology in the Indian Banking Sector.
+                    Xsports is based on the legally well recognized and accepted principle of ‘mere game of skill’ by the Indian judiciary also!
                     </h5>
                     <hr/>
                     <h5 className="text-white mb-0 font-weight-light"> 
-                        The proposal gives the insight of various challenges and global perspective of blockchain technology
-                        in Banking Industry.
+                    Here you exercise your ‘skills’ by your experience and knowledge and win money, rewards and prizes in return for sure.​
                     </h5>
                     <hr/>
                   </div>
@@ -302,7 +297,7 @@ export default function Login({checkLoginDetails,LoginDetails}) {
             <Container>
               <Row className="justify-content-center text-center mb-md">
                 <Col lg="8">
-                  <h2 className="display-3 text-danger mb-0 font-weight-bold">Our Partners</h2>
+                  <h2 className="display-3 text-danger mb-0 font-weight-bold">OUR PARTNERS</h2>
                 </Col>
               </Row>
               <Row>

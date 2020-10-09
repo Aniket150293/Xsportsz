@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import { registerBankByAdmin,getSports,getSpetialization } from '../../actions'
+import { registerBankByAdmin,getSports,getSpetialization,submitRegisteredUser } from '../../actions'
 import { useHistory } from "react-router";
 import {
   Input,
@@ -11,7 +11,7 @@ import {
 import { Form } from "react-bootstrap";
 
 
-export default function Register({registerBankByAdmin,registeredBankDetailsByAdmin,getSports,getSportsSucsses,getSpetializationSucsses,getSpetialization}) {
+export default function Register({registerBankByAdmin,registeredBankDetailsByAdmin,getSports,getSportsSucsses,getSpetializationSucsses,getSpetialization,submitRegisteredUser,submitRegisteredUserSucsses}) {
 
   const [sport, setSport] = useState("");
   const [years, setYears] = useState("");
@@ -19,13 +19,12 @@ export default function Register({registerBankByAdmin,registeredBankDetailsByAdm
   const [spetialization, setSpetialization] = useState("");
   // const [location, setLocation] = useState("");
 
-
   var validateMsgValid=(<Form.Control.Feedback>Looks good!</Form.Control.Feedback>)
   var validateMsgInvalid=(<Form.Control.Feedback type="invalid">Please provide a valid Input.</Form.Control.Feedback>)
 
   useEffect(() => {
     getSports({"userid":localStorage.getItem("userid")},localStorage.getItem("token"))
-
+    submitRegisteredUser({"userid":localStorage.getItem("userid")},localStorage.getItem("token"))
   },[]);
 
   const [data1, setdata1] = useState();
@@ -77,7 +76,7 @@ export default function Register({registerBankByAdmin,registeredBankDetailsByAdm
     React.useEffect(() => {
     if(registeredBankDetailsByAdmin)if(isSubmit){
       if(registeredBankDetailsByAdmin.status==200){
-        NotificationModel("bg-success","Bank Added Sucssesfully")
+        NotificationModel("bg-success","User Added Sucssesfully")
         setSport("");
         setYears("");
         setMonths("");
@@ -126,16 +125,21 @@ export default function Register({registerBankByAdmin,registeredBankDetailsByAdm
                             tag="h5"
                             className="text-white text-uppercase text-muted mb-0"
                           >
-                            New Users
+                             Users Details
                           </CardTitle>
-                          <span className="text-white h2 font-weight-bold mb-0">
-                           
+                          <hr/>
+                          <span className="mt-3 text-white font-weight-bold mb-0">
+                          {submitRegisteredUserSucsses ? 'Username : '+submitRegisteredUserSucsses.data.rows[0].first_name : ''}
+                          {submitRegisteredUserSucsses ? ' '+submitRegisteredUserSucsses.data.rows[0].middle_name : ''}
+                          {submitRegisteredUserSucsses ? ' '+submitRegisteredUserSucsses.data.rows[0].last_name : ''}<br/>
+                          {submitRegisteredUserSucsses ? 'Email : '+submitRegisteredUserSucsses.data.rows[0].email : ''}<br/>
+                          {submitRegisteredUserSucsses ? 'Mobile : '+submitRegisteredUserSucsses.data.rows[0].mobile : ''}<br/>
                           </span>
                         </div>
                       </Row>
-                      <p className="mt-3 mb-0 text-muted text-sm">
+                      {/* <p className="mt-3 mb-0 text-muted text-sm">
                         <span className="text-white text-nowrap">Since last month</span>
-                      </p>
+                      </p> */}
                     </CardBody>
                   </Card>
                   </Col>
@@ -207,13 +211,15 @@ export default function Register({registerBankByAdmin,registeredBankDetailsByAdm
 const mapDispatchToProps =  {
     registerBankByAdmin : registerBankByAdmin,
     getSports : getSports,
-    getSpetialization : getSpetialization
+    getSpetialization : getSpetialization,
+    submitRegisteredUser :submitRegisteredUser
 }
 
 const mapStateToProps = (state) => ({
   registeredBankDetailsByAdmin:state.registeredBankDetailsByAdmin,
   getSportsSucsses:state.getSportsSucsses,
-  getSpetializationSucsses:state.getSpetializationSucsses
+  getSpetializationSucsses:state.getSpetializationSucsses,
+  submitRegisteredUserSucsses : state.registeredUserDetails
 })
 
 Register = connect(

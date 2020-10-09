@@ -21,7 +21,7 @@ class SimpleFooter extends React.Component {
                 <h3 className=" text-danger font-weight-bold mb-2">
                   Thank you for supporting us!
                 </h3>
-                <h4 className="text-danger mb-0 font-weight-light">
+                <h4 className="text-white mb-0 font-weight-light">
                   Let's get in touch on any of these platforms.
                 </h4>
               </Col>

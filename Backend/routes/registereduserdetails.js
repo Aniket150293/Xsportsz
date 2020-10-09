@@ -10,19 +10,17 @@ router.post('/getRegisteredUserList', function(req, res, next) {
     if(err){
       res.send({status:403 , msg: 'Forbidden'});
     }else{
-  var a = connection.query('SELECT * from user_details where role != "super_user"',
+  var a = connection.query('SELECT * from user_sport_mapping Inner join user_details on user_details.id=user_sport_mapping.user_id',
      function (err, rows) {
       if (err) {
         res.send({status:500 , data:{}});
       } else {
         if(typeof rows != 'undefined' &&  rows != '' &&  rows != null) {
-          jwt.verify(req.headers['authorization'],toString(req.body.userid),function(err,data){
-            if(err){
-              res.send({status:403 , msg: 'Forbidden'});
-            }else{
+    
+
               res.send({status:200 , data: rows, msg: 'List Fetched Successfully'});
-            }
-          })
+            
+   
           
         }else{
           res.send({status:500 , data:{}});

@@ -94,11 +94,11 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
                       <th>User Name</th>
                       <th>Email</th>
                       <th>Mobile</th>
-                      <th>Address</th>
-                      <th>PAN Card No</th>
-                      <th>Adhar Card No</th>
-                      <th>Applied On</th>
-                      <th>Action</th>
+                      {/* <th>Address</th> */}
+                      <th>Age</th>
+                      <th>Sport</th>
+                      <th>Spetialization</th>
+                      <th>Payment</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -106,19 +106,13 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
                       (item => {
                           return(<tr>
                             <td>{item.id}</td>
-                            <td>{item.first_name} {item.last_name}</td>
+                            <td>{item.first_name} {item.middle_name} {item.last_name}</td>
                             <td>{item.email}</td>
                             <td>{item.mobile}</td>
-                            <td>{item.address}</td>
-                            <td>{item.pan_number}</td>
-                            <td>{item.adhar_number}</td>
-                            <th>Applied On</th>
-                            <td>
-                              {item.is_active=='1' ?
-                              <IoMdLock size="20px" color="red" title="Block User" onClick={() => block(item.id)} /> :
-                              <IoIosCheckmarkCircle size="20px" color="green" title="Verify User" onClick={() => verify(item.id)} />
-                              }
-                            </td>
+                            {/* <td>{item.address}</td> */}
+                            <td>{item.years_age}{item.months_age}</td>
+                            <td>{item.specialization_id}</td>
+                            <td>{item.payment}</td>
                           </tr>)
                       }): <tr></tr>
                     }
