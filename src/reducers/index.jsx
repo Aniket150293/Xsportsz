@@ -36,10 +36,15 @@ const reducer = (state = INITIAL_STATE, action) => {
     case'getHomeDetailsSucsses':
       return { ...state,getHomeDetailsSucsses:action.json,loading:false}
 
-      case'getSportsSucsses':
+    case'getSportsSucsses':
       return { ...state,getSportsSucsses:action.json,loading:false}
       case'getSpetializationSucsses':
       return { ...state,getSpetializationSucsses:action.json,loading:false}
+    case'paymentParams':
+      return { ...state,paymentParams:action.json,loading:false}
+    case'paymentStatus':
+      return { ...state,paymentStatus:action.json,loading:false}
+      paymentStatus
 
     case 'LOGOUT_SUCCESS':
         return { INITIAL_STATE,loading: false };

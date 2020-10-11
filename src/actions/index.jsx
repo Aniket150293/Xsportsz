@@ -181,3 +181,21 @@ export const getSpetialization = (data,token) =>
     data : data
   }
 );
+
+export const payment = (data,token) =>
+(
+  {
+    type: 'payment',
+    token: token,
+    data : data
+  }
+);
+
+export const callback = (data,token) =>
+(
+  {
+    type: 'callback',
+    token: token,
+    data : data
+  }
+);

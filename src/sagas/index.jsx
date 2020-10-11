@@ -19,6 +19,8 @@ const devapi =
     'forgetPassword' : url+'users/forgetPassword',
     'resetPassword' : url+'users/resetPassword',
     'getHomeDetails' : url+'dashboard/getHomeDetails',
+    'payment' : url+'payment/payment',
+    'callback' : url+'callback/callback',
 
     
     
@@ -354,6 +356,41 @@ function* logout() {
     yield put({ type: "getSpetializationSucsses", json: json });
   }
 
+  function* payment(action) {
+    const json = yield fetch(
+      devapi.payment,
+      {
+        method : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : action.token
+        },
+        body : JSON.stringify(action.data)
+      }
+      )
+      .then(response =>
+          response.json()
+      );
+    yield put({ type: "paymentParams", json: json });
+  }
+
+  function* callback(action) {
+    const json = yield fetch(
+      devapi.callback,
+      {
+        method : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : action.token
+        },
+        body : JSON.stringify(action.data)
+      }
+      )
+      .then(response =>
+          response.json()
+      );
+    yield put({ type: "paymentStatus", json: json });
+  }
 
 function* actionWatcher() {
   yield takeLatest('CHECK_LOGIN_DETAILS', checkLoginDetails);
@@ -372,7 +409,8 @@ function* actionWatcher() {
   yield takeLatest('forgetPassword', forgetPassword);
   yield takeLatest('resetPassword', resetPassword);
   yield takeLatest('getHomeDetails', getHomeDetails);
-
+  yield takeLatest('payment', payment);
+  yield takeLatest('callback', callback);
 
   yield takeLatest('getSports', getSports);
   yield takeLatest('getSpetialization', getSpetialization);

@@ -10,6 +10,8 @@ import CreatedCustomerList from "../containers/CreatedCustomerList";
 import Login from "../containers/Login";
 import ForgotPassword from "../containers/ForgotPassword";
 import ChangePassword from "../containers/ChangePassword";
+import Payment from "../containers/Payment";
+import Callback from "../containers/Callback";
 
 let App = () => (
   <Router>
@@ -28,19 +30,12 @@ let App = () => (
     <Route path="/changePassword/" component={ChangePassword} />
 
     <Route path="/customer-list/" component={CreatedCustomerList} />
-    {/* <Route path="/bank-admin-list/" component={CreatedCustomerList} /> */}
-
-    {/* <Route path="/bank-list/" component={CreatedBankList} /> */}
+   
     <Route path="/register-sport/" component={RegisterSport} />
 
-    {/* <Route path="/report/" component={Report} /> */}
+    <Route path="/payment/" component={Payment} />
+    <Route path="/callback/" component={Callback} />
 
-    {/* <Route path="/customer-registered-bank-list/" component={CustomerRegisteredBank} />
-
-               <Route path="/transfer-money/" component={TransferMoney} />
-               <Route path="/transfer-money-all/" component={TransferMoney} /> */}
-    {/* 
-          </div> */}
     <Footer />
   </Router>
 );
