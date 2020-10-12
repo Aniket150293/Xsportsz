@@ -96,8 +96,7 @@ export default function Header({ logout }) {
         </UncontrolledDropdown>
       </Nav>
     );
-  } else {
-  }
+  } 
 
   return (
     <div>
@@ -107,9 +106,10 @@ export default function Header({ logout }) {
           expand="lg"
           style={{
             "border-radius": "100px",
-            margin: "10px 50px",
-            padding: "0px",
+            "margin": "10px 50px",
+            "padding": "0px",
             "background-color": "#E92929",
+            "min-height": "50px"
           }}
         >
           <Container>
@@ -128,11 +128,13 @@ export default function Header({ logout }) {
                 <Row>
                   <Col className="collapse-brand" xs="6">
                     <Link to="/">
-                      <img
+                      {/* <img
                         alt="..."
                         src={require("../../assets/img/logo.jpg")}
-                      />
+                      /> */}
+                      <span className="font-weight-bold">Xsportsz</span>
                     </Link>
+                    
                   </Col>
                   <Col className="collapse-close" xs="6">
                     <button className="navbar-toggler" id="navbar_global">
@@ -148,8 +150,6 @@ export default function Header({ logout }) {
               {tabBar2}
               {tabBar3}
               {userSettings}
-              {contactUS}
-              {aboutUS}
               {logoutBtn}
             </UncontrolledCollapse>
           </Container>

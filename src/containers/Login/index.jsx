@@ -10,7 +10,7 @@ import {
   Input,
   Container,
   Row,
-  Col,
+  Col,Modal
 } from "reactstrap";
 import { Form } from "react-bootstrap";
 
@@ -19,7 +19,6 @@ import { useHistory } from "react-router";
 export default function Login({ checkLoginDetails, LoginDetails }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [msg, setMsg] = useState("");
 
   const [isSubmit, setIsSubmit] = useState();
 
@@ -52,7 +51,9 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
         //     history.push("/customer-list");
         // }
       } else {
-        setMsg("Incorrect Credentials");
+        setEmail("")
+        password("")
+        NotificationModel("bg-danger", "Incorrect Credentials");
       }
     }
   }, [LoginDetails]);
@@ -68,8 +69,41 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
     }
   }
 
+  const [Class, SetClass] = useState();
+  const [Msg, SetMsg] = useState();
+  const [Notification, SetNotification] = useState(false);
+  const NotificationClose = () => SetNotification(false);
+  const NotificationShow = () => SetNotification(true);
+  function NotificationModel(Class, Msg) {
+    SetClass(Class);
+    SetMsg(Msg);
+    NotificationShow();
+    setTimeout(function () {
+      NotificationClose();
+    }, 5000);
+  }
+
+
   return (
     <main>
+            <Modal
+        className="modal-dialog modal-danger"
+        contentClassName={Class}
+        isOpen={Notification}
+        toggle={NotificationClose}
+      >
+        <div className="modal-header">
+          <div className="mt-1 modal-title heading">{Msg}</div>
+          <button
+            aria-label="Close"
+            className="close"
+            data-dismiss="modal"
+            type="button"
+            onClick={NotificationClose}
+          >
+          </button>
+        </div>
+      </Modal>
       <div className="position-relative">
         {/* shape Hero */}
         <section className="section section-shaped pb-150">
@@ -142,9 +176,6 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
                             htmlFor=" customCheckLogin"
                           >
                             <span>Remember me</span>
-                          </label>
-                          <label>
-                            <span>{msg}</span>
                           </label>
                         </div>
                         <div className="text-center">

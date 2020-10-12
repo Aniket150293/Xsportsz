@@ -35,7 +35,7 @@ export default function RegisterSport({
   const [months, setMonths] = useState("");
   const [spetialization, setSpetialization] = useState("");
   // const [location, setLocation] = useState("");
-
+  var history = useHistory();
   var validateMsgValid = (
     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
   );
@@ -114,6 +114,7 @@ export default function RegisterSport({
           setMonths("");
           setSpetialization("");
           // setLocation("");
+          history.push("/payment");
         } else {
           NotificationModel("bg-danger", "Bank Not Added");
         }

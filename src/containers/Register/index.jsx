@@ -12,7 +12,6 @@ export default function Register({
   getMasterBankList,
   masterBankList,
 }) {
-  const [profileRegisteredPerson, setProfileRegisteredPerson] = useState("");
   const [profile, setProfile] = useState("");
   const [image, setImage] = useState();
   const [viewimage, setViewImage] = useState();
@@ -31,8 +30,6 @@ export default function Register({
   const [date, setDate] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
-  const [pan, setPan] = useState("");
-  const [adhar, setAdhar] = useState("");
   const [bankId, setBankId] = useState("");
 
   const [edit, setEdit] = useState(false);
@@ -156,9 +153,7 @@ export default function Register({
   useEffect(() => {
     if (RegisteredUserDetails)
       if (RegisteredUserDetails.status == 200) {
-        setProfileRegisteredPerson(
-          RegisteredUserDetails.data.rows[0].profile_created_by
-        );
+
         setEmail(RegisteredUserDetails.data.rows[0].email);
         setProfile(RegisteredUserDetails.data.rows[0].profile);
         // setPassword(RegisteredUserDetails.data.rows[0].password)
@@ -177,8 +172,6 @@ export default function Register({
         setDate(RegisteredUserDetails.data.rows[0].date_of_birth);
         setMonth(RegisteredUserDetails.data.rows[0].month_of_birth);
         setYear(RegisteredUserDetails.data.rows[0].year_of_birth);
-        setPan(RegisteredUserDetails.data.rows[0].pan_number);
-        setAdhar(RegisteredUserDetails.data.rows[0].adhar_number);
         console.log(RegisteredUserDetails.data.rows[0].profile);
       }
   }, [RegisteredUserDetails]);
@@ -189,7 +182,6 @@ export default function Register({
 
     if (e.currentTarget.checkValidity()) {
       // var data = {
-      //     "profileRegisteredPerson" : profileRegisteredPerson,
       //     "profilename" :profile.name,
       //     "email":email,
       //     "password":password,
@@ -206,8 +198,6 @@ export default function Register({
       //     "date":date,
       //     "month":month,
       //     "year" :year,
-      //     "pan" : pan,
-      //     "adhar":adhar
       // }
 
       // submitRegisteredUser(data)
@@ -230,7 +220,6 @@ export default function Register({
         profiledata.append("userid", localStorage.getItem("userid"));
         profiledata.append("bankId", bankId);
       }
-      profiledata.append("profileRegisteredPerson", profileRegisteredPerson);
       profiledata.append("email", email);
       profiledata.append("password", password);
       profiledata.append("confirmPassword", confirmPassword);
@@ -246,8 +235,6 @@ export default function Register({
       profiledata.append("date", date);
       profiledata.append("month", month);
       profiledata.append("year", year);
-      profiledata.append("pan", pan);
-      profiledata.append("adhar", adhar);
       axios
         .post(
           "http://localhost:3000/registereduserdetails/upload",
@@ -267,7 +254,6 @@ export default function Register({
             if (!edit) {
               setImage(null);
               setViewImage(null);
-              setProfileRegisteredPerson("");
               setEmail("");
               setProfile("");
               setPassword("");
@@ -284,9 +270,8 @@ export default function Register({
               setDate("");
               setMonth("");
               setYear("");
-              setPan("");
-              setAdhar("");
               setBankId("");
+              history.push("/");
             }
           } else {
             NotificationModel("bg-danger", response.data.msg);
@@ -316,7 +301,6 @@ export default function Register({
             type="button"
             onClick={NotificationClose}
           >
-            <span aria-hidden={true}>×</span>
           </button>
         </div>
       </Modal>
@@ -332,25 +316,8 @@ export default function Register({
             <Row>
               <Form.Group as={Col} lg="12">
                 <Row>
-                  <Form.Group as={Col} lg="6">
-                    <Input
-                      required
-                      value={profileRegisteredPerson}
-                      className="form-control-alternative"
-                      type="select"
-                      onChange={(e) =>
-                        setProfileRegisteredPerson(e.target.value)
-                      }
-                    >
-                      <option value="">Choose...</option>
-                      <option value="Myself">Myself</option>
-                      <option value="Other">Other</option>
-                    </Input>
-                    {validateMsgValid}
-                    {validateMsgInvalid}
-                  </Form.Group>
 
-                  <Form.Group as={Col} lg="6">
+                  <Form.Group as={Col} lg="12">
                     <Input
                       required
                       value={email}
@@ -533,7 +500,7 @@ export default function Register({
                   type="select"
                   onChange={(e) => setDate(e.target.value)}
                 >
-                  <option value="">Date</option>
+                  <option value="">Date of Birth</option>
                   <option value="1">1</option>
                   <option value="7">7</option>
                   <option value="14">14</option>
@@ -550,7 +517,7 @@ export default function Register({
                   type="select"
                   onChange={(e) => setMonth(e.target.value)}
                 >
-                  <option value="">Month</option>
+                  <option value="">Month of birth</option>
                   <option value="1">1</option>
                   <option value="3">3</option>
                   <option value="6">6</option>
@@ -567,7 +534,7 @@ export default function Register({
                   type="select"
                   onChange={(e) => setYear(e.target.value)}
                 >
-                  <option value="">Year</option>
+                  <option value="">year of birth</option>
                   <option value="1980">1980</option>
                   <option value="1990">1990</option>
                   <option value="1995">1995</option>
@@ -577,32 +544,6 @@ export default function Register({
               </Form.Group>
             </Row>
 
-            <Row>
-              <Form.Group as={Col} lg="6">
-                <Input
-                  required
-                  value={pan}
-                  className="form-control-alternative"
-                  type="text"
-                  placeholder="Enter PAN No"
-                  onChange={(e) => setPan(e.target.value)}
-                />
-                {validateMsgValid}
-                {validateMsgInvalid}
-              </Form.Group>
-              <Form.Group as={Col} lg="6">
-                <Input
-                  required
-                  value={adhar}
-                  className="form-control-alternative"
-                  type="text"
-                  placeholder="Enter Adhar No"
-                  onChange={(e) => setAdhar(e.target.value)}
-                />
-                {validateMsgValid}
-                {validateMsgInvalid}
-              </Form.Group>
-            </Row>
             <br></br>
 
             <Button color="primary" type="submit">
