@@ -1,13 +1,8 @@
 
 
 
-3) After Success ful user registrtion redirect to Home page
-4) In case of Sports Registration, 
-    1   after successful resgistartion redirect user to payment component
-    2   onchange of Select sport drop down card user details are removing
 
-8) Incase of inavlid passwordo or username sho toaster of Inavalid Credentials and remove Lokks Good part at that time
+4) In case of Sports Registration, 
+       onchange of Select sport drop down card user details are removing
+
 9) Change Msg name of successful transaction
-10) Password reset, passsword field should show text
-11) On successful password change send user to login screen again
-12) Forgot Password Should work Properly

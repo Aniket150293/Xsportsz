@@ -32,13 +32,12 @@ router.post('/getRegisteredUserList', function(req, res, next) {
 });
 
 router.post('/upload', function(req, res, next) {
-  jwt.verify(req.headers['authorization'],toString(req.body.userId),function(err,data){
-    if(err){
-      res.send({status:403 , msg: 'Forbidden'});
-    }
-  })
-  if(req.body.update){
 
+  if(req.body.update){
+    jwt.verify(req.headers['authorization'],toString(req.body.userId),function(err,data){
+      if(err){
+        res.send({status:403 , msg: 'Forbidden'});
+      }else{
           // if (req.files != null) {
           //   var imageName=req.body.profile+".jpg"
           //   const file = req.files.file;
@@ -66,6 +65,9 @@ router.post('/upload', function(req, res, next) {
               res.send({status:200 , data: rows, msg: 'User Updated Successfully'});
             }
           })
+      }
+    })
+
       
    
   }

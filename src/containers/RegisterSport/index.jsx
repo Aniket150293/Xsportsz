@@ -108,7 +108,7 @@ export default function RegisterSport({
     if (registeredBankDetailsByAdmin)
       if (isSubmit) {
         if (registeredBankDetailsByAdmin.status == 200) {
-          NotificationModel("bg-success", "User Added Sucssesfully");
+          // NotificationModel("bg-success", "User Added Sucssesfully");
           setSport("");
           setYears("");
           setMonths("");

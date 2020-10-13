@@ -250,7 +250,7 @@ export default function Register({
         .then(function (response) {
           console.log(response);
           if (response.data.status == 200) {
-            NotificationModel("bg-success", response.data.msg);
+            // NotificationModel("bg-success", response.data.msg);
             if (!edit) {
               setImage(null);
               setViewImage(null);
