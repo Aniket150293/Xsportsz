@@ -43,7 +43,7 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
         localStorage.setItem("userid", LoginDetails.data.id);
 
         if (LoginDetails.data.role === "super_user") {
-          history.push("/customer-list");
+          history.push("/player-list");
         } else if (LoginDetails.data.role === "user") {
           history.push("/register-sport");
         }

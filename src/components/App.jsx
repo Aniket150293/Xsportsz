@@ -29,7 +29,7 @@ let App = () => (
     <Route path="/forgot-password/" component={ForgotPassword} />
     <Route path="/changePassword/" component={ChangePassword} />
 
-    <Route path="/customer-list/" component={CreatedCustomerList} />
+    <Route path="/player-list/" component={CreatedCustomerList} />
    
     <Route path="/register-sport/" component={RegisterSport} />
 

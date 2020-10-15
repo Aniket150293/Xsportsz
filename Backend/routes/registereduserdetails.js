@@ -10,7 +10,7 @@ router.post('/getRegisteredUserList', function(req, res, next) {
     if(err){
       res.send({status:403 , msg: 'Forbidden'});
     }else{
-  var a = connection.query('SELECT * from user_sport_mapping Inner join user_details on user_details.id=user_sport_mapping.user_id',
+  var a = connection.query("SELECT * from user_sport_mapping Inner join user_details on user_details.id=user_sport_mapping.user_id where user_details.role='user'",
      function (err, rows) {
       if (err) {
         res.send({status:500 , data:{}});
@@ -38,6 +38,7 @@ router.post('/upload', function(req, res, next) {
       if(err){
         res.send({status:403 , msg: 'Forbidden'});
       }else{
+        const birthdate=new Date(req.body.date);
           // if (req.files != null) {
           //   var imageName=req.body.profile+".jpg"
           //   const file = req.files.file;
@@ -56,8 +57,8 @@ router.post('/upload', function(req, res, next) {
 
           var s="UPDATE user_details SET "+
           "email='"+req.body.email +"', mobile='"+ req.body.mobileNo+"', alternate_mobile='"+ req.body.alternateMobileNo+
-          "',first_name='"+ req.body.firstName+"', middle_name='"+ req.body.middleName+"', last_name='"+req.body.lastName +"', address='"+req.body.address +"', city='"+ req.body.city+"', state='"+ req.body.state+"', zip_code='"+ req.body.zip+"', date_of_birth='"+ req.body.date+
-          "',month_of_birth='"+ req.body.month+"', year_of_birth='"+ req.body.year+"',modified_at =now() where id='"+req.body.userid+"'"
+          "',first_name='"+ req.body.firstName+"', middle_name='"+ req.body.middleName+"', last_name='"+req.body.lastName +"', address='"+req.body.address +"', city='"+ req.body.city+"', state='"+ req.body.state+"', zip_code='"+ req.body.zip+"', date_of_birth='"+ birthdate.getDate()+
+          "',month_of_birth='"+ birthdate.getMonth()+"', year_of_birth='"+ birthdate.getFullYear()+"',modified_at =now() where id='"+req.body.userid+"'"
           var a = connection.query(s,function (err, rows) {
             if (err) {
               res.send({status:500 , data:{error:err}});
@@ -73,7 +74,10 @@ router.post('/upload', function(req, res, next) {
   }
   else{
     const profileID=uuid.v4();
-
+    const birthdate=new Date(req.body.date);
+    
+    
+    
     // if (req.files != null) {
     //   var file = req.files.file;
     //   var imageName=profileID+".jpg"
@@ -89,22 +93,22 @@ router.post('/upload', function(req, res, next) {
     //   }
     // }
 
-              var a = connection.query('INSERT INTO  user_details '+
-              '( profile, email, password, mobile, alternate_mobile, ' +
-              'first_name, middle_name, last_name, address, city, state, zip_code, date_of_birth, '+
-              'month_of_birth, year_of_birth, role, is_active, is_blocked, last_login, created_at,modified_at ) '+
-              'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,0,now(),now(),now()) ',
-              [profileID, req.body.email, req.body.password, 
-                req.body.mobileNo, req.body.alternateMobileNo, req.body.firstName , req.body.middleName, 
-                req.body.lastName,req.body.address,req.body.city, req.body.state, req.body.zip , req.body.date, req.body.month,
-                req.body.year,req.body.role],
-              function (err, rows) {
-                if (err) {
-                  res.send({status:500 , msg:"Enter Corrent Information"});
-                } else {
-                  res.send({status:200 , msg: 'User Registered Successfully'});
-                }
-              })
+    var a = connection.query('INSERT INTO  user_details '+
+    '( profile, email, password, mobile, alternate_mobile, ' +
+    'first_name, middle_name, last_name, address, city, state, zip_code, date_of_birth, '+
+    'month_of_birth, year_of_birth, role, is_active, is_blocked, last_login, created_at,modified_at ) '+
+    'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,0,now(),now(),now()) ',
+    [profileID, req.body.email, req.body.password, 
+      req.body.mobileNo, req.body.alternateMobileNo, req.body.firstName , req.body.middleName, 
+      req.body.lastName,req.body.address,req.body.city, req.body.state, req.body.zip , birthdate.getDate(), birthdate.getMonth(),
+      birthdate.getFullYear(),req.body.role],
+    function (err, rows) {
+      if (err) {
+        res.send({status:500 , data:{sql:a.sql,msg:"Enter Corrent Information"}});
+      } else {
+        res.send({status:200 , msg: 'User Registered Successfully'});
+      }
+    })
 
   }
 

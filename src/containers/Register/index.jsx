@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { submitRegisteredUser, getMasterBankList } from "../../actions";
-import { Input, Container, Row, Col, Button, Modal } from "reactstrap";
+import { Input, Container, Row, Col, Button, Modal,FormGroup,InputGroup,InputGroupAddon,InputGroupText } from "reactstrap";
 import { Form } from "react-bootstrap";
 import { useHistory } from "react-router";
 import axios from "axios";
+import ReactDatetime from 'react-datetime';
 
 export default function Register({
   submitRegisteredUser,
@@ -28,8 +29,8 @@ export default function Register({
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
   const [date, setDate] = useState("");
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
+  // const [month, setMonth] = useState("");
+  // const [year, setYear] = useState("");
   const [bankId, setBankId] = useState("");
 
   const [edit, setEdit] = useState(false);
@@ -170,8 +171,8 @@ export default function Register({
         setState(RegisteredUserDetails.data.rows[0].state);
         setZip(RegisteredUserDetails.data.rows[0].zip_code);
         setDate(RegisteredUserDetails.data.rows[0].date_of_birth);
-        setMonth(RegisteredUserDetails.data.rows[0].month_of_birth);
-        setYear(RegisteredUserDetails.data.rows[0].year_of_birth);
+        // setMonth(RegisteredUserDetails.data.rows[0].month_of_birth);
+        // setYear(RegisteredUserDetails.data.rows[0].year_of_birth);
         console.log(RegisteredUserDetails.data.rows[0].profile);
       }
   }, [RegisteredUserDetails]);
@@ -233,8 +234,8 @@ export default function Register({
       profiledata.append("state", state);
       profiledata.append("zip", zip);
       profiledata.append("date", date);
-      profiledata.append("month", month);
-      profiledata.append("year", year);
+      // profiledata.append("month", month);
+      // profiledata.append("year", year);
       axios
         .post(
           "http://localhost:3000/registereduserdetails/upload",
@@ -268,8 +269,8 @@ export default function Register({
               setState("");
               setZip("");
               setDate("");
-              setMonth("");
-              setYear("");
+              // setMonth("");
+              // setYear("");
               setBankId("");
               history.push("/");
             }
@@ -492,6 +493,25 @@ export default function Register({
             </Row>
 
             <Row>
+            <FormGroup>
+          <InputGroup className="input-group-alternative">
+            <InputGroupAddon addonType="prepend">
+              <InputGroupText>
+                <i className="ni ni-calendar-grid-58" />
+              </InputGroupText>
+            </InputGroupAddon>
+            <ReactDatetime
+              inputProps={{
+                placeholder: "Date of Birth"
+              }}
+              timeFormat={false}
+              onChange={e => {setDate(e._d);console.log(e._d)}}
+            />
+          </InputGroup>
+        </FormGroup>
+        </Row>
+
+            {/* <Row>
               <Form.Group as={Col} lg="4">
                 <Input
                   required
@@ -542,7 +562,7 @@ export default function Register({
                 {validateMsgValid}
                 {validateMsgInvalid}
               </Form.Group>
-            </Row>
+            </Row> */}
 
             <br></br>
 

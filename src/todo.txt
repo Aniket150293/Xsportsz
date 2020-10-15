@@ -1,8 +1,21 @@
+1) Admin login Change Tab Name - Customer List To Player List --
+4) Rename download list to player list
+6) Rename 'List of Users' above list table to 'List of Players'
+8) Oncilck of Xsportsz logo user should not navigate to home, if he already login
+9) In case of Change Password, passsword field should not show text it should show dots(type='password')
+7) In case of sport registartion, onchange of Select sport drop down card user details are removing
+2) Table data is not showing proper result..getting double entry data
+3) In drop down of register, date should come from 1-31, moth should come from 1-12 and year should come from 1970 - till data
 
+5) Add drop down above list with Values - 
+ - Last 1 Month
+ - Last 2 Months
+ - Last3 Months
+ - Last 6 Months
+ - Last 1 Year
+ - Last 2 Year
+ - All
+ 
+ Based on above selection list should get filtered
+ 
 
-
-
-4) In case of Sports Registration, 
-       onchange of Select sport drop down card user details are removing
-
-9) Change Msg name of successful transaction

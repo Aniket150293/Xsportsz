@@ -88,19 +88,19 @@ export default function ChangePassword({resetPassword,resetPasswordSucsses}) {
                     <Form.Group>
 
                         <Label>Enter old Password</Label>
-                        <Input value={OldPassword} onChange={ e => setOldPassword(e.target.value)} className="form-control-alternative" type="text" required/>
+                        <Input value={OldPassword} onChange={ e => setOldPassword(e.target.value)} className="form-control-alternative" type="password" required/>
                   {validateMsgValid}
                   {validateMsgInvalid}
 </Form.Group>
 <Form.Group>
                         <Label>Enter New Password</Label>
-                        <Input value={Password} onChange={ e => setPassword(e.target.value)} className="form-control-alternative" type="text" required/>
+                        <Input value={Password} onChange={ e => setPassword(e.target.value)} className="form-control-alternative" type="password" required/>
                   {validateMsgValid}
                   {validateMsgInvalid}
 </Form.Group>
 <Form.Group>
                         <Label>ReEnter New Password</Label>
-                        <Input value={ConfirmPassword} onChange={ e => setConfirmPassword(e.target.value)} className="form-control-alternative" type="text" required/>
+                        <Input value={ConfirmPassword} onChange={ e => setConfirmPassword(e.target.value)} className="form-control-alternative" type="password" required/>
                   {validateMsgValid}
                   {validateMsgInvalid}
 </Form.Group>

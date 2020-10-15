@@ -12,11 +12,11 @@ router.post('/payment', function(req, res, next) {
   params['CHANNEL_ID']			= 'WEB';
   params['INDUSTRY_TYPE_ID']	= 'Retail';
   params['ORDER_ID']			= 'TEST_'  + new Date().getTime();
-  params['CUST_ID'] 			= 'Customer001';
-  params['TXN_AMOUNT']			= '1.00';
+  params['CUST_ID'] 			= req.body.userid;
+  params['TXN_AMOUNT']			= '250.00';
   params['CALLBACK_URL']		= 'http://localhost:3000/callback/callback';
-  params['EMAIL']				= 'abc@mailinator.com';
-  params['MOBILE_NO']			= '7777777777';
+  params['EMAIL']				= req.body.email;
+  params['MOBILE_NO']			= req.body.mobile;
 
   checksum_lib.genchecksum(params, 'C7UK7o1je%fRZXSE', function (err, checksum) {
     res.send({status:200,data:params, checksum:checksum});

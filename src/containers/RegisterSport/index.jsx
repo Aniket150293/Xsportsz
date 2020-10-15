@@ -56,6 +56,25 @@ export default function RegisterSport({
     );
   }, []);
 
+
+  const [first_name, setfirst_name] = useState();
+  const [middle_name, setmiddle_name] = useState();
+  const [last_name, setlast_name] = useState();
+  const [email, setemail] = useState();
+  const [mobile, setmobile] = useState();
+
+  React.useEffect(() => {
+    if (submitRegisteredUserSucsses)
+      if (submitRegisteredUserSucsses.status == 200) {
+        setfirst_name(submitRegisteredUserSucsses.data.rows[0].first_name);
+        setmiddle_name(submitRegisteredUserSucsses.data.rows[0].middle_name);
+        setlast_name(submitRegisteredUserSucsses.data.rows[0].last_name);
+        setemail(submitRegisteredUserSucsses.data.rows[0].email);
+        setmobile(submitRegisteredUserSucsses.data.rows[0].mobile);
+      }
+  }, [submitRegisteredUserSucsses]);
+
+
   const [data1, setdata1] = useState();
 
   React.useEffect(() => {
@@ -108,6 +127,11 @@ export default function RegisterSport({
     if (registeredBankDetailsByAdmin)
       if (isSubmit) {
         if (registeredBankDetailsByAdmin.status == 200) {
+          localStorage.setItem("first_name", first_name);
+          localStorage.setItem("last_name", last_name);
+          localStorage.setItem("middle_name", middle_name);
+          localStorage.setItem("email", email);
+          localStorage.setItem("mobile", mobile);
           // NotificationModel("bg-success", "User Added Sucssesfully");
           setSport("");
           setYears("");
@@ -159,28 +183,28 @@ export default function RegisterSport({
                     </CardTitle>
                     <hr />
                     <span className="mt-3 text-white font-weight-bold mb-0">
-                      {submitRegisteredUserSucsses
-                        ? "Username : " +
-                          submitRegisteredUserSucsses.data.rows[0].first_name
-                        : ""}
-                      {submitRegisteredUserSucsses
-                        ? " " +
-                          submitRegisteredUserSucsses.data.rows[0].middle_name
-                        : ""}
-                      {submitRegisteredUserSucsses
-                        ? " " +
-                          submitRegisteredUserSucsses.data.rows[0].last_name
-                        : ""}
+                      {
+                         "Username : " +
+                          first_name
+                        }
+                      {
+                         " " +
+                          middle_name
+                        }
+                      {
+                         " " +
+                          last_name
+                        }
                       <br />
-                      {submitRegisteredUserSucsses
-                        ? "Email : " +
-                          submitRegisteredUserSucsses.data.rows[0].email
-                        : ""}
+                      {
+                         "Email : " +
+                          email
+                        }
                       <br />
-                      {submitRegisteredUserSucsses
-                        ? "Mobile : " +
-                          submitRegisteredUserSucsses.data.rows[0].mobile
-                        : ""}
+                      {
+                         "Mobile : " +
+                          mobile
+                        }
                       <br />
                     </span>
                   </div>

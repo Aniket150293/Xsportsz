@@ -50,7 +50,9 @@ export default function Payment({
     e.preventDefault();
     // var txn_url = "https://securegw-stage.paytm.in/order/process";
     payment(
-        { userid: localStorage.getItem("userid") },
+        { userid: localStorage.getItem("userid") ,
+        email :localStorage.getItem("email"),
+         mobile: localStorage.getItem("mobile")},
         localStorage.getItem("token")
       );
   }
@@ -130,16 +132,62 @@ function post(details) {
 
   return (
     <div className="py-5 " style={{ "background-color": "#333333" }}>
-      
-        <div className="modal-header">
-          <div className="mt-1 modal-title heading">{Msg}</div>
-          <button
+      <Container className="mt-5">
+        <Row>
+          <Col lg="12">
+            <Card className="bg-danger shadow card-stats mb-4 mb-xl-0">
+              <CardBody>
+                <Row>
+                  <div className="col">
+                    <CardTitle
+                      tag="h5"
+                      className="text-white text-uppercase text-muted mb-0"
+                    >
+                      Users Details
+                    </CardTitle>
+                    <hr />
+                    <span className="mt-3 text-white font-weight-bold mb-0">
+                      {
+                         "Username : " +
+                         localStorage.getItem("first_name")
+                        }
+                      {
+                         " " +
+                         localStorage.getItem("middle_name")
+                        }
+                      {
+                         " " +
+                         localStorage.getItem("last_name")
+                        }
+                      <br />
+                      {
+                         "Email : " +
+                         localStorage.getItem("email")
+                        }
+                      <br />
+                      {
+                         "Mobile : " +
+                         localStorage.getItem("mobile")
+                        }
+                      <br />
+                    </span>
+                  </div>
+                  <button
             type="button"
+            className="btn btn-dark"
             onClick={handleSubmit}
           >
-            Pay
+            Pay Rs.250 Only
           </button>
-        </div>
+                </Row>
+                {/* <p className="mt-3 mb-0 text-muted text-sm">
+                        <span className="text-white text-nowrap">Since last month</span>
+                      </p> */}
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }

@@ -44,12 +44,12 @@ export default function Header({ logout }) {
           <DropdownToggle nav>
             <i className="ni ni-collection d-lg-none mr-1" />
             <span className="font-weight-bold nav-link-inner--text">
-              Customer List
+              Player List
             </span>
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem to="/customer-list" tag={Link}>
-              Customer List
+            <DropdownItem to="/player-list" tag={Link}>
+            Player List
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
@@ -127,13 +127,13 @@ export default function Header({ logout }) {
               <div className="navbar-collapse-header">
                 <Row>
                   <Col className="collapse-brand" xs="6">
-                    <Link to="/">
+                    {/* <Link to="/"> */}
                       {/* <img
                         alt="..."
                         src={require("../../assets/img/logo.jpg")}
                       /> */}
                       <span className="font-weight-bold">Xsportsz</span>
-                    </Link>
+                    {/* </Link> */}
                     
                   </Col>
                   <Col className="collapse-close" xs="6">

@@ -32,10 +32,11 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
 
   React.useEffect(() => {
     if(RegisteredUserList)if(RegisteredUserList.status==200){
-      if(history.location.pathname=="/customer-list")
-        setdata1(RegisteredUserList.data.filter(item => item.role == "user"))
-      else if(history.location.pathname=="/bank-admin-list")
-        setdata1(RegisteredUserList.data.filter(item => item.role == "bank_admin"))
+      // if(history.location.pathname=="/customer-list")
+      //   setdata1(RegisteredUserList.data.filter(item => item.role == "user"))
+      // else if(history.location.pathname=="/bank-admin-list")
+      //   setdata1(RegisteredUserList.data.filter(item => item.role == "bank_admin"))
+      setdata1(RegisteredUserList.data)
     }
   }, [RegisteredUserList])
 
@@ -85,7 +86,7 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
               </div>
             </Modal>
             <Form className="shadow card mt-5">
-                <div className="card-header">List Of Users</div>
+                <div className="card-header">List of Players</div>
                 <div className="card-body">
                 <Table responsive striped bordered hover>
                   <thead>
@@ -110,7 +111,7 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
                             <td>{item.email}</td>
                             <td>{item.mobile}</td>
                             {/* <td>{item.address}</td> */}
-                            <td>{item.years_age}{item.months_age}</td>
+                            <td>{item.years_age} Years {item.months_age} Months</td>
                             <td>{item.specialization_id}</td>
                             <td>{item.payment}</td>
                           </tr>)

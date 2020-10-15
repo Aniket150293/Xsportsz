@@ -97,11 +97,11 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
                             <Form noValidate validated={isSubmit} onSubmit={submitResetPassword}>
                                 <Form.Group>
                                     <Label>Enter New Password</Label>
-                                    <Input required onChange={ e => setPassword(e.target.value)} className="form-control-alternative" type="text" />
+                                    <Input required onChange={ e => setPassword(e.target.value)} className="form-control-alternative" type="password" />
                                                       {validateMsgValid}
                               {validateMsgInvalid}
                                     <Label>ReEnter New Password</Label>
-                                    <Input required onChange={ e => setConfirmPassword(e.target.value)} className="form-control-alternative" type="text" />
+                                    <Input required onChange={ e => setConfirmPassword(e.target.value)} className="form-control-alternative" type="password" />
                                                       {validateMsgValid}
                               {validateMsgInvalid}
                                     <br/>
