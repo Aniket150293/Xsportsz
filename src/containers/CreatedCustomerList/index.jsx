@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import { Form,Table,Modal } from "reactstrap";
+import { Form,Table,Modal,Row,Input } from "reactstrap";
 import { submitRegisteredUser,getRegisteredUserList } from '../../actions'
 import { IoMdLock,IoIosCheckmarkCircle } from 'react-icons/io';
 import { CSVLink } from "react-csv";
@@ -27,7 +27,7 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
   const [data1, setdata1] = useState();
 
   useEffect(() => {
-    getRegisteredUserList({"userid": localStorage.getItem("userid")},localStorage.getItem("token"));
+    getRegisteredUserList({"userid": localStorage.getItem("userid"),"months":""},localStorage.getItem("token"));
   },[])
 
   React.useEffect(() => {
@@ -86,7 +86,34 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
               </div>
             </Modal>
             <Form className="shadow card mt-5">
-                <div className="card-header">List of Players</div>
+                <div className="card-header">
+                  <Row className="align-items-center">
+                  <div className="col">
+                    List of Players
+                    </div>
+                    <div className="col">
+
+                    <Input
+                        className="form-control-alternative"
+                        type="select"
+                        onChange={(e) => {
+                          getRegisteredUserList({
+                            "userid": localStorage.getItem("userid"),
+                            "months":e.target.value
+                          },localStorage.getItem("token"));
+                        }}
+                      >
+                        <option value="">Select Filter</option>
+                        <option value="1">1 Month</option>
+                        <option value="2">2 Month</option>
+                        <option value="3">3 Month</option>
+                        <option value="6">6 Month</option>
+                        <option value="12">1 Year</option>
+                      </Input>
+
+                    </div>
+                  </Row>
+                </div>
                 <div className="card-body">
                 <Table responsive striped bordered hover>
                   <thead>

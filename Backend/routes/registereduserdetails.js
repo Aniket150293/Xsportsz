@@ -10,26 +10,62 @@ router.post('/getRegisteredUserList', function(req, res, next) {
     if(err){
       res.send({status:403 , msg: 'Forbidden'});
     }else{
-  var a = connection.query("SELECT * from user_sport_mapping Inner join user_details on user_details.id=user_sport_mapping.user_id where user_details.role='user'",
-     function (err, rows) {
-      if (err) {
-        res.send({status:500 , data:{}});
-      } else {
-        if(typeof rows != 'undefined' &&  rows != '' &&  rows != null) {
-    
-
-              res.send({status:200 , data: rows, msg: 'List Fetched Successfully'});
-            
-   
-          
-        }else{
-          res.send({status:500 , data:{}});
+      if(req.body.months!=""){
+        var e=new Date();
+        var y=e.getFullYear(),m=e.getMonth()-req.body.months
+        if(m<=0){
+          m=m+12
+          y=y-1
         }
+        var a = connection.query("SELECT * from user_sport_mapping Inner join user_details on user_details.id=user_sport_mapping.user_id where user_details.role='user' and user_sport_mapping.created_date between '"+y+"-"+m+"-"+ e.getDay()+"' and '"+ e.getFullYear()+"-"+ e.getMonth()+"-"+ e.getDay()+"'",
+          function (err, rows) {
+            if (err) {
+              res.send({status:500 , data:a.sql});
+            } else {
+                res.send({status:200 , data: rows, msg: 'List Fetched Successfully'}); 
+            }
+        })
+      }else{
+        var a = connection.query("SELECT * from user_sport_mapping Inner join user_details on user_details.id=user_sport_mapping.user_id where user_details.role='user'",
+          function (err, rows) {
+            if (err) {
+              res.send({status:500 , data:{}});
+            } else {
+              if(typeof rows != 'undefined' &&  rows != '' &&  rows != null) {
+                res.send({status:200 , data: rows, msg: 'List Fetched Successfully'}); 
+              }else{
+                res.send({status:500 , data:{}});
+              }
+            }
+        })
       }
-  })
 }
 })
 });
+
+
+router.post('/contact', function(req, res, next) {
+  jwt.verify(req.headers['authorization'],toString(req.body.userId),function(err,data){
+    if(err){
+      res.send({status:403 , msg: 'Forbidden'});
+    }else{  
+            var a = connection.query('INSERT INTO  contact_details '+
+            ' (	name, email, message, added_on)'+
+            'VALUES (?,?,?,now())',
+            [req.body.cname, req.body.cemail, req.body.cmessage],
+            function (error, innerRows) {
+              console.log(a.sql)
+              if(error){
+                  res.send({status:500 , data:error});
+              }else{
+                  res.send({status:200 , data: innerRows, msg: ' Added Successfully'});
+              }
+            })
+
+          }
+  })
+});
+
 
 router.post('/upload', function(req, res, next) {
 
