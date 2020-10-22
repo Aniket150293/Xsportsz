@@ -11,7 +11,6 @@ import Login from "../containers/Login";
 import ForgotPassword from "../containers/ForgotPassword";
 import ChangePassword from "../containers/ChangePassword";
 import Payment from "../containers/Payment";
-import Callback from "../containers/Callback";
 
 let App = () => (
   <Router>
@@ -34,7 +33,6 @@ let App = () => (
     <Route path="/register-sport/" component={RegisterSport} />
 
     <Route path="/payment/" component={Payment} />
-    <Route path="/callback/" component={Callback} />
 
     <Footer />
   </Router>

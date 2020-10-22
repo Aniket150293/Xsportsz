@@ -171,7 +171,7 @@ export default function RegisterSport({
       <Container className="mt-5">
         <Row>
           <Col lg="6">
-            <Card className="bg-danger shadow card-stats mb-4 mb-xl-0">
+            <Card className="shadow card-stats mb-4 mb-xl-0" style={{"background-color": "#E92929"}}>
               <CardBody>
                 <Row>
                   <div className="col">

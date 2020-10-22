@@ -139,8 +139,10 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
                             <td>{item.mobile}</td>
                             {/* <td>{item.address}</td> */}
                             <td>{item.years_age} Years {item.months_age} Months</td>
+                            <td>{item.sport_id}</td>
                             <td>{item.specialization_id}</td>
-                            <td>{item.payment}</td>
+                            {/* <td>{item.payment}</td> */}
+                            <td>Rs. 250 /-</td>
                           </tr>)
                       }): <tr></tr>
                     }

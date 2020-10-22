@@ -28,6 +28,70 @@ export default function Payment({
   const [spetialization, setSpetialization] = useState("");
   // const [location, setLocation] = useState("");
 
+  var paybutton,history = useHistory();
+  if (history.location.pathname == "/payment/500") {
+    paybutton=(
+
+
+<Card className="bg-danger shadow card-stats mb-4 mb-xl-0">
+<CardBody>
+  <Row>
+    <div className="col">
+      <CardTitle
+        tag="h5"
+        className="text-white text-center text-uppercase text-muted mb-0"
+      >
+        Payment Unsucssesfull
+        <br/>
+        <button
+          type="button"
+          className="btn btn-dark"
+          onClick={handleSubmit}
+        >
+          Try Again
+        </button>
+      </CardTitle>
+    </div>
+  </Row>
+</CardBody>
+</Card>
+    )
+  } else if (history.location.pathname == "/payment/200") {
+    paybutton=(
+    //   <button
+    //   type="button"
+    //   className="btn btn-dark"
+    //   disable
+    // >
+    //   Payment Sucssesfull
+    // </button>
+    <Card className="bg-success shadow card-stats mb-4 mb-xl-0">
+<CardBody>
+  <Row>
+    <div className="col">
+      <CardTitle
+        tag="h5"
+        className="text-white text-center text-uppercase text-muted mb-0"
+      >
+        Payment Sucssesfull
+      </CardTitle>
+    </div>
+  </Row>
+</CardBody>
+</Card>
+    )
+  }else{
+    paybutton=(
+      <button
+      type="button"
+      className="btn btn-dark"
+      onClick={handleSubmit}
+    >
+      Pay Rs.250 Only
+    </button>
+    )
+  }
+
   var validateMsgValid = (
     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
   );
@@ -37,24 +101,17 @@ export default function Payment({
     </Form.Control.Feedback>
   );
 
-  useEffect(() => {
-   
-
-  }, []);
-
-  
-
- 
 
   function handleSubmit(e) {
     e.preventDefault();
     // var txn_url = "https://securegw-stage.paytm.in/order/process";
-    payment(
-        { userid: localStorage.getItem("userid") ,
-        email :localStorage.getItem("email"),
-         mobile: localStorage.getItem("mobile")},
-        localStorage.getItem("token")
-      );
+    var data={ 
+      "userid": localStorage.getItem("userid") ,
+      "email" :localStorage.getItem("email"),
+      "mobile": localStorage.getItem("mobile")
+    }
+
+    payment(data,localStorage.getItem("token"));
   }
 
   function isDate(val) {
@@ -135,7 +192,7 @@ function post(details) {
       <Container className="mt-5">
         <Row>
           <Col lg="12">
-            <Card className="bg-danger shadow card-stats mb-4 mb-xl-0">
+            <Card className="shadow card-stats mb-4 mb-xl-0" style={{"background-color": "#E92929"}}>
               <CardBody>
                 <Row>
                   <div className="col">
@@ -172,13 +229,8 @@ function post(details) {
                       <br />
                     </span>
                   </div>
-                  <button
-            type="button"
-            className="btn btn-dark"
-            onClick={handleSubmit}
-          >
-            Pay Rs.250 Only
-          </button>
+                  <hr/>
+                  {paybutton}
                 </Row>
                 {/* <p className="mt-3 mb-0 text-muted text-sm">
                         <span className="text-white text-nowrap">Since last month</span>

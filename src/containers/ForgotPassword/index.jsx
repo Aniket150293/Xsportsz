@@ -4,6 +4,7 @@ import { Form } from "react-bootstrap";
 import { Button, Col,Row,Label,Modal,Table,Input } from "reactstrap";
 import { useHistory } from "react-router";
 import {forgetPassword,resetPassword} from "../../actions";
+import { Link } from "react-router-dom";
 
 
 export default function ForgetPassword({forgetPassword,resetPassword,resetPasswordSucsses,forgetPasswordSucsses}) {
@@ -73,7 +74,7 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
                         <Button color="primary" type="submit" className="btn btn-primary">
                             Submit
                         </Button>
-                        <Button color="primary" className="btn btn-primary" to="/">
+                        <Button color="primary" className="btn btn-primary" to="/" tag={Link}>
                             Back To Login
                         </Button>
                     </Form.Group>

@@ -56,6 +56,23 @@ export default function Header({ logout }) {
       </Nav>
     );
   } else if (localStorage.getItem("role") === "user") {
+    tabBar = (
+      <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+        <UncontrolledDropdown nav>
+          <DropdownToggle nav>
+            <i className="ni ni-collection d-lg-none mr-1" />
+            <span className="font-weight-bold nav-link-inner--text">
+              Register Sport
+            </span>
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem to="/register-sport" tag={Link}>
+            Register Sport
+            </DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
+      </Nav>
+    );
   }
 
   if (localStorage.getItem("role") != null) {
@@ -113,12 +130,12 @@ export default function Header({ logout }) {
           }}
         >
           <Container>
-            <NavbarBrand className="mr-lg-5" to="/" tag={Link}>
+            <NavbarBrand className="mr-lg-5">
               {/* <img
                   alt="..."
                   src={require("../../assets/img/logo.jpg")}
                 /> */}
-              <span className="font-weight-bold">Xsportsz</span>
+              <span className="font-weight-bold text-white">Xsportsz</span>
             </NavbarBrand>
             <button className="navbar-toggler" id="navbar_global">
               <span className="navbar-toggler-icon" />
@@ -132,7 +149,7 @@ export default function Header({ logout }) {
                         alt="..."
                         src={require("../../assets/img/logo.jpg")}
                       /> */}
-                      <span className="font-weight-bold">Xsportsz</span>
+                      <span className="font-weight-bold text-white">Xsportsz</span>
                     {/* </Link> */}
                     
                   </Col>

@@ -25,7 +25,6 @@ app.use('/admindetails', require('./routes/admindetails'));
 app.use('/TransferMoneyDetails', require('./routes/TransferMoneyDetails'));
 app.use('/dashboard', require('./routes/dashboard'));
 app.use('/payment', require('./routes/payment'));
-app.use('/callback', require('./routes/callback'));
 
 
 app.listen(port);
