@@ -41,7 +41,7 @@ export default function Payment({
         tag="h5"
         className="text-white text-center text-uppercase text-muted mb-0"
       >
-        Payment Unsucssesfull
+        PAYMENT UNSUCSSESFULL
         <br/>
         <button
           type="button"
@@ -73,7 +73,7 @@ export default function Payment({
         tag="h5"
         className="text-white text-center text-uppercase text-muted mb-0"
       >
-        Payment Sucssesfull
+        PAYMENT SUCSSESFULL
       </CardTitle>
     </div>
   </Row>

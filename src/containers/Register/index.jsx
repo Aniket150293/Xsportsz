@@ -39,7 +39,8 @@ export default function Register({
   var history = useHistory();
   var pass, banks;
   var validateMsgValid = (
-    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+    // <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+    <div></div>
   );
   var validateMsgInvalid = (
     <Form.Control.Feedback type="invalid">
@@ -471,7 +472,7 @@ export default function Register({
                   type="select"
                   onChange={(e) => setState(e.target.value)}
                 >
-                  <option value="">Choose...</option>
+                  <option value="">Choose State</option>
                   <option value="1">Maharashtra</option>
                 </Input>
                 {validateMsgValid}
@@ -504,6 +505,7 @@ export default function Register({
               inputProps={{
                 placeholder: "Date of Birth"
               }}
+              value={date}
               timeFormat={false}
               onChange={e => {setDate(e._d);console.log(e._d)}}
             />

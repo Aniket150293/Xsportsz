@@ -11,7 +11,10 @@ export default function ChangePassword({resetPassword,resetPasswordSucsses}) {
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
 
-  var validateMsgValid=(<Form.Control.Feedback>Looks good!</Form.Control.Feedback>)
+  var validateMsgValid=(
+  // <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+  <div></div>
+  )
   var validateMsgInvalid=(<Form.Control.Feedback type="invalid">Please provide a valid Input.</Form.Control.Feedback>)
 
 

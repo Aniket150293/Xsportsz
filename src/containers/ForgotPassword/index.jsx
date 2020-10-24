@@ -15,7 +15,10 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
 
   let form;
   const path=useHistory().location.pathname;
-  var validateMsgValid=(<Form.Control.Feedback>Looks good!</Form.Control.Feedback>)
+  var validateMsgValid=(
+    <div></div>
+  // <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+  )
   var validateMsgInvalid=(<Form.Control.Feedback type="invalid">Please provide a valid Input.</Form.Control.Feedback>)
 
   const [isSubmit, setIsSubmit] = useState();

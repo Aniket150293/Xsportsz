@@ -78,16 +78,33 @@ export default function Header({ logout }) {
   if (localStorage.getItem("role") != null) {
     logoutBtn = (
       <Nav className="align-items-lg-center ml-lg-auto" navbar>
-        <NavItem className="d-none d-lg-block ml-lg-4">
+        {/* <NavItem className="d-none d-lg-block ml-lg-4">
           <span className="mb-0 text-white  font-weight-bold">
-            {localStorage.getItem("firstname")} &nbsp;{" "}
-            {localStorage.getItem("lastname")}&nbsp;
+
           </span>
           &nbsp;
           <Button className="btn btn-warning" onClick={logout1}>
             Logout
           </Button>
-        </NavItem>
+        </NavItem> */}
+
+        <UncontrolledDropdown nav>
+          <DropdownToggle className="p-0 m-0" nav>
+            <i className="ni ni-collection ml-lg-auto d-lg-none mr-1" />
+            <span className="font-weight-bold nav-link-inner--text">
+            {localStorage.getItem("firstname")} &nbsp;{" "}
+            {localStorage.getItem("lastname")}&nbsp;
+            </span>
+            <Button className="btn btn-warning" onClick={logout1}>
+            Logout
+          </Button>
+          </DropdownToggle>
+          {/* <DropdownMenu>
+            <DropdownItem>
+
+            </DropdownItem>
+          </DropdownMenu> */}
+        </UncontrolledDropdown>
       </Nav>
     );
     userSettings = (
@@ -123,10 +140,10 @@ export default function Header({ logout }) {
           expand="lg"
           style={{
             "border-radius": "100px",
-            "margin": "10px 50px",
-            "padding": "0px",
+            "margin": "10px 25px",
+            "padding": "0px 10px",
             "background-color": "#E92929",
-            "min-height": "50px"
+            "min-height": "53px"
           }}
         >
           <Container>
@@ -149,7 +166,7 @@ export default function Header({ logout }) {
                         alt="..."
                         src={require("../../assets/img/logo.jpg")}
                       /> */}
-                      <span className="font-weight-bold text-white">Xsportsz</span>
+                      <span className="font-weight-bold">Xsportsz</span>
                     {/* </Link> */}
                     
                   </Col>

@@ -33,9 +33,10 @@ class SimpleFooter extends React.Component {
                 id="tooltip475038074"
                 target="_blank"
               >
-                <span className="btn-inner--icon">
+                {/* <span className="btn-inner--icon">
                   <i className="fa fa-twitter" />
-                </span>
+                </span> */}
+                <img height="20" width="20" src={require("../../assets/img/s2.png")}/>
               </Button>
               <UncontrolledTooltip delay={0} target="tooltip475038074">
                 Follow us
@@ -47,9 +48,10 @@ class SimpleFooter extends React.Component {
                 id="tooltip837440414"
                 target="_blank"
               >
-                <span className="btn-inner--icon">
+                {/* <span className="btn-inner--icon">
                   <i className="fa fa-facebook-square" />
-                </span>
+                </span> */}
+                <img height="20" width="20" src={require("../../assets/img/s1.png")}/>
               </Button>
               <UncontrolledTooltip delay={0} target="tooltip837440414">
                 Like us
@@ -61,26 +63,13 @@ class SimpleFooter extends React.Component {
                 id="tooltip829810202"
                 target="_blank"
               >
-                <span className="btn-inner--icon">
+                {/* <span className="btn-inner--icon">
                   <i className="fa fa-dribbble" />
-                </span>
+                </span> */}
+                <img height="20" width="20" src={require("../../assets/img/s3.png")}/>
               </Button>
               <UncontrolledTooltip delay={0} target="tooltip829810202">
                 Follow us
-              </UncontrolledTooltip>
-              <Button
-                className="btn-icon-only rounded-circle ml-1"
-                color="github"
-                href="https://github.com/creativetimofficial"
-                id="tooltip495507257"
-                target="_blank"
-              >
-                <span className="btn-inner--icon">
-                  <i className="fa fa-github" />
-                </span>
-              </Button>
-              <UncontrolledTooltip delay={0} target="tooltip495507257">
-                Star on Github
               </UncontrolledTooltip>
             </Col>
           </Row>

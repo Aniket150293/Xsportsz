@@ -37,7 +37,8 @@ export default function RegisterSport({
   // const [location, setLocation] = useState("");
   var history = useHistory();
   var validateMsgValid = (
-    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+    // <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+    <div></div>
   );
   var validateMsgInvalid = (
     <Form.Control.Feedback type="invalid">

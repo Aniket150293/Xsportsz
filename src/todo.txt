@@ -46,3 +46,27 @@ res.redirect(url?staust=success)
     "REFUNDAMT":"0.00",
     "TXNDATE":"2020-10-18 11:32:54.0"
 }
+
+
+1) Contact Us Sending Forbidden (jwt check should not require in this case)
+4) Remove Looks good msgs, keep only red one
+5) Correct spelling mistake of 'PAYMENT SUCSSESFULL', after payment completion
+6) Incase of Edit Profile, date of birth is not populating
+7) Change Placeholder of State dropdown as 'Choose State'
+14) Download CSV name should be - Player List
+9) Fb/ insta/ twitter links should be at bottom.
+11) Logout button is not displaying in mobile view
+10) Incase of mobile view, the top red is not coming properly. Please check all screens in mobile view
+12) In case of admin login, in table Paymet column should show transaction status not Rs
+
+
+2) While registration, password and confirm password should be the same. Currently no checking happening, do checking at ui side
+8) Incase of Reset Password, Enter New Password and Re Enter New Password should be the same, do checking at ui side
+13) In case of admin login, in table Sport and Specialization should show name of sport and specialization (not ids)
+
+
+
+3) After sport registration, show toastr of Successful registration and then navigate to Pay 250
+15) Filter of Admin table is not working, if selected 1 month then it should show only 1 month records
+    SELECT * from user_sport_mapping Inner join user_details on user_details.id=user_sport_mapping.user_id where user_details.role='user' and user_sport_mapping.created_date between '2020-6-5' and '2020-9-5'
+    "2020-9-5" current date is comming wrong not code issue

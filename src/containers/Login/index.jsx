@@ -27,7 +27,8 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
 
   var history = useHistory();
   var validateMsgValid = (
-    <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+    <div></div>
+    // <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
   );
   var validateMsgInvalid = (
     <Form.Control.Feedback type="invalid">

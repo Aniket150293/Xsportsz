@@ -141,8 +141,8 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
                             <td>{item.years_age} Years {item.months_age} Months</td>
                             <td>{item.sport_id}</td>
                             <td>{item.specialization_id}</td>
-                            {/* <td>{item.payment}</td> */}
-                            <td>Rs. 250 /-</td>
+                            <td>{item.status}</td>
+                            {/* <td>Rs. 250 /-</td> */}
                           </tr>)
                       }): <tr></tr>
                     }
@@ -152,7 +152,7 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
                 <div className="card-footer text-center">
                       <CSVLink
                       data={data1 ? data1 : ''}
-                      filename={"Customer-List"+new Date().getTime()+".csv"}
+                      filename={"Player-List"+new Date().getTime()+".csv"}
                       className="btn btn-primary"
                       target="_blank"
                     >
