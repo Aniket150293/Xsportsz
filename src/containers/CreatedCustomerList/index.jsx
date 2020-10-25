@@ -1,12 +1,16 @@
 import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { Form,Table,Modal,Row,Input } from "reactstrap";
-import { submitRegisteredUser,getRegisteredUserList } from '../../actions'
+import { submitRegisteredUser,getRegisteredUserList,  getSports,
+  getSpetialization, } from '../../actions'
 import { IoMdLock,IoIosCheckmarkCircle } from 'react-icons/io';
 import { CSVLink } from "react-csv";
 import { useHistory } from "react-router";
 
-export default function CreatedCustomerList({submitRegisteredUser,registeredUserDetails,getRegisteredUserList,RegisteredUserList }) {
+export default function CreatedCustomerList({submitRegisteredUser,registeredUserDetails,getRegisteredUserList,RegisteredUserList,  getSports,
+  getSportsSucsses,
+  getSpetializationSucsses,
+  getSpetialization, }) {
 
   const [isSubmit, setIsSubmit] = useState();
   const [Class, SetClass] = useState();
@@ -25,11 +29,24 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
 
   var history = useHistory();
   const [data1, setdata1] = useState();
+  const [sport, setsport] = useState();
+  const [specialization, setspecialization] = useState();
 
   useEffect(() => {
+    getSports(
+      { userid: localStorage.getItem("userid") },
+      localStorage.getItem("token")
+    );
+    getSpetialization(
+      {
+        userid: localStorage.getItem("userid"),
+      },
+      localStorage.getItem("token")
+    );
     getRegisteredUserList({"userid": localStorage.getItem("userid"),"months":""},localStorage.getItem("token"));
   },[])
 
+  
   React.useEffect(() => {
     if(RegisteredUserList)if(RegisteredUserList.status==200){
       // if(history.location.pathname=="/customer-list")
@@ -40,6 +57,22 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
     }
   }, [RegisteredUserList])
 
+
+  React.useEffect(() => {
+    if (getSportsSucsses)
+      if (getSportsSucsses.status == 200) {
+        setsport(getSportsSucsses.data);
+      }
+  }, [getSportsSucsses]);
+
+
+  React.useEffect(() => {
+    if (getSpetializationSucsses)
+      if (getSpetializationSucsses.status == 200) {
+        setspecialization(getSpetializationSucsses.data);
+      }
+  }, [getSpetializationSucsses]);
+  
 
   React.useEffect(() => {
     if(registeredUserDetails)if(isSubmit){
@@ -139,8 +172,22 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
                             <td>{item.mobile}</td>
                             {/* <td>{item.address}</td> */}
                             <td>{item.years_age} Years {item.months_age} Months</td>
-                            <td>{item.sport_id}</td>
-                            <td>{item.specialization_id}</td>
+                            {/* <td>{item.sport_id}</td> */}
+                            <td>
+                            {item.sport_id}
+                            { sport ? sport.map((item1) => { 
+                              if(item1.id==item.sport_id) console.log(item1.id+" "+item1.name);item1.name})
+                              : "Not Available"
+                            }
+                            </td>
+                            {/* <td>{item.specialization_id}</td> */}
+                            <td>
+                            {item.specialization_id}
+                            { specialization ? specialization.map((item1) => { 
+                              if(item1.id==item.specialization_id) console.log(item1.id+" "+item1.name);item1.name})
+                              : "Not Available"
+                            }
+                            </td>
                             <td>{item.status}</td>
                             {/* <td>Rs. 250 /-</td> */}
                           </tr>)
@@ -167,12 +214,16 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
 
 const mapDispatchToProps =  {
   getRegisteredUserList:getRegisteredUserList,
-  submitRegisteredUser:submitRegisteredUser
+  submitRegisteredUser:submitRegisteredUser,
+  getSports: getSports,
+  getSpetialization: getSpetialization,
 }
 
 const mapStateToProps = (state) => ({
   RegisteredUserList: state.registeredUserList,
-  registeredUserDetails:state.registeredUserDetails
+  registeredUserDetails:state.registeredUserDetails,
+  getSportsSucsses: state.getSportsSucsses,
+  getSpetializationSucsses: state.getSpetializationSucsses,
 })
 
 CreatedCustomerList = connect(

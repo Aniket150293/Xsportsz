@@ -56,7 +56,7 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
         // }
       } else {
         setEmail("")
-        password("")
+        setPassword("")
         NotificationModel("bg-danger", "Incorrect Credentials");
       }
     }
@@ -553,6 +553,7 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
                       type="text"
                       value={cname}
                       onChange={(e) => setcname(e.target.value)}
+                      required
                     />
                     {validateMsgValid}
                     {validateMsgInvalid}
@@ -565,6 +566,7 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
                       type="email"
                       value={cemail}
                       onChange={(e) => setcemail(e.target.value)}
+                      required
                     />
                     {validateMsgValid}
                     {validateMsgInvalid}
@@ -579,6 +581,7 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
                       type="textarea"
                       value={cmessage}
                       onChange={(e) => setcmessage(e.target.value)}
+                      required
                     />
                   </Form.Group>
                   <div>

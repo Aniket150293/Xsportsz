@@ -49,6 +49,7 @@ export default function ChangePassword({resetPassword,resetPasswordSucsses}) {
   function submitchangePassword(e){
     e.preventDefault();
     if(e.currentTarget.checkValidity()){
+      if(password==confirmPassword){
         let data={
             "changePassword":true,
             "oldpassword":OldPassword,
@@ -56,6 +57,7 @@ export default function ChangePassword({resetPassword,resetPasswordSucsses}) {
             "password":Password,
         }
         resetPassword(data,localStorage.getItem("token"));
+      }else NotificationModel( "bg-danger" ,"Password Not Match")
       }
     setIsSubmit(true);
   }

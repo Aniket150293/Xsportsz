@@ -6,6 +6,7 @@ import { Form } from "react-bootstrap";
 import { useHistory } from "react-router";
 import axios from "axios";
 import ReactDatetime from 'react-datetime';
+import { Link } from "react-router-dom";
 
 export default function Register({
   submitRegisteredUser,
@@ -37,7 +38,7 @@ export default function Register({
   const [role, setRole] = useState("");
 
   var history = useHistory();
-  var pass, banks;
+  var pass,banks;
   var validateMsgValid = (
     // <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
     <div></div>
@@ -171,7 +172,8 @@ export default function Register({
         setCity(RegisteredUserDetails.data.rows[0].city);
         setState(RegisteredUserDetails.data.rows[0].state);
         setZip(RegisteredUserDetails.data.rows[0].zip_code);
-        setDate(RegisteredUserDetails.data.rows[0].date_of_birth);
+        setDate(new Date(RegisteredUserDetails.data.rows[0].year_of_birth+"-"+RegisteredUserDetails.data.rows[0].month_of_birth+"-"+RegisteredUserDetails.data.rows[0].date_of_birth));
+        console.log(date);
         // setMonth(RegisteredUserDetails.data.rows[0].month_of_birth);
         // setYear(RegisteredUserDetails.data.rows[0].year_of_birth);
         console.log(RegisteredUserDetails.data.rows[0].profile);
@@ -203,6 +205,7 @@ export default function Register({
       // }
 
       // submitRegisteredUser(data)
+    if(password==confirmPassword){
 
       const profiledata = new FormData();
 
@@ -252,7 +255,7 @@ export default function Register({
         .then(function (response) {
           console.log(response);
           if (response.data.status == 200) {
-            // NotificationModel("bg-success", response.data.msg);
+            NotificationModel("bg-success", response.data.msg);
             if (!edit) {
               setImage(null);
               setViewImage(null);
@@ -273,7 +276,7 @@ export default function Register({
               // setMonth("");
               // setYear("");
               setBankId("");
-              history.push("/");
+              // history.push("/");
             }
           } else {
             NotificationModel("bg-danger", response.data.msg);
@@ -284,6 +287,7 @@ export default function Register({
           console.log(error);
           NotificationModel("bg-danger", "Server Error");
         });
+      }else NotificationModel( "bg-danger" ,"Password Not Match")
     }
   }
   return (
@@ -571,6 +575,7 @@ export default function Register({
             <Button color="primary" type="submit">
               Submit
             </Button>
+            {edit ? "" : (<Button color="primary" className="btn btn-primary" to="/" tag={Link}>Back To Login</Button>)}
           </Form>
         </div>
       </Container>

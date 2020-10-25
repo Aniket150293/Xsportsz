@@ -58,6 +58,13 @@ res.redirect(url?staust=success)
 11) Logout button is not displaying in mobile view
 10) Incase of mobile view, the top red is not coming properly. Please check all screens in mobile view
 12) In case of admin login, in table Paymet column should show transaction status not Rs
+1) Incase of Edit Profile, updated date is not getting inserted
+2) Incase of user update profile, toaster shold be shown with msg as 'Updated Successfully' 
+3) For Twitter Url : https://twitter.com/xsportsz , for Instagram : https://www.instagram.com/x_sportsz/
+5) Incase of inavalid credentials, code is breaking
+6) Provide Back to login Button for Register Screen
+7) Forgot Password form should slighly below of red tile
+
 
 
 2) While registration, password and confirm password should be the same. Currently no checking happening, do checking at ui side
@@ -65,8 +72,12 @@ res.redirect(url?staust=success)
 13) In case of admin login, in table Sport and Specialization should show name of sport and specialization (not ids)
 
 
-
 3) After sport registration, show toastr of Successful registration and then navigate to Pay 250
 15) Filter of Admin table is not working, if selected 1 month then it should show only 1 month records
     SELECT * from user_sport_mapping Inner join user_details on user_details.id=user_sport_mapping.user_id where user_details.role='user' and user_sport_mapping.created_date between '2020-6-5' and '2020-9-5'
     "2020-9-5" current date is comming wrong not code issue
+4) User Registered Success msg should come once user register then it should navigate to login page    
+    
+    
+
+

@@ -115,14 +115,27 @@ router.post('/getSpetialization',(req,res,next)=>{
     if(err){
       res.send({status:403 , msg: 'Forbidden'});
     }else{
-  connection.query('SELECT * FROM specialization_master where sport_id = ?',[req.body.sport_id],
-     function (err, rows) {
-      if (err) {
-        res.send({status:500 , data:{}});
-      } else {
-        res.send({status:200 , data: rows, msg: 'getAccounts Successfully'});
+      if(req.body.sport_id){
+        connection.query('SELECT * FROM specialization_master where sport_id = ?',[req.body.sport_id],
+        function (err, rows) {
+         if (err) {
+           res.send({status:500 , data:{}});
+         } else {
+           res.send({status:200 , data: rows, msg: 'getAccounts Successfully'});
+         }
+       })
       }
-    })
+      else{
+        connection.query('SELECT * FROM specialization_master',
+        function (err, rows) {
+         if (err) {
+           res.send({status:500 , data:{}});
+         } else {
+           res.send({status:200 , data: rows, msg: 'getAccounts Successfully'});
+         }
+       })
+      }
+
   }
 })
 });

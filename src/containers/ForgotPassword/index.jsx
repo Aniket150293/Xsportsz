@@ -69,7 +69,6 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
             <div className="card-body">
                 <Form noValidate validated={isSubmit} onSubmit={submitForgotPassword}>
                     <Form.Group>
-                        <Label>Email</Label>
                         <Input required onChange={ e => setEmail(e.target.value)} className="form-control-alternative" type="email" placeholder="Enter email" />
                                           {validateMsgValid}
                   {validateMsgInvalid}
@@ -125,9 +124,11 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
 
   function submitForgotPassword(e){
     setIsSubmit(true);
-        e.preventDefault();
+    e.preventDefault();
     if(e.currentTarget.checkValidity()){
+      if(password==confirmPassword){
     forgetPassword({'email':email,"userId" : localStorage.getItem("userid")},localStorage.getItem("token"));
+      }else NotificationModel( "bg-danger" ,"Password Not Match")  
   }
   }
 
@@ -135,6 +136,7 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
     setIsSubmit(true);
         e.preventDefault();
     if(e.currentTarget.checkValidity()){
+      if(password==confirmPassword){
     var d=new Date();
     var id=path.split("$")[1]
     var mailtime=path.split("$")[2]
@@ -153,6 +155,7 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
     }else{
         console.log("link is invalid");
     }
+  }else NotificationModel( "bg-danger" ,"Password Not Match")
   }
   }
 
@@ -171,7 +174,8 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
   }
 
     return (
-        <div className="container py-5">
+      <div class="py-5" style={{ "background-color": "#333333" }}>
+        <div className="container mt-5" >
                {form}
                <Modal
               className="modal-dialog modal-danger"
@@ -195,6 +199,7 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
               </div>
             </Modal>
         </div>
+      </div>
     );
 };
 
