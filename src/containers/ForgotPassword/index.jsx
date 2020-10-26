@@ -126,7 +126,7 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
     setIsSubmit(true);
     e.preventDefault();
     if(e.currentTarget.checkValidity()){
-      if(password==confirmPassword){
+      if(Password==ConfirmPassword){
     forgetPassword({'email':email,"userId" : localStorage.getItem("userid")},localStorage.getItem("token"));
       }else NotificationModel( "bg-danger" ,"Password Not Match")  
   }
@@ -136,7 +136,7 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
     setIsSubmit(true);
         e.preventDefault();
     if(e.currentTarget.checkValidity()){
-      if(password==confirmPassword){
+      if(Password==ConfirmPassword){
     var d=new Date();
     var id=path.split("$")[1]
     var mailtime=path.split("$")[2]

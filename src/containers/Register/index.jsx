@@ -173,10 +173,8 @@ export default function Register({
         setState(RegisteredUserDetails.data.rows[0].state);
         setZip(RegisteredUserDetails.data.rows[0].zip_code);
         setDate(new Date(RegisteredUserDetails.data.rows[0].year_of_birth+"-"+RegisteredUserDetails.data.rows[0].month_of_birth+"-"+RegisteredUserDetails.data.rows[0].date_of_birth));
-        console.log(date);
         // setMonth(RegisteredUserDetails.data.rows[0].month_of_birth);
         // setYear(RegisteredUserDetails.data.rows[0].year_of_birth);
-        console.log(RegisteredUserDetails.data.rows[0].profile);
       }
   }, [RegisteredUserDetails]);
 
@@ -511,7 +509,7 @@ export default function Register({
               }}
               value={date}
               timeFormat={false}
-              onChange={e => {setDate(e._d);console.log(e._d)}}
+              onChange={e => {setDate(e._d);}}
             />
           </InputGroup>
         </FormGroup>

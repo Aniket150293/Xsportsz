@@ -12,12 +12,17 @@ router.post('/getRegisteredUserList', function(req, res, next) {
     }else{
       if(req.body.months!=""){
         var e=new Date();
+        var getDate =e.getDate()
+        var getMonth =e.getMonth()+1
+        var getFullYear =e.getFullYear()
+
         var y=e.getFullYear(),m=e.getMonth()-req.body.months
         if(m<=0){
           m=m+12
           y=y-1
         }
-        var a = connection.query("SELECT * from (user_sport_mapping Inner join user_details on user_details.id=user_sport_mapping.user_id ) Inner join transaction_details on transaction_details.user_id=user_sport_mapping.user_id where user_details.role='user' and user_sport_mapping.created_date between '"+y+"-"+m+"-"+ e.getDay()+"' and '"+ e.getFullYear()+"-"+ e.getMonth()+"-"+ e.getDay()+"'",
+        
+        var a = connection.query("SELECT * from (user_sport_mapping Inner join user_details on user_details.id=user_sport_mapping.user_id ) Inner join transaction_details on transaction_details.user_id=user_sport_mapping.user_id where user_details.role='user' and user_sport_mapping.created_date between '"+y+"-"+m+"-"+ getDate+"' and '"+ getFullYear+"-"+ getMonth+"-"+ getDate+"'",
           function (err, rows) {
             if (err) {
               res.send({status:500 , data:a.sql});
@@ -61,13 +66,15 @@ router.post('/contact', function(req, res, next) {
 
 
 router.post('/upload', function(req, res, next) {
-
+  const birthdate=new Date(req.body.date);
+  var getDate =birthdate.getDate()
+  var getMonth =birthdate.getMonth()+1
+  var getFullYear =birthdate.getFullYear()
   if(req.body.update){
     jwt.verify(req.headers['authorization'],toString(req.body.userId),function(err,data){
       if(err){
         res.send({status:403 , msg: 'Forbidden'});
       }else{
-        const birthdate=new Date(req.body.date);
           // if (req.files != null) {
           //   var imageName=req.body.profile+".jpg"
           //   const file = req.files.file;
@@ -86,8 +93,8 @@ router.post('/upload', function(req, res, next) {
 
           var s="UPDATE user_details SET "+
           "email='"+req.body.email +"', mobile='"+ req.body.mobileNo+"', alternate_mobile='"+ req.body.alternateMobileNo+
-          "',first_name='"+ req.body.firstName+"', middle_name='"+ req.body.middleName+"', last_name='"+req.body.lastName +"', address='"+req.body.address +"', city='"+ req.body.city+"', state='"+ req.body.state+"', zip_code='"+ req.body.zip+"', date_of_birth='"+ birthdate.getDate()+
-          "',month_of_birth='"+ birthdate.getMonth()+"', year_of_birth='"+ birthdate.getFullYear()+"',modified_at =now() where id='"+req.body.userid+"'"
+          "',first_name='"+ req.body.firstName+"', middle_name='"+ req.body.middleName+"', last_name='"+req.body.lastName +"', address='"+req.body.address +"', city='"+ req.body.city+"', state='"+ req.body.state+"', zip_code='"+ req.body.zip+"', date_of_birth='"+ getDate+
+          "',month_of_birth='"+ getMonth+"', year_of_birth='"+ getFullYear+"',modified_at =now() where id='"+req.body.userid+"'"
           var a = connection.query(s,function (err, rows) {
             if (err) {
               res.send({status:500 , data:{error:err}});
@@ -103,10 +110,6 @@ router.post('/upload', function(req, res, next) {
   }
   else{
     const profileID=uuid.v4();
-    const birthdate=new Date(req.body.date);
-    
-    
-    
     // if (req.files != null) {
     //   var file = req.files.file;
     //   var imageName=profileID+".jpg"
@@ -129,8 +132,8 @@ router.post('/upload', function(req, res, next) {
     'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,0,now(),now(),now()) ',
     [profileID, req.body.email, req.body.password, 
       req.body.mobileNo, req.body.alternateMobileNo, req.body.firstName , req.body.middleName, 
-      req.body.lastName,req.body.address,req.body.city, req.body.state, req.body.zip , birthdate.getDate(), birthdate.getMonth(),
-      birthdate.getFullYear(),req.body.role],
+      req.body.lastName,req.body.address,req.body.city, req.body.state, req.body.zip , getDate, getMonth,
+      getFullYear,req.body.role],
     function (err, rows) {
       if (err) {
         res.send({status:500 , data:{sql:a.sql,msg:"Enter Corrent Information"}});
