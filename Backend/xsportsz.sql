@@ -1,20 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
--- http://www.phpmyadmin.net
+-- version 4.9.2
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 04, 2020 at 03:15 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Host: localhost
+-- Generation Time: Oct 24, 2020 at 08:09 AM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `xsportsz`
@@ -23,16 +25,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `contact_details`
+--
+
+CREATE TABLE `contact_details` (
+  `id` int(10) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `email` text NOT NULL,
+  `message` text NOT NULL,
+  `added_on` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `specialization_master`
 --
 
-CREATE TABLE IF NOT EXISTS `specialization_master` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `specialization_master` (
+  `id` int(10) NOT NULL,
   `sport_id` int(10) NOT NULL,
   `name` varchar(500) NOT NULL,
-  `is_active` tinyint(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+  `is_active` tinyint(4) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `specialization_master`
@@ -54,12 +69,11 @@ INSERT INTO `specialization_master` (`id`, `sport_id`, `name`, `is_active`) VALU
 -- Table structure for table `sports_master`
 --
 
-CREATE TABLE IF NOT EXISTS `sports_master` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sports_master` (
+  `id` int(10) NOT NULL,
   `name` varchar(500) NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `is_active` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sports_master`
@@ -77,12 +91,36 @@ INSERT INTO `sports_master` (`id`, `name`, `is_active`) VALUES
 -- Table structure for table `state_master`
 --
 
-CREATE TABLE IF NOT EXISTS `state_master` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `state_master` (
+  `id` int(10) NOT NULL,
   `state` varchar(150) NOT NULL,
-  `is_active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `is_active` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaction_details`
+--
+
+CREATE TABLE `transaction_details` (
+  `id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `transaction_id` varchar(500) NOT NULL,
+  `bank_txn_id` varchar(500) NOT NULL,
+  `order_id` varchar(500) NOT NULL,
+  `amount` varchar(100) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `txn_type` varchar(100) DEFAULT NULL,
+  `gateway_name` varchar(100) NOT NULL,
+  `response_code` varchar(100) NOT NULL,
+  `response_msg` text NOT NULL,
+  `bank_name` varchar(500) NOT NULL,
+  `mid` text NOT NULL,
+  `payment_mode` varchar(500) NOT NULL,
+  `refund_amount` varchar(500) DEFAULT NULL,
+  `transaction_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -90,9 +128,8 @@ CREATE TABLE IF NOT EXISTS `state_master` (
 -- Table structure for table `user_details`
 --
 
-CREATE TABLE IF NOT EXISTS `user_details` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `profile_created_by` varchar(15) NOT NULL,
+CREATE TABLE `user_details` (
+  `id` int(10) NOT NULL,
   `profile` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
@@ -108,16 +145,20 @@ CREATE TABLE IF NOT EXISTS `user_details` (
   `date_of_birth` int(10) NOT NULL,
   `month_of_birth` int(10) NOT NULL,
   `year_of_birth` int(10) NOT NULL,
-  `pan_number` varchar(100) NOT NULL,
-  `adhar_number` varchar(1000) NOT NULL,
   `role` varchar(10) NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
-  `is_blocked` tinyint(1) NOT NULL DEFAULT '0',
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `is_blocked` tinyint(1) NOT NULL DEFAULT 0,
   `last_login` datetime NOT NULL,
   `created_at` datetime NOT NULL,
-  `modified_at` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `modified_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_details`
+--
+
+INSERT INTO `user_details` (`id`, `profile`, `email`, `password`, `mobile`, `alternate_mobile`, `first_name`, `middle_name`, `last_name`, `address`, `city`, `state`, `zip_code`, `date_of_birth`, `month_of_birth`, `year_of_birth`, `role`, `is_active`, `is_blocked`, `last_login`, `created_at`, `modified_at`) VALUES
+(2, 'c6ed106b-e39a-4597-b37b-73aa5b24b8f6', 'a@gmail.com', 'a', '8', '8', '8', '8', '8', '8', '8', 1, '8', 2, 9, 2020, 'super_user', 1, 0, '2020-10-15 14:15:36', '2020-08-15 14:15:36', '2020-10-15 14:15:36');
 
 -- --------------------------------------------------------
 
@@ -125,18 +166,110 @@ CREATE TABLE IF NOT EXISTS `user_details` (
 -- Table structure for table `user_sport_mapping`
 --
 
-CREATE TABLE IF NOT EXISTS `user_sport_mapping` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `user_sport_mapping` (
+  `id` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
   `sport_id` int(10) NOT NULL,
   `years_age` int(10) NOT NULL,
   `months_age` int(10) NOT NULL,
   `specialization_id` int(10) NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '1',
-  `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `contact_details`
+--
+ALTER TABLE `contact_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `specialization_master`
+--
+ALTER TABLE `specialization_master`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sports_master`
+--
+ALTER TABLE `sports_master`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `state_master`
+--
+ALTER TABLE `state_master`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transaction_details`
+--
+ALTER TABLE `transaction_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_details`
+--
+ALTER TABLE `user_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_sport_mapping`
+--
+ALTER TABLE `user_sport_mapping`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `contact_details`
+--
+ALTER TABLE `contact_details`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `specialization_master`
+--
+ALTER TABLE `specialization_master`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `sports_master`
+--
+ALTER TABLE `sports_master`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `state_master`
+--
+ALTER TABLE `state_master`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `transaction_details`
+--
+ALTER TABLE `transaction_details`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `user_details`
+--
+ALTER TABLE `user_details`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `user_sport_mapping`
+--
+ALTER TABLE `user_sport_mapping`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -11,7 +11,10 @@ export default function ChangePassword({resetPassword,resetPasswordSucsses}) {
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
 
-  var validateMsgValid=(<Form.Control.Feedback>Looks good!</Form.Control.Feedback>)
+  var validateMsgValid=(
+  // <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+  <div></div>
+  )
   var validateMsgInvalid=(<Form.Control.Feedback type="invalid">Please provide a valid Input.</Form.Control.Feedback>)
 
 
@@ -46,6 +49,7 @@ export default function ChangePassword({resetPassword,resetPasswordSucsses}) {
   function submitchangePassword(e){
     e.preventDefault();
     if(e.currentTarget.checkValidity()){
+      if(Password==ConfirmPassword){
         let data={
             "changePassword":true,
             "oldpassword":OldPassword,
@@ -53,13 +57,15 @@ export default function ChangePassword({resetPassword,resetPasswordSucsses}) {
             "password":Password,
         }
         resetPassword(data,localStorage.getItem("token"));
+      }else NotificationModel( "bg-danger" ,"Password Not Match")
       }
     setIsSubmit(true);
   }
   
 
     return (
-        <div className="container py-5 ">
+      <div class="py-5" style={{ "background-color": "#333333" }}>
+        <div className="container mt-5" >
                        <Modal
               className="modal-dialog modal-danger"
               contentClassName={Class}
@@ -87,20 +93,20 @@ export default function ChangePassword({resetPassword,resetPasswordSucsses}) {
                 <Form noValidate validated={isSubmit} onSubmit={submitchangePassword}>
                     <Form.Group>
 
-                        <Label>Enter old Password</Label>
-                        <Input value={OldPassword} onChange={ e => setOldPassword(e.target.value)} className="form-control-alternative" type="text" required/>
+
+                        <Input placeholder="Enter old Password" value={OldPassword} onChange={ e => setOldPassword(e.target.value)} className="form-control-alternative" type="password" required/>
                   {validateMsgValid}
                   {validateMsgInvalid}
 </Form.Group>
 <Form.Group>
-                        <Label>Enter New Password</Label>
-                        <Input value={Password} onChange={ e => setPassword(e.target.value)} className="form-control-alternative" type="text" required/>
+
+                        <Input placeholder="Enter New Password" value={Password} onChange={ e => setPassword(e.target.value)} className="form-control-alternative" type="password" required/>
                   {validateMsgValid}
                   {validateMsgInvalid}
 </Form.Group>
 <Form.Group>
-                        <Label>ReEnter New Password</Label>
-                        <Input value={ConfirmPassword} onChange={ e => setConfirmPassword(e.target.value)} className="form-control-alternative" type="text" required/>
+
+                        <Input placeholder="ReEnter New Password" value={ConfirmPassword} onChange={ e => setConfirmPassword(e.target.value)} className="form-control-alternative" type="password" required/>
                   {validateMsgValid}
                   {validateMsgInvalid}
 </Form.Group>
@@ -112,7 +118,8 @@ export default function ChangePassword({resetPassword,resetPasswordSucsses}) {
                 </Form>
             </div>
         </div>
-        </div>
+      </div>
+    </div>
     );
 };
 

@@ -1,12 +1,16 @@
 import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
-import { Form,Table,Modal } from "reactstrap";
-import { submitRegisteredUser,getRegisteredUserList } from '../../actions'
+import { Form,Table,Modal,Row,Input } from "reactstrap";
+import { submitRegisteredUser,getRegisteredUserList,  getSports,
+  getSpetialization, } from '../../actions'
 import { IoMdLock,IoIosCheckmarkCircle } from 'react-icons/io';
 import { CSVLink } from "react-csv";
 import { useHistory } from "react-router";
 
-export default function CreatedCustomerList({submitRegisteredUser,registeredUserDetails,getRegisteredUserList,RegisteredUserList }) {
+export default function CreatedCustomerList({submitRegisteredUser,registeredUserDetails,getRegisteredUserList,RegisteredUserList,  getSports,
+  getSportsSucsses,
+  getSpetializationSucsses,
+  getSpetialization, }) {
 
   const [isSubmit, setIsSubmit] = useState();
   const [Class, SetClass] = useState();
@@ -25,20 +29,50 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
 
   var history = useHistory();
   const [data1, setdata1] = useState();
+  const [sport, setsport] = useState();
+  const [specialization, setspecialization] = useState();
 
   useEffect(() => {
-    getRegisteredUserList({"userid": localStorage.getItem("userid")},localStorage.getItem("token"));
+    getSports(
+      { userid: localStorage.getItem("userid") },
+      localStorage.getItem("token")
+    );
+    getSpetialization(
+      {
+        userid: localStorage.getItem("userid"),
+      },
+      localStorage.getItem("token")
+    );
+    getRegisteredUserList({"userid": localStorage.getItem("userid"),"months":""},localStorage.getItem("token"));
   },[])
 
+  
   React.useEffect(() => {
     if(RegisteredUserList)if(RegisteredUserList.status==200){
-      if(history.location.pathname=="/customer-list")
-        setdata1(RegisteredUserList.data.filter(item => item.role == "user"))
-      else if(history.location.pathname=="/bank-admin-list")
-        setdata1(RegisteredUserList.data.filter(item => item.role == "bank_admin"))
+      // if(history.location.pathname=="/customer-list")
+      //   setdata1(RegisteredUserList.data.filter(item => item.role == "user"))
+      // else if(history.location.pathname=="/bank-admin-list")
+      //   setdata1(RegisteredUserList.data.filter(item => item.role == "bank_admin"))
+      setdata1(RegisteredUserList.data)
     }
   }, [RegisteredUserList])
 
+
+  React.useEffect(() => {
+    if (getSportsSucsses)
+      if (getSportsSucsses.status == 200) {
+        setsport(getSportsSucsses.data);
+      }
+  }, [getSportsSucsses]);
+
+
+  React.useEffect(() => {
+    if (getSpetializationSucsses)
+      if (getSpetializationSucsses.status == 200) {
+        setspecialization(getSpetializationSucsses.data);
+      }
+  }, [getSpetializationSucsses]);
+  
 
   React.useEffect(() => {
     if(registeredUserDetails)if(isSubmit){
@@ -62,7 +96,7 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
   }
 
     return (
-        <div className="container-fluid py-5 ">
+        <div className="container-fluid py-5 " style={{"background-color":"#333333"}}>
                        <Modal
               className="modal-dialog modal-danger"
               contentClassName={Class}
@@ -84,8 +118,35 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
                 </button>
               </div>
             </Modal>
-            <Form className="shadow card">
-                <div className="card-header">List Of Users</div>
+            <Form className="shadow card mt-5">
+                <div className="card-header">
+                  <Row className="align-items-center">
+                  <div className="col">
+                    List of Players
+                    </div>
+                    <div className="col">
+
+                    <Input
+                        className="form-control-alternative"
+                        type="select"
+                        onChange={(e) => {
+                          getRegisteredUserList({
+                            "userid": localStorage.getItem("userid"),
+                            "months":e.target.value
+                          },localStorage.getItem("token"));
+                        }}
+                      >
+                        <option value="">Select Filter</option>
+                        <option value="1">1 Month</option>
+                        <option value="2">2 Month</option>
+                        <option value="3">3 Month</option>
+                        <option value="6">6 Month</option>
+                        <option value="12">1 Year</option>
+                      </Input>
+
+                    </div>
+                  </Row>
+                </div>
                 <div className="card-body">
                 <Table responsive striped bordered hover>
                   <thead>
@@ -94,11 +155,11 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
                       <th>User Name</th>
                       <th>Email</th>
                       <th>Mobile</th>
-                      <th>Address</th>
-                      <th>PAN Card No</th>
-                      <th>Adhar Card No</th>
-                      <th>Applied On</th>
-                      <th>Action</th>
+                      {/* <th>Address</th> */}
+                      <th>Age</th>
+                      <th>Sport</th>
+                      <th>Spetialization</th>
+                      <th>Payment</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -106,19 +167,29 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
                       (item => {
                           return(<tr>
                             <td>{item.id}</td>
-                            <td>{item.first_name} {item.last_name}</td>
+                            <td>{item.first_name} {item.middle_name} {item.last_name}</td>
                             <td>{item.email}</td>
                             <td>{item.mobile}</td>
-                            <td>{item.address}</td>
-                            <td>{item.pan_number}</td>
-                            <td>{item.adhar_number}</td>
-                            <th>Applied On</th>
+                            {/* <td>{item.address}</td> */}
+                            <td>{item.years_age} Years {item.months_age} Months</td>
+                            {/* <td>{item.sport_id}</td> */}
                             <td>
-                              {item.is_active=='1' ?
-                              <IoMdLock size="20px" color="red" title="Block User" onClick={() => block(item.id)} /> :
-                              <IoIosCheckmarkCircle size="20px" color="green" title="Verify User" onClick={() => verify(item.id)} />
-                              }
+                            {item.sport_id}
+                            { sport ? sport.map((item1) => { 
+                              if(item1.id==item.sport_id) console.log(item1.id+" "+item1.name);item1.name})
+                              : "Not Available"
+                            }
                             </td>
+                            {/* <td>{item.specialization_id}</td> */}
+                            <td>
+                            {item.specialization_id}
+                            { specialization ? specialization.map((item1) => { 
+                              if(item1.id==item.specialization_id) console.log(item1.id+" "+item1.name);item1.name})
+                              : "Not Available"
+                            }
+                            </td>
+                            <td>{item.status}</td>
+                            {/* <td>Rs. 250 /-</td> */}
                           </tr>)
                       }): <tr></tr>
                     }
@@ -128,7 +199,7 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
                 <div className="card-footer text-center">
                       <CSVLink
                       data={data1 ? data1 : ''}
-                      filename={"Customer-List"+new Date().getTime()+".csv"}
+                      filename={"Player-List"+new Date().getTime()+".csv"}
                       className="btn btn-primary"
                       target="_blank"
                     >
@@ -143,12 +214,16 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
 
 const mapDispatchToProps =  {
   getRegisteredUserList:getRegisteredUserList,
-  submitRegisteredUser:submitRegisteredUser
+  submitRegisteredUser:submitRegisteredUser,
+  getSports: getSports,
+  getSpetialization: getSpetialization,
 }
 
 const mapStateToProps = (state) => ({
   RegisteredUserList: state.registeredUserList,
-  registeredUserDetails:state.registeredUserDetails
+  registeredUserDetails:state.registeredUserDetails,
+  getSportsSucsses: state.getSportsSucsses,
+  getSpetializationSucsses: state.getSpetializationSucsses,
 })
 
 CreatedCustomerList = connect(

@@ -1,0 +1,55 @@
+var express = require('express');
+var router = express.Router();
+const checksum_lib = require('./checksum/checksum.js');
+const config = require('./checksum/config.js');
+var connection = require('./config/index')
+
+/* GET home page. */
+router.post('/payment', function(req, res, next) {
+    
+  var params 						= {};
+  params['MID'] 					= "dYCLtv04241463291282";
+  params['WEBSITE']				= "WEBSTAGING";
+  params['CHANNEL_ID']			= 'WEB';
+  params['INDUSTRY_TYPE_ID']	= 'Retail';
+  params['ORDER_ID']			= 'TEST_'  + new Date().getTime();
+  params['CUST_ID'] 			= req.body.userid;
+  params['TXN_AMOUNT']			= '250.00';
+  params['CALLBACK_URL']		= 'http://localhost:3000/payment/callback';
+  params['EMAIL']				= req.body.email;
+  params['MOBILE_NO']			= req.body.mobile;
+
+  checksum_lib.genchecksum(params, 'C7UK7o1je%fRZXSE', function (err, checksum) {
+    res.send({status:200,data:params, checksum:checksum});
+  });
+});
+
+
+router.post('/callback', (req, res) => {
+  console.log(req.body)
+  var result = checksum_lib.verifychecksum(req.body, config.PaytmConfig.key, req.body.CHECKSUMHASH);
+  if(result) {
+    var a = connection.query('INSERT INTO  transaction_details '+
+    '( user_sport_mapping_id, transaction_id, bank_txn_id, order_id, amount, ' +
+    'status, txn_type, gateway_name, response_code, response_msg, bank_name, mid, payment_mode, '+
+    'refund_amount, transaction_date ) '+
+    'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ',
+    ["1", req.body.TXNID, req.body.BANKTXNID, 
+      req.body.ORDERID, req.body.TXNAMOUNT, req.body.STATUS , req.body.TXNTYPE, 
+      req.body.GATEWAYNAME,req.body.RESPCODE,req.body.RESPMSG, req.body.BANKNAME, req.body.MID , req.body.PAYMENTMODE,
+       req.body.REFUNDAMT,req.body.TXNDATE],
+    function (err, rows) {
+      // if (err) {
+      //   console.log(a.sql)
+      //   res.redirect('http://localhost:8080/#/payment/500');
+      // } else {
+        if(req.body.STATUS=="TXN_SUCCESS")
+          res.redirect('http://localhost:8080/#/payment/200');
+        else
+          res.redirect('http://localhost:8080/#/payment/500');
+      // }
+    })
+  }
+})
+
+module.exports = router;

@@ -4,6 +4,7 @@ import { Form } from "react-bootstrap";
 import { Button, Col,Row,Label,Modal,Table,Input } from "reactstrap";
 import { useHistory } from "react-router";
 import {forgetPassword,resetPassword} from "../../actions";
+import { Link } from "react-router-dom";
 
 
 export default function ForgetPassword({forgetPassword,resetPassword,resetPasswordSucsses,forgetPasswordSucsses}) {
@@ -14,7 +15,10 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
 
   let form;
   const path=useHistory().location.pathname;
-  var validateMsgValid=(<Form.Control.Feedback>Looks good!</Form.Control.Feedback>)
+  var validateMsgValid=(
+    <div></div>
+  // <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+  )
   var validateMsgInvalid=(<Form.Control.Feedback type="invalid">Please provide a valid Input.</Form.Control.Feedback>)
 
   const [isSubmit, setIsSubmit] = useState();
@@ -65,7 +69,6 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
             <div className="card-body">
                 <Form noValidate validated={isSubmit} onSubmit={submitForgotPassword}>
                     <Form.Group>
-                        <Label>Email</Label>
                         <Input required onChange={ e => setEmail(e.target.value)} className="form-control-alternative" type="email" placeholder="Enter email" />
                                           {validateMsgValid}
                   {validateMsgInvalid}
@@ -73,7 +76,7 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
                         <Button color="primary" type="submit" className="btn btn-primary">
                             Submit
                         </Button>
-                        <Button color="primary" className="btn btn-primary" to="/">
+                        <Button color="primary" className="btn btn-primary" to="/" tag={Link}>
                             Back To Login
                         </Button>
                     </Form.Group>
@@ -97,11 +100,11 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
                             <Form noValidate validated={isSubmit} onSubmit={submitResetPassword}>
                                 <Form.Group>
                                     <Label>Enter New Password</Label>
-                                    <Input required onChange={ e => setPassword(e.target.value)} className="form-control-alternative" type="text" />
+                                    <Input required onChange={ e => setPassword(e.target.value)} className="form-control-alternative" type="password" />
                                                       {validateMsgValid}
                               {validateMsgInvalid}
                                     <Label>ReEnter New Password</Label>
-                                    <Input required onChange={ e => setConfirmPassword(e.target.value)} className="form-control-alternative" type="text" />
+                                    <Input required onChange={ e => setConfirmPassword(e.target.value)} className="form-control-alternative" type="password" />
                                                       {validateMsgValid}
                               {validateMsgInvalid}
                                     <br/>
@@ -121,9 +124,11 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
 
   function submitForgotPassword(e){
     setIsSubmit(true);
-        e.preventDefault();
+    e.preventDefault();
     if(e.currentTarget.checkValidity()){
+      if(Password==ConfirmPassword){
     forgetPassword({'email':email,"userId" : localStorage.getItem("userid")},localStorage.getItem("token"));
+      }else NotificationModel( "bg-danger" ,"Password Not Match")  
   }
   }
 
@@ -131,6 +136,7 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
     setIsSubmit(true);
         e.preventDefault();
     if(e.currentTarget.checkValidity()){
+      if(Password==ConfirmPassword){
     var d=new Date();
     var id=path.split("$")[1]
     var mailtime=path.split("$")[2]
@@ -149,6 +155,7 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
     }else{
         console.log("link is invalid");
     }
+  }else NotificationModel( "bg-danger" ,"Password Not Match")
   }
   }
 
@@ -167,7 +174,8 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
   }
 
     return (
-        <div className="container py-5">
+      <div class="py-5" style={{ "background-color": "#333333" }}>
+        <div className="container mt-5" >
                {form}
                <Modal
               className="modal-dialog modal-danger"
@@ -191,6 +199,7 @@ export default function ForgetPassword({forgetPassword,resetPassword,resetPasswo
               </div>
             </Modal>
         </div>
+      </div>
     );
 };
 

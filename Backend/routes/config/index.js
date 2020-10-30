@@ -4,7 +4,7 @@ var connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'multibanking_erp'
+  database: 'xsportsz'
 })
 
 connection.connect(function(err) {

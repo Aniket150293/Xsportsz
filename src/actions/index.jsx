@@ -160,3 +160,42 @@ export const logout = () =>
     type: 'logout',
   }
 );
+
+
+
+
+export const getSports = (data,token) =>
+(
+  {
+    type: 'getSports',
+    token: token,
+    data : data
+  }
+);
+
+export const getSpetialization = (data,token) =>
+(
+  {
+    type: 'getSpetialization',
+    token: token,
+    data : data
+  }
+);
+
+export const payment = (data,token) =>
+(
+  {
+    type: 'payment',
+    token: token,
+    data : data
+  }
+);
+
+export const callback = (data,token) =>
+(
+  {
+    type: 'callback',
+    token: token,
+    data : data
+  }
+);
