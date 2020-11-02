@@ -10,6 +10,8 @@ import {
   Col,
   UncontrolledTooltip,
 } from "reactstrap";
+ 
+
 
 class SimpleFooter extends React.Component {
   render() {
