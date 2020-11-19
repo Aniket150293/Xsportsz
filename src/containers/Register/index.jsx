@@ -570,7 +570,7 @@ export default function Register({
 
             <br></br>
 
-            <Button color="primary" type="submit">
+            <Button color="danger" type="submit">
               Submit
             </Button>
             {edit ? "" : (<Button color="primary" className="btn btn-primary" to="/" tag={Link}>Back To Login</Button>)}

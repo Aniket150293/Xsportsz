@@ -7,7 +7,6 @@ import { logger } from 'redux-logger';
 import reducer from './reducers';
 import App from './components/App';
 import rootSaga from './sagas';
-
 import 'bootstrap/dist/css/bootstrap.css';
 import './assets/css/argon-design-system-react.css';
 

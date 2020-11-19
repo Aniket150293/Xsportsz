@@ -111,7 +111,7 @@ export default function ChangePassword({resetPassword,resetPasswordSucsses}) {
                   {validateMsgInvalid}
 </Form.Group>
                         <br/>
-                        <Button color="primary" type="submit" className="btn btn-primary">
+                        <Button color="danger" type="submit" className="btn btn-danger">
                             Submit
                         </Button>
                     
