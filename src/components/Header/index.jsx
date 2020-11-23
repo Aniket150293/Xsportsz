@@ -147,34 +147,34 @@ export default function Header({ logout }) {
             "padding": "0px 10px",
             "background-color": "white",
             "min-height": "53px",
-            
+            //"position":"relative"
           }}
           
         >
-        {/*
-         {
-          <div class="row">
-    <div class="col">
+        {
+         
+       
            <img
                     
                   src={image}
-                  class=" mx-auto d-block img-fluid" alt="Responsive image" 
-             width="80" height="80" 
+                  class=" d-block float-right  " style={{"marginLeft":"50px"}} alt="Responsive image" 
+             width="60" height="60" 
                 
                 />
-                </div> 
-                </div>
+              
           
-        }*/}
+        }
           <Container>
+         {/*
           <img
                     
                     src={image}
-                    class=" mx-auto d-block  " alt="Responsive image" 
-               width="70" height="70" 
+                    class=" mx-auto d-block position-relative  " alt="Responsive image" 
+               width="60" height="60" 
                   
                   />
-
+                 
+         */}
             <NavbarBrand className="mr-lg-5">
 
               <span className="font-weight-bold text-white">
@@ -182,7 +182,11 @@ export default function Header({ logout }) {
               </span>
               
             </NavbarBrand>
-            <button className="navbar-toggler btn-danger bg-danger" id="navbar_global">
+
+
+
+            
+            <button className="navbar-toggler  btn-danger bg-danger" id="navbar_global">
               <span className="navbar-toggler-icon" />
             </button>
             <UncontrolledCollapse toggler="#navbar_global" navbar>

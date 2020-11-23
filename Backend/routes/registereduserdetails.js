@@ -93,7 +93,7 @@ router.post('/upload', function(req, res, next) {
 
           var s="UPDATE user_details SET "+
           "email='"+req.body.email +"', mobile='"+ req.body.mobileNo+"', alternate_mobile='"+ req.body.alternateMobileNo+
-          "',first_name='"+ req.body.firstName+"', middle_name='"+ req.body.middleName+"', last_name='"+req.body.lastName +"', address='"+req.body.address +"', city='"+ req.body.city+"', state='"+ req.body.state+"', zip_code='"+ req.body.zip+"', date_of_birth='"+ getDate+
+          "',first_name='"+ req.body.firstName+"', middle_name='"+ req.body.middleName+"', last_name='"+req.body.lastName +"', address='"+req.body.address +"', city='"+ req.body.city+"', state='"+req.body.state+"', zip_code='"+ req.body.zip+"', date_of_birth='"+ getDate+
           "',month_of_birth='"+ getMonth+"', year_of_birth='"+ getFullYear+"',modified_at =now() where id='"+req.body.userid+"'"
           var a = connection.query(s,function (err, rows) {
             if (err) {
@@ -102,7 +102,7 @@ router.post('/upload', function(req, res, next) {
               res.send({status:200 , data: rows, msg: 'User Updated Successfully'});
             }
           })
-      }
+      } 
     })
 
       

@@ -13,6 +13,7 @@ export default function Register({
   RegisteredUserDetails,
   getMasterBankList,
   masterBankList,
+  getstatesuccess
 }) {
   const [profile, setProfile] = useState("");
   const [image, setImage] = useState();
@@ -37,6 +38,17 @@ export default function Register({
   const [edit, setEdit] = useState(false);
   const [role, setRole] = useState("");
 
+ 
+  
+  /*
+const [sdata,setsdata]=useState();
+React.useEffect(() => {
+  if (submitRegisteredUser)
+    if (submitRegisteredUser.status == 200) {
+      setsdata(submitRegisteredUser.data);
+    }
+}, [submitRegisteredUser]);
+*/
   var history = useHistory();
   var pass,banks;
   var validateMsgValid = (
@@ -183,9 +195,9 @@ export default function Register({
     setIsSubmit(true);
 
     if (e.currentTarget.checkValidity()) {
-      // var data = {
-      //     "profilename" :profile.name,
-      //     "email":email,
+     //  var data = {
+      //   "profilename" :profile.name,
+       //    "email":email,
       //     "password":password,
       //     "confirmPassword":confirmPassword,
       //     "mobileNo":mobileNo,
@@ -195,14 +207,14 @@ export default function Register({
       //     "lastName":lastName,
       //     "address":address,
       //     "city":city,
-      //     "state":state,
+      //    "state":state,
       //     "zip":zip,
-      //     "date":date,
+      //   "date":date,
       //     "month":month,
-      //     "year" :year,
-      // }
+     //      "year" :year,
+     //  }
 
-      // submitRegisteredUser(data)
+    //  submitRegisteredUser(data)
     if(password==confirmPassword){
 
       const profiledata = new FormData();
@@ -472,10 +484,16 @@ export default function Register({
                   value={state}
                   className="form-control-alternative"
                   type="select"
-                  onChange={(e) => setState(e.target.value)}
+                  placeholder="Select State"
+                  onChange={(e) => setState(e.target.value)
+                  
+                  }
                 >
-                  <option value="">Choose State</option>
+
+                  <option value="" >Choose State</option>
                   <option value="1">Maharashtra</option>
+                  
+               
                 </Input>
                 {validateMsgValid}
                 {validateMsgInvalid}
