@@ -6,10 +6,13 @@ import {
   NavLink,
   Nav,
   Container,
+
   Row,
   Col,
   UncontrolledTooltip,
 } from "reactstrap";
+ 
+
 
 class SimpleFooter extends React.Component {
   render() {
@@ -19,7 +22,14 @@ class SimpleFooter extends React.Component {
           <Row className=" row-grid align-items-center mb-5">
             <Col lg="6">
               <h3 className=" text-danger font-weight-bold mb-2">
-                Thank you for supporting us!
+              'Thank you for visiting us!'
+
+
+
+
+
+
+                
               </h3>
               <h4 className="text-white mb-0 font-weight-light">
                 Let's get in touch on any of these platforms.
@@ -55,6 +65,8 @@ class SimpleFooter extends React.Component {
               </Button>
               <UncontrolledTooltip delay={0} target="tooltip837440414">
                 Like us
+                
+
               </UncontrolledTooltip>
               <Button
                 className="btn-icon-only rounded-circle ml-1"

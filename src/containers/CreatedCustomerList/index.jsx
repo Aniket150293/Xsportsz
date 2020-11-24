@@ -200,7 +200,7 @@ export default function CreatedCustomerList({submitRegisteredUser,registeredUser
                       <CSVLink
                       data={data1 ? data1 : ''}
                       filename={"Player-List"+new Date().getTime()+".csv"}
-                      className="btn btn-primary"
+                      className="btn btn-danger"
                       target="_blank"
                     >
                       Download

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { logout } from "../../actions";
+//import logo from '../../assets/img/logo.jpeg';
 // reactstrap components
 import {
   Button,
@@ -29,6 +30,8 @@ export default function Header({ logout }) {
     history.push("/");
   }
 
+ var image=require("../../assets/img/logo1.jpg");
+
   let tabBar,
     tabBar1,
     tabBar2,
@@ -43,7 +46,7 @@ export default function Header({ logout }) {
         <UncontrolledDropdown nav>
           <DropdownToggle nav>
             <i className="ni ni-collection d-lg-none mr-1" />
-            <span className="font-weight-bold nav-link-inner--text">
+            <span className="font-weight-bold nav-link-inner--text text-danger">
               Player List
             </span>
           </DropdownToggle>
@@ -61,7 +64,7 @@ export default function Header({ logout }) {
         <UncontrolledDropdown nav>
           <DropdownToggle nav>
             <i className="ni ni-collection d-lg-none mr-1" />
-            <span className="font-weight-bold nav-link-inner--text">
+            <span className="font-weight-bold nav-link-inner--text text-danger">
               Register Sport
             </span>
           </DropdownToggle>
@@ -95,7 +98,7 @@ export default function Header({ logout }) {
             {localStorage.getItem("firstname")} &nbsp;{" "}
             {localStorage.getItem("lastname")}&nbsp;
             </span>
-            <Button className="btn btn-warning" onClick={logout1}>
+            <Button className="btn btn-danger" onClick={logout1}>
             Logout
           </Button>
           </DropdownToggle>
@@ -108,11 +111,11 @@ export default function Header({ logout }) {
       </Nav>
     );
     userSettings = (
-      <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+      <Nav className="navbar-nav-hover align-items-lg-center  " navbar>
         <UncontrolledDropdown nav>
           <DropdownToggle nav>
-            <i className="ni ni-collection d-lg-none mr-1" />
-            <span className="font-weight-bold nav-link-inner--text">
+            <i className="ni ni-collection d-lg-none mr-1 " />
+            <span className="font-weight-bold nav-link-inner--text text-danger ">
               User Settings
             </span>
           </DropdownToggle>
@@ -134,27 +137,56 @@ export default function Header({ logout }) {
 
   return (
     <div>
-      <header>
+      <header  >
         <Navbar
-          className="shadow navbar-main fixed-top navbar-expand-lg navbar-dark headroom"
+          className="shadow navbar-main fixed-top navbar-expand-lg navbar-dark headroom "
           expand="lg"
           style={{
             "border-radius": "100px",
-            "margin": "10px 25px",
+            "margin": "4px 25px",
             "padding": "0px 10px",
-            "background-color": "#E92929",
-            "min-height": "53px"
+            "background-color": "white",
+            "min-height": "53px",
+            //"position":"relative"
           }}
+          
         >
+        {
+         
+       
+           <img
+                    
+                  src={image}
+                  class=" d-block float-right  " style={{"marginLeft":"50px"}} alt="Responsive image" 
+             width="60" height="60" 
+                
+                />
+              
+          
+        }
           <Container>
+         {/*
+          <img
+                    
+                    src={image}
+                    class=" mx-auto d-block position-relative  " alt="Responsive image" 
+               width="60" height="60" 
+                  
+                  />
+                 
+         */}
             <NavbarBrand className="mr-lg-5">
-              {/* <img
-                  alt="..."
-                  src={require("../../assets/img/logo.jpg")}
-                /> */}
-              <span className="font-weight-bold text-white">Xsportsz</span>
+
+              <span className="font-weight-bold text-white">
+            
+              </span>
+              
             </NavbarBrand>
-            <button className="navbar-toggler" id="navbar_global">
+
+
+
+            
+            <button className="navbar-toggler  btn-danger bg-danger" id="navbar_global">
               <span className="navbar-toggler-icon" />
             </button>
             <UncontrolledCollapse toggler="#navbar_global" navbar>
@@ -166,12 +198,16 @@ export default function Header({ logout }) {
                         alt="..."
                         src={require("../../assets/img/logo.jpg")}
                       /> */}
+      
+        
+                        
+
                       <span className="font-weight-bold">Xsportsz</span>
                     {/* </Link> */}
                     
                   </Col>
                   <Col className="collapse-close" xs="6">
-                    <button className="navbar-toggler" id="navbar_global">
+                    <button className="navbar-toggler " id="navbar_global">
                       <span />
                       <span />
                     </button>
@@ -192,6 +228,8 @@ export default function Header({ logout }) {
     </div>
   );
 }
+
+
 
 const mapDispatchToProps = {
   logout: logout,
