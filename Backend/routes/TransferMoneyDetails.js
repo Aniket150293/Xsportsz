@@ -110,6 +110,15 @@ router.post('/getSports',(req,res,next)=>{
 });
 
 
+
+
+
+
+
+
+
+
+
 router.post('/getSpetialization',(req,res,next)=>{
   jwt.verify(req.headers['authorization'],toString(req.body.userid),function(err,data){
     if(err){

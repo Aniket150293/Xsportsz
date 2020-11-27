@@ -1,4 +1,6 @@
+
 import { put, takeLatest, all } from 'redux-saga/effects';
+
 
 const url="http://localhost:3000/";
 const devapi =
@@ -23,8 +25,10 @@ const devapi =
     'callback' : url+'callback/callback',
 
     
-    
     'getSports' : url+'TransferMoneyDetails/getSports',
+    'getState':url+'registereduserdetails/getState',
+    'getCountry':url+'registereduserdetails/getCountry',
+
     'getSpetialization' : url+'TransferMoneyDetails/getSpetialization',
 }
 
@@ -338,6 +342,46 @@ function* logout() {
     yield put({ type: "getSportsSucsses", json: json });
   }
 
+
+ function* getState(action) {
+    const json = yield fetch(
+      devapi.getState,
+      {
+        method : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : action.token
+        },
+        body : JSON.stringify(action.data)
+      }
+      )
+      .then(response =>
+          response.json()
+      );
+    yield put({ type: "getstatesucces" , json: json });
+  }
+
+
+function* getCountry(action){
+  const json=yield fetch(
+    devapi.getCountry,
+    {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'Authorization':action.token
+      },
+      body:JSON.stringify(action.data)
+    }
+  )
+  .then(response=>
+    response.json()
+    );
+    yield put({type:"getcountrysuccess",json:json});
+}
+
+
+
   function* getSpetialization(action) {
     const json = yield fetch(
       devapi.getSpetialization,
@@ -413,6 +457,8 @@ function* actionWatcher() {
   yield takeLatest('callback', callback);
 
   yield takeLatest('getSports', getSports);
+  yield takeLatest('getState',getState);
+  yield takeLatest('getCountry',getCountry);
   yield takeLatest('getSpetialization', getSpetialization);
 
   yield takeLatest('logout', logout);

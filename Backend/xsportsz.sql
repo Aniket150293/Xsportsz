@@ -93,11 +93,79 @@ INSERT INTO `sports_master` (`id`, `name`, `is_active`) VALUES
 
 CREATE TABLE `state_master` (
   `id` int(10) NOT NULL,
-  `state` varchar(150) NOT NULL,
+  `name` varchar(150) NOT NULL,
   `is_active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO `state_master` (`id`, `name`, `is_active`) VALUES
+(1, 'Maharashtra', 1),
+(2, 'karnataka', 1),
+(3, 'Uttar Pradesh', 1),
+(4, 'Bihar', 1),
+(5, 'West Bengal', 1),
+(6, 'Madhya Pradesh', 1),
+(7, 'Tamil Nadu', 1),
+(8, 'Rajasthan', 1),
+(9, 'Gujarat', 1),
+(11, 'Andhra Pradesh' ,1),
+(12, 'Odisha', 1),
+(13, 'Telangana', 1),
+(14, 'Kerala', 1),
+(15, 'Jharkhand', 1),
+(16, 'Assam', 1),
+(17, 'Punjab', 1),
+(18, 'Chhattisgarh', 1),
+(19, 'Haryana', 1),
+(20, 'Delhi', 1),
+(21, 'Jammu and Kashmir', 1),
+(22, 'Uttarakhand', 1),
+(23, 'Himachal Pradesh', 1),
+(24, 'Tripura', 1),
+(25, 'Meghalaya', 1),
+(26, 'Manipur', 1),
+(27, 'Nagaland', 1),
+(28, 'Goa', 1),
+(29, 'Arunachal Pradesh', 1),
+(30, 'Puducherry', 1),
+(31, 'Mizoram', 1),
+(32, 'Chandigarh', 1),
+(33, 'Sikkim', 1),
+(34, 'Dadra and Nagar Haveli and Daman and Diu', 1),
+(35, 'Andaman and Nicobar Islands', 1),
+(36, 'Ladakh', 1),
+(37, 'Lakshadweep', 1);
+
 -- --------------------------------------------------------
+CREATE TABLE `country_master` (
+  `id` int(10) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `is_active` tinyint(1) NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+INSERT INTO `country_master` (`id`, `name`, `is_active`) VALUES
+(1, 'India', 1),
+(2, 'United States', 1),
+(3, 'China', 1),
+(4, 'Japan', 1),
+(5, 'Germany', 1),
+(6, ' United Kingdom', 1),
+(7, 'France', 1),
+(8, 'Italy', 1),
+(9, 'Brazil', 1),
+(10, 'Canada', 1),
+(11, 'Russia', 1),
+(12, ' South Korea', 1),
+(13, 'Spain', 1),
+(14, 'Australia', 1),
+(15, 'Mexico', 1),
+(16, 'Indonesia', 1),
+(17, 'Netherlands', 1),
+(18, 'Saudi Arabia', 1),
+(19, 'Turkey', 1),
+(20, 'Switzerland', 1);
+
+
 
 --
 -- Table structure for table `transaction_details`
