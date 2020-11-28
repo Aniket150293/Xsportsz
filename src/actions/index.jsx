@@ -173,6 +173,21 @@ export const getSports = (data,token) =>
   }
 );
 
+export const getState=(data,token)=>(
+  {
+    type: 'getState',
+    token: token,
+    data: data
+  }
+);
+
+export const getCountry=(data,token)=>({
+    type: 'getCountry',
+    token: token,
+    data:data
+
+});
+
 export const getSpetialization = (data,token) =>
 (
   {

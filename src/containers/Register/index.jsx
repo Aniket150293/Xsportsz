@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { submitRegisteredUser, getMasterBankList } from "../../actions";
+import { submitRegisteredUser, getMasterBankList ,getState,getCountry} from "../../actions";
 import { Input, Container, Row, Col, Button, Modal,FormGroup,InputGroup,InputGroupAddon,InputGroupText } from "reactstrap";
 import { Form } from "react-bootstrap";
 import { useHistory } from "react-router";
@@ -12,8 +12,11 @@ export default function Register({
   submitRegisteredUser,
   RegisteredUserDetails,
   getMasterBankList,
+  getState,
+  getstatesucces,
+  getCountry,
+  getcountrysuccess,
   masterBankList,
-  getstatesuccess
 }) {
   const [profile, setProfile] = useState("");
   const [image, setImage] = useState();
@@ -28,6 +31,7 @@ export default function Register({
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
+  const [country,setCountry]=useState("");
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
   const [date, setDate] = useState("");
@@ -49,6 +53,27 @@ React.useEffect(() => {
     }
 }, [submitRegisteredUser]);
 */
+
+const [data,setdata]=useState();
+React.useEffect(()=>{
+  if(getstatesucces)
+    if(getstatesucces.status == 200){
+      setdata(getstatesucces.data);
+    }
+},[getstatesucces]);
+
+const [countrydata,setcountrydata]=useState();
+React.useEffect(()=>{
+if(getcountrysuccess)
+  if(getcountrysuccess.status==200){
+    setcountrydata(getcountrysuccess.data);
+  }
+
+
+},[getcountrysuccess]);
+
+
+
   var history = useHistory();
   var pass,banks;
   var validateMsgValid = (
@@ -70,15 +95,38 @@ React.useEffect(() => {
       );
       setRole("bank_admin");
     } else if (history.location.pathname == "/register") {
+      getState(
+        {userid:localStorage.getItem("userid")},
+        localStorage.getItem("token")
+      );
+      getCountry(
+        {userid:localStorage.getItem("userid")},
+        localStorage.getItem("token")
+      );
       setRole("user");
+      
     } else {
       setEdit(true);
       submitRegisteredUser(
         { userid: localStorage.getItem("userid") },
         localStorage.getItem("token")
       );
+      
+      
+      getState(
+        {userid:localStorage.getItem("userid")},
+        localStorage.getItem("token")
+      );
+      getCountry(
+        {userid:localStorage.getItem("userid")},
+        localStorage.getItem("token")
+      );
+      
     }
   }, []);
+
+ 
+
 
   const [data1, setdata1] = useState();
   React.useEffect(() => {
@@ -165,7 +213,7 @@ React.useEffect(() => {
     }
   }
 
-  useEffect(() => {
+React.useEffect(() => {
     if (RegisteredUserDetails)
       if (RegisteredUserDetails.status == 200) {
 
@@ -182,13 +230,24 @@ React.useEffect(() => {
         setLastName(RegisteredUserDetails.data.rows[0].last_name);
         setAddress(RegisteredUserDetails.data.rows[0].address);
         setCity(RegisteredUserDetails.data.rows[0].city);
+        setCountry(RegisteredUserDetails.data.rows[0].country);
         setState(RegisteredUserDetails.data.rows[0].state);
+
         setZip(RegisteredUserDetails.data.rows[0].zip_code);
         setDate(new Date(RegisteredUserDetails.data.rows[0].year_of_birth+"-"+RegisteredUserDetails.data.rows[0].month_of_birth+"-"+RegisteredUserDetails.data.rows[0].date_of_birth));
         // setMonth(RegisteredUserDetails.data.rows[0].month_of_birth);
         // setYear(RegisteredUserDetails.data.rows[0].year_of_birth);
+
+       
+      }
+      else{
+        
       }
   }, [RegisteredUserDetails]);
+
+
+
+  
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -245,11 +304,13 @@ React.useEffect(() => {
       profiledata.append("lastName", lastName);
       profiledata.append("address", address);
       profiledata.append("city", city);
+      profiledata.append("country",country);
       profiledata.append("state", state);
       profiledata.append("zip", zip);
       profiledata.append("date", date);
       // profiledata.append("month", month);
       // profiledata.append("year", year);
+      
       axios
         .post(
           "http://localhost:3000/registereduserdetails/upload",
@@ -280,6 +341,7 @@ React.useEffect(() => {
               setLastName("");
               setAddress("");
               setCity("");
+              setCountry("");
               setState("");
               setZip("");
               setDate("");
@@ -463,7 +525,7 @@ React.useEffect(() => {
               </Form.Group>
             </Row>
             <Row>
-              <Form.Group as={Col} lg="4">
+              <Form.Group as={Col} lg="3">
                 <Input
                   required
                   value={city}
@@ -477,29 +539,54 @@ React.useEffect(() => {
                 {validateMsgValid}
                 {validateMsgInvalid}
               </Form.Group>
+                  
+                  <Form.Group as={Col} lg="3">
+                    <Input
+                      required
+                      value={country}
+                      className="form-control-alternative"
+                      type="select"
+                      placeholder="country"
+                      onChange={(e)=>setCountry(e.target.value)}
+                      >
+                        <option value="" >Choose Country</option>
+                  {countrydata
+                     ? countrydata.map((item)=>(
+                        <option value={item.id}>{item.name}</option>
+                          )):"not available"}
+                      </Input>
+                      {validateMsgValid}
+                      {validateMsgInvalid}
+                  </Form.Group>
 
-              <Form.Group as={Col} lg="4">
+
+              <Form.Group as={Col} lg="3">
                 <Input
                   required
                   value={state}
                   className="form-control-alternative"
                   type="select"
                   placeholder="Select State"
-                  onChange={(e) => setState(e.target.value)
-                  
-                  }
+                  onChange={(e) => {
+                    setState(e.target.value);
+                    
+                    
+                   } }
                 >
-
+                
                   <option value="" >Choose State</option>
-                  <option value="1">Maharashtra</option>
-                  
+                 {data
+                   ? data.map((item)=>(
+                   <option value={item.id}>{item.name}</option>
+                 )):"not available"}
+                 
                
                 </Input>
                 {validateMsgValid}
                 {validateMsgInvalid}
               </Form.Group>
 
-              <Form.Group as={Col} lg="4">
+              <Form.Group as={Col} lg="3">
                 <Input
                   required
                   value={zip}
@@ -602,11 +689,15 @@ React.useEffect(() => {
 const mapDispatchToProps = {
   submitRegisteredUser: submitRegisteredUser,
   getMasterBankList: getMasterBankList,
+  getState:getState,
+  getCountry:getCountry
 };
 
 const mapStateToProps = (state) => ({
   RegisteredUserDetails: state.registeredUserDetails,
   masterBankList: state.masterBankList,
+  getstatesucces:state.getstatesucces,
+  getcountrysuccess:state.getcountrysuccess
 });
 
 Register = connect(mapStateToProps, mapDispatchToProps)(Register);

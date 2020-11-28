@@ -5,6 +5,7 @@ var connection = require('./config/index')
 var uuid = require('uuid');
 
 
+
 router.post('/getRegisteredUserList', function(req, res, next) {
   jwt.verify(req.headers['authorization'],toString(req.body.userid),function(err,data){
     if(err){
@@ -74,6 +75,7 @@ router.post('/upload', function(req, res, next) {
     jwt.verify(req.headers['authorization'],toString(req.body.userId),function(err,data){
       if(err){
         res.send({status:403 , msg: 'Forbidden'});
+
       }else{
           // if (req.files != null) {
           //   var imageName=req.body.profile+".jpg"
@@ -93,7 +95,7 @@ router.post('/upload', function(req, res, next) {
 
           var s="UPDATE user_details SET "+
           "email='"+req.body.email +"', mobile='"+ req.body.mobileNo+"', alternate_mobile='"+ req.body.alternateMobileNo+
-          "',first_name='"+ req.body.firstName+"', middle_name='"+ req.body.middleName+"', last_name='"+req.body.lastName +"', address='"+req.body.address +"', city='"+ req.body.city+"', state='"+req.body.state+"', zip_code='"+ req.body.zip+"', date_of_birth='"+ getDate+
+          "',first_name='"+ req.body.firstName+"', middle_name='"+ req.body.middleName+"', last_name='"+req.body.lastName +"', address='"+req.body.address +"', city='"+ req.body.city+"', state='"+req.body.state+"',country='"+req.body.country+"', zip_code='"+ req.body.zip+"', date_of_birth='"+ getDate+
           "',month_of_birth='"+ getMonth+"', year_of_birth='"+ getFullYear+"',modified_at =now() where id='"+req.body.userid+"'"
           var a = connection.query(s,function (err, rows) {
             if (err) {
@@ -127,18 +129,18 @@ router.post('/upload', function(req, res, next) {
 
     var a = connection.query('INSERT INTO  user_details '+
     '( profile, email, password, mobile, alternate_mobile, ' +
-    'first_name, middle_name, last_name, address, city, state, zip_code, date_of_birth, '+
+    'first_name, middle_name, last_name, address, city, state,country, zip_code, date_of_birth, '+
     'month_of_birth, year_of_birth, role, is_active, is_blocked, last_login, created_at,modified_at ) '+
-    'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,0,now(),now(),now()) ',
+    'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,0,now(),now(),now()) ',
     [profileID, req.body.email, req.body.password, 
       req.body.mobileNo, req.body.alternateMobileNo, req.body.firstName , req.body.middleName, 
-      req.body.lastName,req.body.address,req.body.city, req.body.state, req.body.zip , getDate, getMonth,
+      req.body.lastName,req.body.address,req.body.city, req.body.state,req.body.country, req.body.zip , getDate, getMonth,
       getFullYear,req.body.role],
     function (err, rows) {
       if (err) {
         res.send({status:500 , data:{sql:a.sql,msg:"Enter Corrent Information"}});
       } else {
-        res.send({status:200 , msg: 'User Registered Successfully'});
+        res.send({status:200 ,  msg: 'User Registered Successfully'});
       }
     })
 
@@ -246,6 +248,48 @@ router.post('/getMasterBankList', function(req, res, next) {
     }
   })
 });
+
+
+router.post('/getState',function(req,res,next){
+  jwt.verify(req.headers['authorization'],toString(req.body.userid),function(err,data){
+    if(err){
+      res.send({status:403 , msg: 'Forbidden'});
+    }else{
+  connection.query('SELECT * FROM state_master ',
+     function (err, rows) {
+      if (err) {
+        res.send({status:500 , data:{}});
+      } else {
+        res.send({status:200 , data: rows, msg: 'get Successfully'});
+      }
+    })
+  }
+})
+});
+
+
+
+
+router.post('/getCountry',function(req,res,next){
+  jwt.verify(req.headers['authorization'],toString(req.body.userid),function(err,data){
+    if(err){
+      res.send({status:403,msg:'Forbidden'});
+    }else{
+      connection.query('SELECT * FROM country_master',
+        function(err,rows){
+          if(err){
+            res.send({status:403,data:{}});
+          }else{
+            res.send({status:200,data:rows,msg:'getcountrysuccessfull'});
+          }
+        }
+      )
+    }
+  })
+});
+
+
+
 
 
 
