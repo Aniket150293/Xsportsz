@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Oct 24, 2020 at 08:09 AM
--- Server version: 10.4.10-MariaDB
--- PHP Version: 7.3.12
+-- Host: 127.0.0.1
+-- Generation Time: Nov 29, 2020 at 07:07 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -35,6 +34,44 @@ CREATE TABLE `contact_details` (
   `message` text NOT NULL,
   `added_on` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `country_master`
+--
+
+CREATE TABLE `country_master` (
+  `id` int(10) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `is_active` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `country_master`
+--
+
+INSERT INTO `country_master` (`id`, `name`, `is_active`) VALUES
+(1, 'India', 1),
+(2, 'United States', 1),
+(3, 'China', 1),
+(4, 'Japan', 1),
+(5, 'Germany', 1),
+(6, ' United Kingdom', 1),
+(7, 'France', 1),
+(8, 'Italy', 1),
+(9, 'Brazil', 1),
+(10, 'Canada', 1),
+(11, 'Russia', 1),
+(12, ' South Korea', 1),
+(13, 'Spain', 1),
+(14, 'Australia', 1),
+(15, 'Mexico', 1),
+(16, 'Indonesia', 1),
+(17, 'Netherlands', 1),
+(18, 'Saudi Arabia', 1),
+(19, 'Turkey', 1),
+(20, 'Switzerland', 1);
 
 -- --------------------------------------------------------
 
@@ -93,80 +130,53 @@ INSERT INTO `sports_master` (`id`, `name`, `is_active`) VALUES
 
 CREATE TABLE `state_master` (
   `id` int(10) NOT NULL,
-  `name` varchar(150) NOT NULL,
+  `name` varchar(10) DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `state_master`
+--
+
 INSERT INTO `state_master` (`id`, `name`, `is_active`) VALUES
-(1, 'Maharashtra', 1),
+(1, 'Maharashtr', 1),
 (2, 'karnataka', 1),
-(3, 'Uttar Pradesh', 1),
+(3, 'Uttar Prad', 1),
 (4, 'Bihar', 1),
-(5, 'West Bengal', 1),
-(6, 'Madhya Pradesh', 1),
+(5, 'West Benga', 1),
+(6, 'Madhya Pra', 1),
 (7, 'Tamil Nadu', 1),
 (8, 'Rajasthan', 1),
 (9, 'Gujarat', 1),
-(11, 'Andhra Pradesh' ,1),
+(11, 'Andhra Pra', 1),
 (12, 'Odisha', 1),
 (13, 'Telangana', 1),
 (14, 'Kerala', 1),
 (15, 'Jharkhand', 1),
 (16, 'Assam', 1),
 (17, 'Punjab', 1),
-(18, 'Chhattisgarh', 1),
+(18, 'Chhattisga', 1),
 (19, 'Haryana', 1),
 (20, 'Delhi', 1),
-(21, 'Jammu and Kashmir', 1),
-(22, 'Uttarakhand', 1),
-(23, 'Himachal Pradesh', 1),
+(21, 'Jammu and ', 1),
+(22, 'Uttarakhan', 1),
+(23, 'Himachal P', 1),
 (24, 'Tripura', 1),
 (25, 'Meghalaya', 1),
 (26, 'Manipur', 1),
 (27, 'Nagaland', 1),
 (28, 'Goa', 1),
-(29, 'Arunachal Pradesh', 1),
+(29, 'Arunachal ', 1),
 (30, 'Puducherry', 1),
 (31, 'Mizoram', 1),
 (32, 'Chandigarh', 1),
 (33, 'Sikkim', 1),
-(34, 'Dadra and Nagar Haveli and Daman and Diu', 1),
-(35, 'Andaman and Nicobar Islands', 1),
+(34, 'Dadra and ', 1),
+(35, 'Andaman an', 1),
 (36, 'Ladakh', 1),
-(37, 'Lakshadweep', 1);
+(37, 'Lakshadwee', 1);
 
 -- --------------------------------------------------------
-/*
-CREATE TABLE `country_master` (
-  `id` int(10) NOT NULL,
-  `name` varchar(150) NOT NULL,
-  `is_active` tinyint(1) NOT NULL
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-INSERT INTO `country_master` (`id`, `name`, `is_active`) VALUES
-(1, 'India', 1),
-(2, 'United States', 1),
-(3, 'China', 1),
-(4, 'Japan', 1),
-(5, 'Germany', 1),
-(6, ' United Kingdom', 1),
-(7, 'France', 1),
-(8, 'Italy', 1),
-(9, 'Brazil', 1),
-(10, 'Canada', 1),
-(11, 'Russia', 1),
-(12, ' South Korea', 1),
-(13, 'Spain', 1),
-(14, 'Australia', 1),
-(15, 'Mexico', 1),
-(16, 'Indonesia', 1),
-(17, 'Netherlands', 1),
-(18, 'Saudi Arabia', 1),
-(19, 'Turkey', 1),
-(20, 'Switzerland', 1);
-
-*/
 
 --
 -- Table structure for table `transaction_details`
@@ -219,15 +229,19 @@ CREATE TABLE `user_details` (
   `is_blocked` tinyint(1) NOT NULL DEFAULT 0,
   `last_login` datetime NOT NULL,
   `created_at` datetime NOT NULL,
-  `modified_at` datetime NOT NULL
+  `modified_at` datetime NOT NULL,
+  `country` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_details`
 --
 
-INSERT INTO `user_details` (`id`, `profile`, `email`, `password`, `mobile`, `alternate_mobile`, `first_name`, `middle_name`, `last_name`, `address`, `city`, `state`, `zip_code`, `date_of_birth`, `month_of_birth`, `year_of_birth`, `role`, `is_active`, `is_blocked`, `last_login`, `created_at`, `modified_at`) VALUES
-(2, 'c6ed106b-e39a-4597-b37b-73aa5b24b8f6', 'a@gmail.com', 'a', '8', '8', '8', '8', '8', '8', '8', 1, '8', 2, 9, 2020, 'super_user', 1, 0, '2020-10-15 14:15:36', '2020-08-15 14:15:36', '2020-10-15 14:15:36');
+INSERT INTO `user_details` (`id`, `profile`, `email`, `password`, `mobile`, `alternate_mobile`, `first_name`, `middle_name`, `last_name`, `address`, `city`, `state`, `zip_code`, `date_of_birth`, `month_of_birth`, `year_of_birth`, `role`, `is_active`, `is_blocked`, `last_login`, `created_at`, `modified_at`, `country`) VALUES
+(2, 'c6ed106b-e39a-4597-b37b-73aa5b24b8f6', 'a@gmail.com', 'a', '8', '8', '8', '8', '8', '8', '8', 1, '8', 2, 9, 2020, 'super_user', 1, 0, '2020-10-15 14:15:36', '2020-08-15 14:15:36', '2020-11-17 12:24:14', ''),
+(3, '8b53e37d-9b34-4242-900d-52c8a19ac13f', 'ashukatkar24@gmail.com', 'ashu@123', '9765602975', '123456789', 'ashutosh', 'arun', 'katkar', 'hadapsar', 'pune', 20, '411028', 24, 5, 2000, 'user', 1, 0, '2020-11-10 19:11:53', '2020-11-10 19:11:53', '2020-11-27 11:46:32', '9'),
+(4, 'a6553989-c5d9-469c-a73e-a9b388aaadcd', 'b@gmail.com', 'b', '6544565456466', '54545445545', 'ba', 'c', 'd', 'e', 'f', 36, '54664', 10, 11, 2020, 'user', 1, 0, '2020-11-20 19:07:13', '2020-11-20 19:07:13', '2020-11-27 20:11:44', '2'),
+(5, 'ec207489-8417-428c-a1fc-18762e5e9776', 'sample@gmail.com', 's', '12', '12', 's', 's', 's', 's', 's', 22, 'ss', 28, 10, 2020, 'user', 1, 0, '2020-11-27 18:28:18', '2020-11-27 18:28:18', '2020-11-27 18:28:18', '15');
 
 -- --------------------------------------------------------
 
@@ -246,6 +260,17 @@ CREATE TABLE `user_sport_mapping` (
   `created_date` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_sport_mapping`
+--
+
+INSERT INTO `user_sport_mapping` (`id`, `user_id`, `sport_id`, `years_age`, `months_age`, `specialization_id`, `is_active`, `created_date`, `updated_date`) VALUES
+(12, 3, 1, 21, 8, 1, 1, '2020-11-10 19:13:16', '2020-11-10 19:13:16'),
+(13, 3, 1, 22, 3, 2, 1, '2020-11-19 10:06:57', '2020-11-19 10:06:57'),
+(14, 3, 2, 1, 1, 5, 1, '2020-11-21 19:46:42', '2020-11-21 19:46:42'),
+(15, 3, 1, 1, 1, 1, 1, '2020-11-21 19:47:10', '2020-11-21 19:47:10'),
+(16, 4, 1, 22, 2, 1, 1, '2020-11-26 11:15:02', '2020-11-26 11:15:02');
 
 --
 -- Indexes for dumped tables
@@ -319,7 +344,7 @@ ALTER TABLE `sports_master`
 -- AUTO_INCREMENT for table `state_master`
 --
 ALTER TABLE `state_master`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `transaction_details`
@@ -331,13 +356,13 @@ ALTER TABLE `transaction_details`
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_sport_mapping`
 --
 ALTER TABLE `user_sport_mapping`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
