@@ -27,6 +27,7 @@ const devapi =
     
     'getSports' : url+'TransferMoneyDetails/getSports',
     'getState':url+'registereduserdetails/getState',
+    
     'getCountry':url+'registereduserdetails/getCountry',
 
     'getSpetialization' : url+'TransferMoneyDetails/getSpetialization',

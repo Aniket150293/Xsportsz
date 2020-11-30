@@ -40,6 +40,7 @@ const reducer = (state = INITIAL_STATE, action) => {
       return { ...state,getSportsSucsses:action.json,loading:false}
     case 'getstatesucces':
       return{...state,getstatesucces:action.json,loading:false}
+      
     case 'getcountrysuccess':
       return{...state,getcountrysuccess:action.json,loading:false}
       case'getSpetializationSucsses':

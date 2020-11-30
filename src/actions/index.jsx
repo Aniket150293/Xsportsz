@@ -177,9 +177,11 @@ export const getState=(data,token)=>(
   {
     type: 'getState',
     token: token,
-    data: data
+    data: data,
   }
 );
+
+
 
 export const getCountry=(data,token)=>({
     type: 'getCountry',

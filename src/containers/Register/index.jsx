@@ -42,7 +42,7 @@ export default function Register({
   const [edit, setEdit] = useState(false);
   const [role, setRole] = useState("");
 
- 
+
   
   /*
 const [sdata,setsdata]=useState();
@@ -58,6 +58,7 @@ const [data,setdata]=useState();
 React.useEffect(()=>{
   if(getstatesucces)
     if(getstatesucces.status == 200){
+      
       setdata(getstatesucces.data);
     }
 },[getstatesucces]);
@@ -94,25 +95,22 @@ if(getcountrysuccess)
         localStorage.getItem("token")
       );
       setRole("bank_admin");
-    } else if (history.location.pathname == "/register") {
-      getState(
-        {userid:localStorage.getItem("userid")},
-        localStorage.getItem("token")
-      );
-      getCountry(
-        {userid:localStorage.getItem("userid")},
-        localStorage.getItem("token")
-      );
+    } 
+    else if (history.location.pathname == "/register") {
+    
       setRole("user");
+      console.log("get")
       
-    } else {
+    }
+    
+    else {
       setEdit(true);
       submitRegisteredUser(
         { userid: localStorage.getItem("userid") },
         localStorage.getItem("token")
       );
       
-      
+      /*
       getState(
         {userid:localStorage.getItem("userid")},
         localStorage.getItem("token")
@@ -121,11 +119,35 @@ if(getcountrysuccess)
         {userid:localStorage.getItem("userid")},
         localStorage.getItem("token")
       );
-      
+      */
     }
   }, []);
 
+  
  
+  useEffect(()=>{
+ 
+  
+    getState(
+      {userid:localStorage.getItem("userid")},
+      localStorage.getItem("token")
+    );
+    getCountry(
+      {userid:localStorage.getItem("userid")},
+      localStorage.getItem("token")
+    );
+ 
+
+
+    console.log("helooooooo");
+  
+},[])
+
+
+  
+
+
+
 
 
   const [data1, setdata1] = useState();
@@ -294,6 +316,7 @@ React.useEffect(() => {
         profiledata.append("userid", localStorage.getItem("userid"));
         profiledata.append("bankId", bankId);
       }
+      
       profiledata.append("email", email);
       profiledata.append("password", password);
       profiledata.append("confirmPassword", confirmPassword);
