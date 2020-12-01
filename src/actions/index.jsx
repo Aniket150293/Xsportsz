@@ -161,7 +161,14 @@ export const logout = () =>
   }
 );
 
-
+export const getRole=(data,token)=>
+(
+  {
+    type:'getRole',
+    token: token,
+    data:data,
+  }
+);
 
 
 export const getSports = (data,token) =>

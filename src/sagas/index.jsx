@@ -24,7 +24,7 @@ const devapi =
     'payment' : url+'payment/payment',
     'callback' : url+'callback/callback',
 
-    
+    'getRole':url+'TransferMoneyDetails/getRole',
     'getSports' : url+'TransferMoneyDetails/getSports',
     'getState':url+'registereduserdetails/getState',
     
@@ -325,6 +325,30 @@ function* logout() {
    yield put({ type: "LOGOUT_SUCCESS"});
   }
 
+
+  function* getRole(action) {
+    const json = yield fetch(
+      devapi.getRole,
+      {
+        method : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : action.token
+        },
+        body : JSON.stringify(action.data)
+      }
+      )
+      .then(response =>
+          response.json()
+      );
+    yield put({ type: "getRolesuccess", json: json });
+  }
+
+
+
+
+
+
   function* getSports(action) {
     const json = yield fetch(
       devapi.getSports,
@@ -457,6 +481,7 @@ function* actionWatcher() {
   yield takeLatest('payment', payment);
   yield takeLatest('callback', callback);
 
+  yield takeLatest('getRole',getRole);
   yield takeLatest('getSports', getSports);
   yield takeLatest('getState',getState);
   yield takeLatest('getCountry',getCountry);
