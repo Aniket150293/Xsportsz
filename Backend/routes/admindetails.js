@@ -12,9 +12,9 @@ router.post('/registerBankByAdmin', function(req, res, next) {
             }else{
               var a = connection.query('INSERT INTO user_sport_mapping '+
               '( user_id, sport_id, years_age, months_age, specialization_id, '+
-              'is_active, created_date, updated_date ) '+
-              'VALUES (?,?,?,?,?,1,now(),now()) ',
-              [req.body.userid, req.body.sport, req.body.years, req.body.months, req.body.spetialization],
+              'is_active, created_date, updated_date,role_id ) '+
+              'VALUES (?,?,?,?,?,1,now(),now(),?) ',
+              [req.body.userid, req.body.sport, req.body.years, req.body.months, req.body.spetialization,req.body.role],
               function (err, rows) {
                 if(err){
                   res.send({status:500 , data:err});
