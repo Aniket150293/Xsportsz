@@ -161,7 +161,14 @@ export const logout = () =>
   }
 );
 
-
+export const getRole=(data,token)=>
+(
+  {
+    type:'getRole',
+    token: token,
+    data:data,
+  }
+);
 
 
 export const getSports = (data,token) =>
@@ -177,9 +184,11 @@ export const getState=(data,token)=>(
   {
     type: 'getState',
     token: token,
-    data: data
+    data: data,
   }
 );
+
+
 
 export const getCountry=(data,token)=>({
     type: 'getCountry',
@@ -187,6 +196,15 @@ export const getCountry=(data,token)=>({
     data:data
 
 });
+
+export const getMysport=(data,token)=>(
+  {
+    type:'getMysport',
+    token:token,
+    data:data
+  }
+);
+
 
 export const getSpetialization = (data,token) =>
 (

@@ -250,11 +250,8 @@ router.post('/getMasterBankList', function(req, res, next) {
 });
 
 
-router.post('/getState',function(req,res,next){
-  jwt.verify(req.headers['authorization'],toString(req.body.userid),function(err,data){
-    if(err){
-      res.send({status:403 , msg: 'Forbidden'});
-    }else{
+router.post('/getState',(req,res,next)=>{
+  
   connection.query('SELECT * FROM state_master ',
      function (err, rows) {
       if (err) {
@@ -262,19 +259,19 @@ router.post('/getState',function(req,res,next){
       } else {
         res.send({status:200 , data: rows, msg: 'get Successfully'});
       }
-    })
+     })
   }
-})
-});
+
+);
+
+
+
 
 
 
 
 router.post('/getCountry',function(req,res,next){
-  jwt.verify(req.headers['authorization'],toString(req.body.userid),function(err,data){
-    if(err){
-      res.send({status:403,msg:'Forbidden'});
-    }else{
+ 
       connection.query('SELECT * FROM country_master',
         function(err,rows){
           if(err){
@@ -284,9 +281,8 @@ router.post('/getCountry',function(req,res,next){
           }
         }
       )
-    }
-  })
-});
+    
+  });
 
 
 

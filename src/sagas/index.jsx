@@ -24,11 +24,12 @@ const devapi =
     'payment' : url+'payment/payment',
     'callback' : url+'callback/callback',
 
-    
+    'getRole':url+'TransferMoneyDetails/getRole',
     'getSports' : url+'TransferMoneyDetails/getSports',
     'getState':url+'registereduserdetails/getState',
+    
     'getCountry':url+'registereduserdetails/getCountry',
-
+    'getMysport':url+'TransferMoneyDetails/getMysport',
     'getSpetialization' : url+'TransferMoneyDetails/getSpetialization',
 }
 
@@ -324,6 +325,30 @@ function* logout() {
    yield put({ type: "LOGOUT_SUCCESS"});
   }
 
+
+  function* getRole(action) {
+    const json = yield fetch(
+      devapi.getRole,
+      {
+        method : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : action.token
+        },
+        body : JSON.stringify(action.data)
+      }
+      )
+      .then(response =>
+          response.json()
+      );
+    yield put({ type: "getRolesuccess", json: json });
+  }
+
+
+
+
+
+
   function* getSports(action) {
     const json = yield fetch(
       devapi.getSports,
@@ -341,6 +366,30 @@ function* logout() {
       );
     yield put({ type: "getSportsSucsses", json: json });
   }
+
+
+
+  function* getMysport(action) {
+    const json = yield fetch(
+      devapi.getMysport,
+      {
+        method : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : action.token
+        },
+        body : JSON.stringify(action.data)
+      }
+      )
+      .then(response =>
+          response.json()
+      );
+    yield put({ type: "getMysportsucsses", json: json });
+  }
+
+
+
+
 
 
  function* getState(action) {
@@ -456,7 +505,10 @@ function* actionWatcher() {
   yield takeLatest('payment', payment);
   yield takeLatest('callback', callback);
 
+  yield takeLatest('getRole',getRole);
   yield takeLatest('getSports', getSports);
+  yield takeLatest('getMysport',getMysport);
+ 
   yield takeLatest('getState',getState);
   yield takeLatest('getCountry',getCountry);
   yield takeLatest('getSpetialization', getSpetialization);

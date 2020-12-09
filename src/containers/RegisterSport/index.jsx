@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import {
   registerBankByAdmin,
+  getRole,
   getSports,
   getSpetialization,
   submitRegisteredUser,
@@ -23,6 +24,8 @@ import { Form } from "react-bootstrap";
 export default function RegisterSport({
   registerBankByAdmin,
   registeredBankDetailsByAdmin,
+  getRole,
+  getRolesuccess,
   getSports,
   getSportsSucsses,
   getSpetializationSucsses,
@@ -31,6 +34,7 @@ export default function RegisterSport({
   submitRegisteredUserSucsses,
 }) {
   const [sport, setSport] = useState("");
+  const [role,setRole]=useState("");
   const [years, setYears] = useState("");
   const [months, setMonths] = useState("");
   const [spetialization, setSpetialization] = useState("");
@@ -53,6 +57,10 @@ export default function RegisterSport({
     );
     submitRegisteredUser(
       { userid: localStorage.getItem("userid") },
+      localStorage.getItem("token")
+    );
+    getRole(
+      {userid: localStorage.getItem("userid")},
       localStorage.getItem("token")
     );
   }, []);
@@ -94,6 +102,15 @@ export default function RegisterSport({
       }
   }, [getSpetializationSucsses]);
 
+const [roledata,setroledata]=useState();
+React.useEffect(()=>{
+  if(getRolesuccess)
+    if(getRolesuccess.status==200){
+      setroledata(getRolesuccess.data);
+    }
+},[getRolesuccess]);
+
+
   function handleSubmit(e) {
     e.preventDefault();
     if (e.currentTarget.checkValidity()) {
@@ -101,6 +118,7 @@ export default function RegisterSport({
         userid: localStorage.getItem("userid"),
         sport: sport,
         years: years,
+        role:role,
         months: months,
         spetialization: spetialization,
         // "location":location,
@@ -134,6 +152,7 @@ export default function RegisterSport({
           localStorage.setItem("email", email);
           localStorage.setItem("mobile", mobile);
           // NotificationModel("bg-success", "User Added Sucssesfully");
+          setRole("");
           setSport("");
           setYears("");
           setMonths("");
@@ -226,6 +245,31 @@ export default function RegisterSport({
                 </div>
 
                 <Form noValidate validated={isSubmit} onSubmit={handleSubmit}>
+                <Row>
+                    <Form.Group as={Col} lg="12" sm="12">
+                      <Input
+                        required
+                        value={role}
+                        className="form-control-alternative"
+                        type="select"
+                        placeholder="Enter Role"
+                        onChange={(e) => setRole(e.target.value)}
+                      >
+                        <option value="">Select Role</option>
+                        {roledata
+                          ?
+                            roledata.map((item)=>(
+                              <option value={item.id}>{item.role}</option>
+                            )):"not available"
+
+                        }
+                      </Input>
+                     
+                      {validateMsgValid}
+                      {validateMsgInvalid}
+                    </Form.Group>
+                      </Row>
+                      
                   <Row>
                     <Form.Group as={Col} lg="12" sm="12">
                       <Input
@@ -322,6 +366,7 @@ export default function RegisterSport({
 
 const mapDispatchToProps = {
   registerBankByAdmin: registerBankByAdmin,
+  getRole:getRole,
   getSports: getSports,
   getSpetialization: getSpetialization,
   submitRegisteredUser: submitRegisteredUser,
@@ -329,6 +374,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   registeredBankDetailsByAdmin: state.registeredBankDetailsByAdmin,
+  getRolesuccess:state.getRolesuccess,
   getSportsSucsses: state.getSportsSucsses,
   getSpetializationSucsses: state.getSpetializationSucsses,
   submitRegisteredUserSucsses: state.registeredUserDetails,
