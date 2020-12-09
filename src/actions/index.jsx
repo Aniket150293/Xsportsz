@@ -197,6 +197,15 @@ export const getCountry=(data,token)=>({
 
 });
 
+export const getMysport=(data,token)=>(
+  {
+    type:'getMysport',
+    token:token,
+    data:data
+  }
+);
+
+
 export const getSpetialization = (data,token) =>
 (
   {

@@ -29,7 +29,7 @@ const devapi =
     'getState':url+'registereduserdetails/getState',
     
     'getCountry':url+'registereduserdetails/getCountry',
-
+    'getMysport':url+'TransferMoneyDetails/getMysport',
     'getSpetialization' : url+'TransferMoneyDetails/getSpetialization',
 }
 
@@ -368,6 +368,30 @@ function* logout() {
   }
 
 
+
+  function* getMysport(action) {
+    const json = yield fetch(
+      devapi.getMysport,
+      {
+        method : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : action.token
+        },
+        body : JSON.stringify(action.data)
+      }
+      )
+      .then(response =>
+          response.json()
+      );
+    yield put({ type: "getMysportsucsses", json: json });
+  }
+
+
+
+
+
+
  function* getState(action) {
     const json = yield fetch(
       devapi.getState,
@@ -483,6 +507,8 @@ function* actionWatcher() {
 
   yield takeLatest('getRole',getRole);
   yield takeLatest('getSports', getSports);
+  yield takeLatest('getMysport',getMysport);
+ 
   yield takeLatest('getState',getState);
   yield takeLatest('getCountry',getCountry);
   yield takeLatest('getSpetialization', getSpetialization);

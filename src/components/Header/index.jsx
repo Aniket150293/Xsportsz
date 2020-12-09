@@ -36,6 +36,7 @@ export default function Header({ logout }) {
     tabBar1,
     tabBar2,
     tabBar3,
+    tabBar4,
     logoutBtn,
     userSettings,
     contactUS,
@@ -75,6 +76,25 @@ export default function Header({ logout }) {
           </DropdownMenu>
         </UncontrolledDropdown>
       </Nav>
+      
+    );
+    tabBar4 = (
+      <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+        <UncontrolledDropdown nav>
+          <DropdownToggle nav>
+            <i className="ni ni-collection d-lg-none mr-1" />
+            <span className="font-weight-bold nav-link-inner--text text-danger">
+             My Registered Sport
+            </span>
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem to="/myregisteredsport" tag={Link}>
+             My Registered Sport
+            </DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
+      </Nav>
+      
     );
   }
 
@@ -219,6 +239,7 @@ export default function Header({ logout }) {
               {tabBar1}
               {tabBar2}
               {tabBar3}
+              {tabBar4}
               {userSettings}
               {logoutBtn}
             </UncontrolledCollapse>

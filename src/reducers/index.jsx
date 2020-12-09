@@ -41,6 +41,10 @@ const reducer = (state = INITIAL_STATE, action) => {
 
     case'getSportsSucsses':
       return { ...state,getSportsSucsses:action.json,loading:false}
+
+     case'getMysportsucsses':
+      return{...state,getMysportsucsses:action.json,loading:false} 
+
     case 'getstatesucces':
       return{...state,getstatesucces:action.json,loading:false}
       

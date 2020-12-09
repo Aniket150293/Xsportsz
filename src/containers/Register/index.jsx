@@ -139,7 +139,7 @@ if(getcountrysuccess)
  
 
 
-    console.log("helooooooo");
+    
   
 },[])
 
@@ -616,7 +616,9 @@ React.useEffect(() => {
                   className="form-control-alternative"
                   type="text"
                   placeholder="Zip"
-                  onChange={(e) => setZip(e.target.value)}
+                  onChange={(e) => setZip(e.target.value)
+                  
+                  }
                 />
                 {validateMsgValid}
                 {validateMsgInvalid}
