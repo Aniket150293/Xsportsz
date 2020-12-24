@@ -1,7 +1,8 @@
+import { Button } from "bootstrap";
 import React from "react";
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Form, Table, Modal, Row, Input } from "reactstrap";
+import { Form, Table, Modal, Row, Input, ButtonToolbar } from "reactstrap";
 import { getMysport } from "../../actions/index";
 
 export default function Myregisteredsport({ getMysport, getMysportSuccess }) {
@@ -23,7 +24,6 @@ export default function Myregisteredsport({ getMysport, getMysportSuccess }) {
     if (getMysportSuccess) {
       console.log("!!!!!!!!!!!!11");
       if (getMysportSuccess.status == 200) {
-       
         console.log(getMysportSuccess);
         setData(getMysportSuccess.data);
       }
@@ -38,34 +38,38 @@ export default function Myregisteredsport({ getMysport, getMysportSuccess }) {
   }, []);
 
   return (
-    <div>
+    <div
+      className="container-fluid py-5 "
+      style={{ "background-color": "#333333" }}
+    >
       <Form className="shadow card mt-5">
-        <div className="card-body">
-          <Table responsive striped bordered hover>
-            <thead>
-              <tr>
-                <th>SR NO</th>
-                <th>sport Name</th>
-                <th>specilization</th>
-                <th>date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data
-                ? data.map((item) => {
-                    return (
-                      <tr>
-                        <td color="red">{item.name}</td>
-                        <td color="red">{item.name}</td>
-                        <td color="red">{item.name}</td>
-                        <td color="red">{item.name}</td>
-                      </tr>
-                    );
-                  })
-                : "notfound"}
-            </tbody>
-          </Table>
-        </div>
+        {/* <div className="card-body" > */}
+        <Table responsive striped bordered hover>
+          <thead>
+            <tr>
+              <th>SR NO</th>
+              <th>sport Name</th>
+              <th>specilization</th>
+              <th>date</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            {data
+              ? data.map((item) => {
+                return (
+                  <tr>
+                    <td>{item.srNo}</td>
+                    <td>{item.name}</td>
+                    <td>{item.sname}</td>
+                    <td>{item.cddate}</td>
+                  </tr>
+                );
+              })
+              : "notfound"}
+          </tbody>
+        </Table>
+        {/* </div> */}
       </Form>
     </div>
   );
