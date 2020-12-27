@@ -91,7 +91,7 @@ router.post('/getMysport',(req,res,next)=>{
     if(err){
       res.send({status:403 , msg: 'Forbidden'});
     }else{
-  connection.query('SELECT  sports_master.name, specialization_master.name, user_sport_mapping.created_date FROM ((specialization_master INNER JOIN user_sport_mapping ON specialization_master.id=user_sport_mapping.specialization_id) INNER JOIN sports_master ON specialization_master.sport_id=sports_master.id) WHERE user_id=?',
+  connection.query(`SELECT  ROW_NUMBER()  OVER (ORDER BY sports_master.name) As srNo ,sports_master.name, specialization_master.name as sname, DATE_FORMAT(user_sport_mapping.created_date,'%d-%m-%y') as cddate  FROM ((specialization_master INNER JOIN user_sport_mapping ON specialization_master.id=user_sport_mapping.specialization_id) INNER JOIN sports_master ON specialization_master.sport_id=sports_master.id) WHERE user_id=?`,
  [req.body.userid] ,
      function (err, rows) {
       if (err) {
@@ -165,7 +165,7 @@ router.post('/getSpetialization',(req,res,next)=>{
          } else {
            res.send({status:200 , data: rows, msg: 'getAccounts Successfully'});
          }
-       })
+       } ) 
       }
       else{
         connection.query('SELECT * FROM specialization_master',

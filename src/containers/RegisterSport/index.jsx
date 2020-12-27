@@ -34,7 +34,7 @@ export default function RegisterSport({
   submitRegisteredUserSucsses,
 }) {
   const [sport, setSport] = useState("");
-  const [role,setRole]=useState("");
+  const [role, setRole] = useState("");
   const [years, setYears] = useState("");
   const [months, setMonths] = useState("");
   const [spetialization, setSpetialization] = useState("");
@@ -53,6 +53,7 @@ export default function RegisterSport({
   useEffect(() => {
     getSports(
       { userid: localStorage.getItem("userid") },
+
       localStorage.getItem("token")
     );
     submitRegisteredUser(
@@ -60,11 +61,10 @@ export default function RegisterSport({
       localStorage.getItem("token")
     );
     getRole(
-      {userid: localStorage.getItem("userid")},
+      { userid: localStorage.getItem("userid") },
       localStorage.getItem("token")
     );
   }, []);
-
 
   const [first_name, setfirst_name] = useState();
   const [middle_name, setmiddle_name] = useState();
@@ -82,7 +82,6 @@ export default function RegisterSport({
         setmobile(submitRegisteredUserSucsses.data.rows[0].mobile);
       }
   }, [submitRegisteredUserSucsses]);
-
 
   const [data1, setdata1] = useState();
 
@@ -102,14 +101,13 @@ export default function RegisterSport({
       }
   }, [getSpetializationSucsses]);
 
-const [roledata,setroledata]=useState();
-React.useEffect(()=>{
-  if(getRolesuccess)
-    if(getRolesuccess.status==200){
-      setroledata(getRolesuccess.data);
-    }
-},[getRolesuccess]);
-
+  const [roledata, setroledata] = useState();
+  React.useEffect(() => {
+    if (getRolesuccess)
+      if (getRolesuccess.status == 200) {
+        setroledata(getRolesuccess.data);
+      }
+  }, [getRolesuccess]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -118,7 +116,7 @@ React.useEffect(()=>{
         userid: localStorage.getItem("userid"),
         sport: sport,
         years: years,
-        role:role,
+        role: role,
         months: months,
         spetialization: spetialization,
         // "location":location,
@@ -191,7 +189,10 @@ React.useEffect(()=>{
       <Container className="mt-5">
         <Row>
           <Col lg="6">
-            <Card className="shadow card-stats mb-4 mb-xl-0" style={{"background-color": "#E92929"}}>
+            <Card
+              className="shadow card-stats mb-4 mb-xl-0"
+              style={{ "background-color": "#E92929" }}
+            >
               <CardBody>
                 <Row>
                   <div className="col">
@@ -203,28 +204,13 @@ React.useEffect(()=>{
                     </CardTitle>
                     <hr />
                     <span className="mt-3 text-white font-weight-bold mb-0">
-                      {
-                         "Username : " +
-                          first_name
-                        }
-                      {
-                         " " +
-                          middle_name
-                        }
-                      {
-                         " " +
-                          last_name
-                        }
+                      {"Username : " + first_name}
+                      {" " + middle_name}
+                      {" " + last_name}
                       <br />
-                      {
-                         "Email : " +
-                          email
-                        }
+                      {"Email : " + email}
                       <br />
-                      {
-                         "Mobile : " +
-                          mobile
-                        }
+                      {"Mobile : " + mobile}
                       <br />
                     </span>
                   </div>
@@ -245,7 +231,7 @@ React.useEffect(()=>{
                 </div>
 
                 <Form noValidate validated={isSubmit} onSubmit={handleSubmit}>
-                <Row>
+                  <Row>
                     <Form.Group as={Col} lg="12" sm="12">
                       <Input
                         required
@@ -257,19 +243,17 @@ React.useEffect(()=>{
                       >
                         <option value="">Select Role</option>
                         {roledata
-                          ?
-                            roledata.map((item)=>(
+                          ? roledata.map((item) => (
                               <option value={item.id}>{item.role}</option>
-                            )):"not available"
-
-                        }
+                            ))
+                          : "not available"}
                       </Input>
-                     
+
                       {validateMsgValid}
                       {validateMsgInvalid}
                     </Form.Group>
-                      </Row>
-                      
+                  </Row>
+
                   <Row>
                     <Form.Group as={Col} lg="12" sm="12">
                       <Input
@@ -366,7 +350,7 @@ React.useEffect(()=>{
 
 const mapDispatchToProps = {
   registerBankByAdmin: registerBankByAdmin,
-  getRole:getRole,
+  getRole: getRole,
   getSports: getSports,
   getSpetialization: getSpetialization,
   submitRegisteredUser: submitRegisteredUser,
@@ -374,7 +358,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   registeredBankDetailsByAdmin: state.registeredBankDetailsByAdmin,
-  getRolesuccess:state.getRolesuccess,
+  getRolesuccess: state.getRolesuccess,
   getSportsSucsses: state.getSportsSucsses,
   getSpetializationSucsses: state.getSpetializationSucsses,
   submitRegisteredUserSucsses: state.registeredUserDetails,

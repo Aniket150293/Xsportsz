@@ -7,8 +7,10 @@ var connection = mysql.createConnection({
   database: 'xsportsz'
 })
 
-connection.connect(function(err) {
-    if (err) throw err;
+connection.connect(function (err) {
+  if (err) {
+    console.log(err);
+  }
 });
 
 module.exports = connection;
