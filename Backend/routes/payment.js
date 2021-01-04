@@ -28,6 +28,8 @@ router.post('/payment', function (req, res, next) {
 
 router.post('/callback', (req, res) => {
   console.log(req.body)
+
+
   var result = checksum_lib.verifychecksum(req.body, config.PaytmConfig.key, req.body.CHECKSUMHASH);
   return new Promise((resolve, reject) => {
     if (result) {

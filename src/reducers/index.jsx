@@ -31,6 +31,8 @@ const reducer = (state = INITIAL_STATE, action) => {
       return { ...state, searchAccountSucsses: action.json, loading: false }
     case 'forgetPasswordSucsses':
       return { ...state, forgetPasswordSucsses: action.json, loading: false }
+    case 'checkPasswordDateSucsses':
+      return { ...state, checkPasswordDateSucsses: action.json, loading: false }
     case 'resetPasswordSucsses':
       return { ...state, resetPasswordSucsses: action.json, loading: false }
     case 'getHomeDetailsSucsses':
