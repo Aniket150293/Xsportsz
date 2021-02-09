@@ -12,10 +12,10 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],
-  devtool: 'inline-source-map',
-  devServer: {
-    hot: true,
-  },
+  // devtool: 'inline-source-map',
+  // devServer: {
+  //   hot: true,
+  // },
   module: {
     rules: [
       { test: /\.css$/, use: ['style-loader', 'css-loader'] },
