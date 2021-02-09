@@ -47,25 +47,22 @@ export default function Myregisteredsport({ getMysport, getMysportSuccess }) {
         <Table responsive striped bordered hover>
           <thead>
             <tr>
-              <th>SR NO</th>
               <th>sport Name</th>
               <th>specilization</th>
               <th>date</th>
-
             </tr>
           </thead>
           <tbody>
             {data
               ? data.map((item) => {
-                return (
-                  <tr>
-                    <td>{item.srNo}</td>
-                    <td>{item.name}</td>
-                    <td>{item.sname}</td>
-                    <td>{item.cddate}</td>
-                  </tr>
-                );
-              })
+                  return (
+                    <tr>
+                      <td>{item.name}</td>
+                      <td>{item.sname}</td>
+                      <td>{item.cddate}</td>
+                    </tr>
+                  );
+                })
               : "notfound"}
           </tbody>
         </Table>

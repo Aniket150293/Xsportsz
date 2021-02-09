@@ -6,13 +6,10 @@ import {
   NavLink,
   Nav,
   Container,
-
   Row,
   Col,
   UncontrolledTooltip,
 } from "reactstrap";
- 
-
 
 class SimpleFooter extends React.Component {
   render() {
@@ -22,14 +19,7 @@ class SimpleFooter extends React.Component {
           <Row className=" row-grid align-items-center mb-5">
             <Col lg="6">
               <h3 className=" text-danger font-weight-bold mb-2">
-              'Thank you for visiting us!'
-
-
-
-
-
-
-                
+                'Thank you for visiting us!'
               </h3>
               <h4 className="text-white mb-0 font-weight-light">
                 Let's get in touch on any of these platforms.
@@ -46,7 +36,11 @@ class SimpleFooter extends React.Component {
                 {/* <span className="btn-inner--icon">
                   <i className="fa fa-twitter" />
                 </span> */}
-                <img height="20" width="20" src={require("../../assets/img/s2.png")}/>
+                <img
+                  height="20"
+                  width="20"
+                  src={require("../../assets/img/s2.png")}
+                />
               </Button>
               <UncontrolledTooltip delay={0} target="tooltip475038074">
                 Follow us
@@ -61,12 +55,14 @@ class SimpleFooter extends React.Component {
                 {/* <span className="btn-inner--icon">
                   <i className="fa fa-facebook-square" />
                 </span> */}
-                <img height="20" width="20" src={require("../../assets/img/s1.png")}/>
+                <img
+                  height="20"
+                  width="20"
+                  src={require("../../assets/img/s1.png")}
+                />
               </Button>
               <UncontrolledTooltip delay={0} target="tooltip837440414">
                 Like us
-                
-
               </UncontrolledTooltip>
               <Button
                 className="btn-icon-only rounded-circle ml-1"
@@ -78,7 +74,11 @@ class SimpleFooter extends React.Component {
                 {/* <span className="btn-inner--icon">
                   <i className="fa fa-dribbble" />
                 </span> */}
-                <img height="20" width="20" src={require("../../assets/img/s3.png")}/>
+                <img
+                  height="20"
+                  width="20"
+                  src={require("../../assets/img/s3.png")}
+                />
               </Button>
               <UncontrolledTooltip delay={0} target="tooltip829810202">
                 Follow us

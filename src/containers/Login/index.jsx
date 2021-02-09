@@ -11,7 +11,8 @@ import {
   Input,
   Container,
   Row,
-  Col,Modal
+  Col,
+  Modal,
 } from "reactstrap";
 import { Form } from "react-bootstrap";
 
@@ -20,8 +21,6 @@ import { useHistory } from "react-router";
 export default function Login({ checkLoginDetails, LoginDetails }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-
 
   const [isSubmit, setIsSubmit] = useState();
 
@@ -55,8 +54,8 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
         //     history.push("/customer-list");
         // }
       } else {
-        setEmail("")
-        setPassword("")
+        setEmail("");
+        setPassword("");
         NotificationModel("bg-danger", "Incorrect Credentials");
       }
     }
@@ -74,43 +73,42 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
   }
 
   const [cemail, setcemail] = useState("");
-  const [cname, setcname] = useState(""); 
+  const [cname, setcname] = useState("");
   const [cmessage, setcmessage] = useState("");
 
-  function handleContact(e){
+  function handleContact(e) {
     e.preventDefault();
     const profiledata = new FormData();
     profiledata.append("cemail", cemail);
     profiledata.append("cname", cname);
     profiledata.append("cmessage", cmessage);
     axios
-    .post(
-      "http://localhost:3000/registereduserdetails/contact",
-      profiledata,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "Authorization": localStorage.getItem("token"),
-        },
-      }
-    )
-    .then(function (response) {
-      console.log(response);
-      if (response.data.status == 200) {
-         NotificationModel("bg-success", response.data.msg);
-         setcemail("");
-         setcname("");
-         setcmessage("");
-      } else {
-        NotificationModel("bg-danger", response.data.msg);
-      }
-      setIsSubmit(false);
-    })
-    .catch(function (error) {
-      console.log(error);
-      NotificationModel("bg-danger", "Server Error");
-    });
+      .post(
+        "http://localhost:3000/registereduserdetails/contact",
+        profiledata,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      )
+      .then(function (response) {
+        if (response.data.status == 200) {
+          NotificationModel("bg-success", response.data.msg);
+          setcemail("");
+          setcname("");
+          setcmessage("");
+        } else {
+          NotificationModel("bg-danger", response.data.msg);
+        }
+        setIsSubmit(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+        NotificationModel("bg-danger", "Server Error");
+      });
   }
 
   const [Class, SetClass] = useState();
@@ -127,10 +125,9 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
     }, 5000);
   }
 
-
   return (
     <main>
-            <Modal
+      <Modal
         className="modal-dialog modal-danger"
         contentClassName={Class}
         isOpen={Notification}
@@ -144,8 +141,7 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
             data-dismiss="modal"
             type="button"
             onClick={NotificationClose}
-          >
-          </button>
+          ></button>
         </div>
       </Modal>
       <div className="position-relative">
@@ -223,7 +219,7 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
                           </label>
                         </div>
                         <div className="text-center">
-                          <Button className="my-4" color="danger"  type="submit">
+                          <Button className="my-4" color="danger" type="submit">
                             Sign in
                           </Button>
                         </div>
@@ -545,56 +541,56 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
                 <CardBody className="p-lg-5">
                   <h4>Want to contact us?</h4>
                   <Form onSubmit={handleContact}>
-                  <Form.Group>
-                    <i className="ni ni-user-run" />
-                    <Input
-                      className="form-control-alternative"
-                      placeholder="Your name"
-                      type="text"
-                      value={cname}
-                      onChange={(e) => setcname(e.target.value)}
-                      required
-                    />
-                    {validateMsgValid}
-                    {validateMsgInvalid}
-                  </Form.Group>
-                  <Form.Group>
-                    <i className="ni ni-email-83" />
-                    <Input
-                      className="form-control-alternative"
-                      placeholder="Email address"
-                      type="email"
-                      value={cemail}
-                      onChange={(e) => setcemail(e.target.value)}
-                      required
-                    />
-                    {validateMsgValid}
-                    {validateMsgInvalid}
-                  </Form.Group>
-                  <Form.Group className="mb-4">
-                    <Input
-                      className="form-control-alternative"
-                      cols="80"
-                      name="name"
-                      placeholder="Type a message..."
-                      rows="4"
-                      type="textarea"
-                      value={cmessage}
-                      onChange={(e) => setcmessage(e.target.value)}
-                      required
-                    />
-                  </Form.Group>
-                  <div>
-                    <Button
-                      block
-                      className="btn-round"
-                      color="danger"
-                      size="lg"
-                      type="submit"
-                    >
-                      Send Message
-                    </Button>
-                  </div>
+                    <Form.Group>
+                      <i className="ni ni-user-run" />
+                      <Input
+                        className="form-control-alternative"
+                        placeholder="Your name"
+                        type="text"
+                        value={cname}
+                        onChange={(e) => setcname(e.target.value)}
+                        required
+                      />
+                      {validateMsgValid}
+                      {validateMsgInvalid}
+                    </Form.Group>
+                    <Form.Group>
+                      <i className="ni ni-email-83" />
+                      <Input
+                        className="form-control-alternative"
+                        placeholder="Email address"
+                        type="email"
+                        value={cemail}
+                        onChange={(e) => setcemail(e.target.value)}
+                        required
+                      />
+                      {validateMsgValid}
+                      {validateMsgInvalid}
+                    </Form.Group>
+                    <Form.Group className="mb-4">
+                      <Input
+                        className="form-control-alternative"
+                        cols="80"
+                        name="name"
+                        placeholder="Type a message..."
+                        rows="4"
+                        type="textarea"
+                        value={cmessage}
+                        onChange={(e) => setcmessage(e.target.value)}
+                        required
+                      />
+                    </Form.Group>
+                    <div>
+                      <Button
+                        block
+                        className="btn-round"
+                        color="danger"
+                        size="lg"
+                        type="submit"
+                      >
+                        Send Message
+                      </Button>
+                    </div>
                   </Form>
                 </CardBody>
               </Card>

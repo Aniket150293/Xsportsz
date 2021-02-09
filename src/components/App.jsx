@@ -30,7 +30,7 @@ let App = () => (
     <Route path="/changePassword/" component={ChangePassword} />
 
     <Route path="/player-list/" component={CreatedCustomerList} />
-   
+
     <Route path="/register-sport/" component={RegisterSport} />
 
     <Route path="/payment/" component={Payment} />

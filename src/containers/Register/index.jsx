@@ -1,11 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { submitRegisteredUser, getMasterBankList, getState, getCountry } from "../../actions";
-import { Input, Container, Row, Col, Button, Modal, FormGroup, InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
+import {
+  submitRegisteredUser,
+  getMasterBankList,
+  getState,
+  getCountry,
+} from "../../actions";
+import {
+  Input,
+  Container,
+  Row,
+  Col,
+  Button,
+  Modal,
+  FormGroup,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+} from "reactstrap";
 import { Form } from "react-bootstrap";
 import { useHistory } from "react-router";
 import axios from "axios";
-import ReactDatetime from 'react-datetime';
+import ReactDatetime from "react-datetime";
 import { Link } from "react-router-dom";
 
 export default function Register({
@@ -42,8 +58,6 @@ export default function Register({
   const [edit, setEdit] = useState(false);
   const [role, setRole] = useState("");
 
-
-
   /*
 const [sdata,setsdata]=useState();
 React.useEffect(() => {
@@ -58,7 +72,6 @@ React.useEffect(() => {
   React.useEffect(() => {
     if (getstatesucces)
       if (getstatesucces.status == 200) {
-
         setdata(getstatesucces.data);
       }
   }, [getstatesucces]);
@@ -69,11 +82,7 @@ React.useEffect(() => {
       if (getcountrysuccess.status == 200) {
         setcountrydata(getcountrysuccess.data);
       }
-
-
   }, [getcountrysuccess]);
-
-
 
   var history = useHistory();
   var pass, banks;
@@ -95,15 +104,10 @@ React.useEffect(() => {
         localStorage.getItem("token")
       );
       setRole("bank_admin");
-    }
-    else if (history.location.pathname == "/register") {
-
+    } else if (history.location.pathname == "/register") {
       setRole("user");
-      console.log("get")
-
-    }
-
-    else {
+      console.log("get");
+    } else {
       setEdit(true);
       submitRegisteredUser(
         { userid: localStorage.getItem("userid") },
@@ -123,11 +127,7 @@ React.useEffect(() => {
     }
   }, []);
 
-
-
   useEffect(() => {
-
-
     getState(
       { userid: localStorage.getItem("userid") },
       localStorage.getItem("token")
@@ -136,19 +136,7 @@ React.useEffect(() => {
       { userid: localStorage.getItem("userid") },
       localStorage.getItem("token")
     );
-
-
-
-
-
-  }, [])
-
-
-
-
-
-
-
+  }, []);
 
   const [data1, setdata1] = useState();
   React.useEffect(() => {
@@ -223,8 +211,8 @@ React.useEffect(() => {
               <option value="">Select Bank</option>
               {data1
                 ? data1.map((item) => (
-                  <option value={item.id}>{item.bank}</option>
-                ))
+                    <option value={item.id}>{item.bank}</option>
+                  ))
                 : "Not Available"}
             </Input>
             {validateMsgValid}
@@ -238,7 +226,6 @@ React.useEffect(() => {
   React.useEffect(() => {
     if (RegisteredUserDetails)
       if (RegisteredUserDetails.status == 200) {
-
         setEmail(RegisteredUserDetails.data.rows[0].email);
         setProfile(RegisteredUserDetails.data.rows[0].profile);
         // setPassword(RegisteredUserDetails.data.rows[0].password)
@@ -256,20 +243,20 @@ React.useEffect(() => {
         setState(RegisteredUserDetails.data.rows[0].state);
 
         setZip(RegisteredUserDetails.data.rows[0].zip_code);
-        setDate(new Date(RegisteredUserDetails.data.rows[0].year_of_birth + "-" + RegisteredUserDetails.data.rows[0].month_of_birth + "-" + RegisteredUserDetails.data.rows[0].date_of_birth));
+        setDate(
+          new Date(
+            RegisteredUserDetails.data.rows[0].year_of_birth +
+              "-" +
+              RegisteredUserDetails.data.rows[0].month_of_birth +
+              "-" +
+              RegisteredUserDetails.data.rows[0].date_of_birth
+          )
+        );
         // setMonth(RegisteredUserDetails.data.rows[0].month_of_birth);
         // setYear(RegisteredUserDetails.data.rows[0].year_of_birth);
-
-
-      }
-      else {
-
+      } else {
       }
   }, [RegisteredUserDetails]);
-
-
-
-
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -297,7 +284,6 @@ React.useEffect(() => {
 
       //  submitRegisteredUser(data)
       if (password == confirmPassword) {
-
         const profiledata = new FormData();
 
         if (image) {
@@ -382,7 +368,7 @@ React.useEffect(() => {
             console.log(error);
             NotificationModel("bg-danger", "Server Error");
           });
-      } else NotificationModel("bg-danger", "Password Not Match")
+      } else NotificationModel("bg-danger", "Password Not Match");
     }
   }
   return (
@@ -401,8 +387,7 @@ React.useEffect(() => {
             data-dismiss="modal"
             type="button"
             onClick={NotificationClose}
-          >
-          </button>
+          ></button>
         </div>
       </Modal>
       <Container className="bg-secondary shadow card mt-5">
@@ -417,7 +402,6 @@ React.useEffect(() => {
             <Row>
               <Form.Group as={Col} lg="12">
                 <Row>
-
                   <Form.Group as={Col} lg="12">
                     <Input
                       required
@@ -572,16 +556,16 @@ React.useEffect(() => {
                   placeholder="country"
                   onChange={(e) => setCountry(e.target.value)}
                 >
-                  <option value="" >Choose Country</option>
+                  <option value="">Choose Country</option>
                   {countrydata
                     ? countrydata.map((item) => (
-                      <option value={item.id}>{item.name}</option>
-                    )) : "not available"}
+                        <option value={item.id}>{item.name}</option>
+                      ))
+                    : "not available"}
                 </Input>
                 {validateMsgValid}
                 {validateMsgInvalid}
               </Form.Group>
-
 
               <Form.Group as={Col} lg="3">
                 <Input
@@ -592,18 +576,14 @@ React.useEffect(() => {
                   placeholder="Select State"
                   onChange={(e) => {
                     setState(e.target.value);
-
-
                   }}
                 >
-
-                  <option value="" >Choose State</option>
+                  <option value="">Choose State</option>
                   {data
                     ? data.map((item) => (
-                      <option value={item.id}>{item.name}</option>
-                    )) : "not available"}
-
-
+                        <option value={item.id}>{item.name}</option>
+                      ))
+                    : "not available"}
                 </Input>
                 {validateMsgValid}
                 {validateMsgInvalid}
@@ -616,9 +596,7 @@ React.useEffect(() => {
                   className="form-control-alternative"
                   type="text"
                   placeholder="Zip"
-                  onChange={(e) => setZip(e.target.value)
-
-                  }
+                  onChange={(e) => setZip(e.target.value)}
                 />
                 {validateMsgValid}
                 {validateMsgInvalid}
@@ -635,11 +613,13 @@ React.useEffect(() => {
                   </InputGroupAddon>
                   <ReactDatetime
                     inputProps={{
-                      placeholder: "Date of Birth"
+                      placeholder: "Date of Birth",
                     }}
                     value={date}
                     timeFormat={false}
-                    onChange={e => { setDate(e._d); }}
+                    onChange={(e) => {
+                      setDate(e._d);
+                    }}
                   />
                 </InputGroup>
               </FormGroup>
@@ -703,7 +683,18 @@ React.useEffect(() => {
             <Button color="danger" type="submit">
               Submit
             </Button>
-            {edit ? "" : (<Button color="primary" className="btn btn-primary" to="/" tag={Link}>Back To Login</Button>)}
+            {edit ? (
+              ""
+            ) : (
+              <Button
+                color="primary"
+                className="btn btn-primary"
+                to="/"
+                tag={Link}
+              >
+                Back To Login
+              </Button>
+            )}
           </Form>
         </div>
       </Container>
@@ -715,14 +706,14 @@ const mapDispatchToProps = {
   submitRegisteredUser: submitRegisteredUser,
   getMasterBankList: getMasterBankList,
   getState: getState,
-  getCountry: getCountry
+  getCountry: getCountry,
 };
 
 const mapStateToProps = (state) => ({
   RegisteredUserDetails: state.registeredUserDetails,
   masterBankList: state.masterBankList,
   getstatesucces: state.getstatesucces,
-  getcountrysuccess: state.getcountrysuccess
+  getcountrysuccess: state.getcountrysuccess,
 });
 
 Register = connect(mapStateToProps, mapDispatchToProps)(Register);

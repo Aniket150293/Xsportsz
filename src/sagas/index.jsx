@@ -201,7 +201,6 @@ function* forgetPassword(action) {
   yield put({ type: "forgetPasswordSucsses", json: json });
 }
 
-
 function* checkPasswordDate(action) {
   const json = yield fetch(devapi.checkPasswordDate, {
     method: "POST",
@@ -213,12 +212,6 @@ function* checkPasswordDate(action) {
   }).then((response) => response.json());
   yield put({ type: "checkPasswordDateSucsses", json: json });
 }
-
-
-
-
-
-
 
 function* resetPassword(action) {
   const json = yield fetch(devapi.resetPassword, {

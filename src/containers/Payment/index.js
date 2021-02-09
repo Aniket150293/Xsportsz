@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import {
-  payment,
- 
-} from "../../actions";
+import { payment } from "../../actions";
 import { useHistory } from "react-router";
 import {
   Input,
@@ -18,78 +15,70 @@ import {
 } from "reactstrap";
 import { Form } from "react-bootstrap";
 
-export default function Payment({
-    payment,
-    paymentParams
-}) {
+export default function Payment({ payment, paymentParams }) {
   const [sport, setSport] = useState("");
   const [years, setYears] = useState("");
   const [months, setMonths] = useState("");
   const [spetialization, setSpetialization] = useState("");
   // const [location, setLocation] = useState("");
 
-  var paybutton,history = useHistory();
+  var paybutton,
+    history = useHistory();
   if (history.location.pathname == "/payment/500") {
-    paybutton=(
-
-
-<Card className="bg-danger shadow card-stats mb-4 mb-xl-0">
-<CardBody>
-  <Row>
-    <div className="col">
-      <CardTitle
-        tag="h5"
-        className="text-white text-center text-uppercase text-muted mb-0"
-      >
-        PAYMENT UNSUCSSESFULL
-        <br/>
-        <button
-          type="button"
-          className="btn btn-dark"
-          onClick={handleSubmit}
-        >
-          Try Again
-        </button>
-      </CardTitle>
-    </div>
-  </Row>
-</CardBody>
-</Card>
-    )
+    paybutton = (
+      <Card className="bg-danger shadow card-stats mb-4 mb-xl-0">
+        <CardBody>
+          <Row>
+            <div className="col">
+              <CardTitle
+                tag="h5"
+                className="text-white text-center text-uppercase text-muted mb-0"
+              >
+                PAYMENT UNSUCSSESFULL
+                <br />
+                <button
+                  type="button"
+                  className="btn btn-dark"
+                  onClick={handleSubmit}
+                >
+                  Try Again
+                </button>
+              </CardTitle>
+            </div>
+          </Row>
+        </CardBody>
+      </Card>
+    );
   } else if (history.location.pathname == "/payment/200") {
-    paybutton=(
-    //   <button
-    //   type="button"
-    //   className="btn btn-dark"
-    //   disable
-    // >
-    //   Payment Sucssesfull
-    // </button>
-    <Card className="bg-success shadow card-stats mb-4 mb-xl-0">
-<CardBody>
-  <Row>
-    <div className="col">
-      <CardTitle
-        tag="h5"
-        className="text-white text-center text-uppercase text-muted mb-0"
-      >
-        PAYMENT SUCSSESFULL
-      </CardTitle>
-    </div>
-  </Row>
-</CardBody>
-</Card>
-    )
-  }else{
-    paybutton=(
-      <button
-      type="button"
-      className="btn btn-dark"
-      onClick={handleSubmit}
-    >
-      Pay Rs.250 Only
-    </button>
-    )
+    paybutton = (
+      //   <button
+      //   type="button"
+      //   className="btn btn-dark"
+      //   disable
+      // >
+      //   Payment Sucssesfull
+      // </button>
+      <Card className="bg-success shadow card-stats mb-4 mb-xl-0">
+        <CardBody>
+          <Row>
+            <div className="col">
+              <CardTitle
+                tag="h5"
+                className="text-white text-center text-uppercase text-muted mb-0"
+              >
+                PAYMENT SUCSSESFULL
+              </CardTitle>
+            </div>
+          </Row>
+        </CardBody>
+      </Card>
+    );
+  } else {
+    paybutton = (
+      <button type="button" className="btn btn-dark" onClick={handleSubmit}>
+        Pay Rs.250 Only
+      </button>
+    );
   }
 
   var validateMsgValid = (
@@ -101,72 +90,69 @@ export default function Payment({
     </Form.Control.Feedback>
   );
 
-
   function handleSubmit(e) {
     e.preventDefault();
     // var txn_url = "https://securegw-stage.paytm.in/order/process";
-    var data={ 
-      "userid": localStorage.getItem("userid") ,
-      "email" :localStorage.getItem("email"),
-      "mobile": localStorage.getItem("mobile")
-    }
+    var data = {
+      userid: localStorage.getItem("userid"),
+      email: localStorage.getItem("email"),
+      mobile: localStorage.getItem("mobile"),
+    };
 
-    payment(data,localStorage.getItem("token"));
+    payment(data, localStorage.getItem("token"));
   }
 
   function isDate(val) {
     // Cross realm comptatible
-    return Object.prototype.toString.call(val) === '[object Date]'
+    return Object.prototype.toString.call(val) === "[object Date]";
   }
-  
+
   function isObj(val) {
-    return typeof val === 'object'
+    return typeof val === "object";
   }
-  
+
   function stringifyValue(val) {
     if (isObj(val) && !isDate(val)) {
-      return JSON.stringify(val)
+      return JSON.stringify(val);
     } else {
-      return val
+      return val;
     }
   }
-  
+
   function buildForm({ action, params }) {
-    const form = document.createElement('form')
-    form.setAttribute('method', 'post')
-    form.setAttribute('action', action)
- 
-  
-    Object.keys(params).forEach(key => {
-      const input = document.createElement('input')
-      input.setAttribute('type', 'hidden')
-      input.setAttribute('name', key)
-      input.setAttribute('value', stringifyValue(params[key]))
-      form.appendChild(input)
-    })
-  
-    return form
+    const form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", action);
+
+    Object.keys(params).forEach((key) => {
+      const input = document.createElement("input");
+      input.setAttribute("type", "hidden");
+      input.setAttribute("name", key);
+      input.setAttribute("value", stringifyValue(params[key]));
+      form.appendChild(input);
+    });
+
+    return form;
   }
-  
-function post(details) {
-    const form = buildForm(details)
-    document.body.appendChild(form)
-    form.submit()
-    form.remove()
+
+  function post(details) {
+    const form = buildForm(details);
+    document.body.appendChild(form);
+    form.submit();
+    form.remove();
   }
 
   useEffect(() => {
-    if(paymentParams){
-        var parametrs = paymentParams.data;
-        parametrs['CHECKSUMHASH'] = paymentParams.checksum
-        var details = {
-            action: "https://securegw-stage.paytm.in/order/process",
-            params : parametrs
-        } 
-        post(details)
-
+    if (paymentParams) {
+      var parametrs = paymentParams.data;
+      parametrs["CHECKSUMHASH"] = paymentParams.checksum;
+      var details = {
+        action: "https://securegw-stage.paytm.in/order/process",
+        params: parametrs,
+      };
+      post(details);
     }
-}, [paymentParams]);
+  }, [paymentParams]);
 
   const [isSubmit, setIsSubmit] = useState();
   const [Class, SetClass] = useState();
@@ -183,16 +169,17 @@ function post(details) {
     }, 5000);
   }
 
-  React.useEffect(() => {
-   
-  }, []);
+  React.useEffect(() => {}, []);
 
   return (
     <div className="py-5 " style={{ "background-color": "#333333" }}>
       <Container className="mt-5">
         <Row>
           <Col lg="12">
-            <Card className="shadow card-stats mb-4 mb-xl-0" style={{"background-color": "#E92929"}}>
+            <Card
+              className="shadow card-stats mb-4 mb-xl-0"
+              style={{ "background-color": "#E92929" }}
+            >
               <CardBody>
                 <Row>
                   <div className="col">
@@ -204,32 +191,17 @@ function post(details) {
                     </CardTitle>
                     <hr />
                     <span className="mt-3 text-white font-weight-bold mb-0">
-                      {
-                         "Username : " +
-                         localStorage.getItem("first_name")
-                        }
-                      {
-                         " " +
-                         localStorage.getItem("middle_name")
-                        }
-                      {
-                         " " +
-                         localStorage.getItem("last_name")
-                        }
+                      {"Username : " + localStorage.getItem("first_name")}
+                      {" " + localStorage.getItem("middle_name")}
+                      {" " + localStorage.getItem("last_name")}
                       <br />
-                      {
-                         "Email : " +
-                         localStorage.getItem("email")
-                        }
+                      {"Email : " + localStorage.getItem("email")}
                       <br />
-                      {
-                         "Mobile : " +
-                         localStorage.getItem("mobile")
-                        }
+                      {"Mobile : " + localStorage.getItem("mobile")}
                       <br />
                     </span>
                   </div>
-                  <hr/>
+                  <hr />
                   {paybutton}
                 </Row>
                 {/* <p className="mt-3 mb-0 text-muted text-sm">
@@ -245,11 +217,11 @@ function post(details) {
 }
 
 const mapDispatchToProps = {
-payment: payment
+  payment: payment,
 };
 
 const mapStateToProps = (state) => ({
-paymentParams: state.paymentParams
+  paymentParams: state.paymentParams,
 });
 
 Payment = connect(mapStateToProps, mapDispatchToProps)(Payment);

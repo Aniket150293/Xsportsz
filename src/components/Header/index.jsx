@@ -30,7 +30,7 @@ export default function Header({ logout }) {
     history.push("/");
   }
 
- var image=require("../../assets/img/logo1.jpg");
+  var image = require("../../assets/img/logo1.jpg");
 
   let tabBar,
     tabBar1,
@@ -53,7 +53,7 @@ export default function Header({ logout }) {
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem to="/player-list" tag={Link}>
-            Player List
+              Player List
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
@@ -71,12 +71,11 @@ export default function Header({ logout }) {
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem to="/register-sport" tag={Link}>
-            Register Sport
+              Register Sport
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
       </Nav>
-      
     );
     tabBar4 = (
       <Nav className="navbar-nav-hover align-items-lg-center" navbar>
@@ -84,17 +83,16 @@ export default function Header({ logout }) {
           <DropdownToggle nav>
             <i className="ni ni-collection d-lg-none mr-1" />
             <span className="font-weight-bold nav-link-inner--text text-danger">
-             My Registered Sport
+              My Registered Sport
             </span>
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem to="/myregisteredsport" tag={Link}>
-             My Registered Sport
+              My Registered Sport
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
       </Nav>
-      
     );
   }
 
@@ -115,12 +113,12 @@ export default function Header({ logout }) {
           <DropdownToggle className="p-0 m-0" nav>
             <i className="ni ni-collection ml-lg-auto d-lg-none mr-1" />
             <span className="font-weight-bold nav-link-inner--text">
-            {localStorage.getItem("firstname")} &nbsp;{" "}
-            {localStorage.getItem("lastname")}&nbsp;
+              {localStorage.getItem("firstname")} &nbsp;{" "}
+              {localStorage.getItem("lastname")}&nbsp;
             </span>
             <Button className="btn btn-danger" onClick={logout1}>
-            Logout
-          </Button>
+              Logout
+            </Button>
           </DropdownToggle>
           {/* <DropdownMenu>
             <DropdownItem>
@@ -153,39 +151,35 @@ export default function Header({ logout }) {
         </UncontrolledDropdown>
       </Nav>
     );
-  } 
+  }
 
   return (
     <div>
-      <header  >
+      <header>
         <Navbar
           className="shadow navbar-main fixed-top navbar-expand-lg navbar-dark headroom "
           expand="lg"
           style={{
             "border-radius": "100px",
-            "margin": "4px 25px",
-            "padding": "0px 10px",
+            margin: "4px 25px",
+            padding: "0px 10px",
             "background-color": "white",
             "min-height": "53px",
             //"position":"relative"
           }}
-          
         >
-        {
-         
-       
-           <img
-                    
-                  src={image}
-                  class=" d-block float-right  " style={{"marginLeft":"50px"}} alt="Responsive image" 
-             width="60" height="60" 
-                
-                />
-              
-          
-        }
+          {
+            <img
+              src={image}
+              class=" d-block float-right  "
+              style={{ marginLeft: "50px" }}
+              alt="Responsive image"
+              width="60"
+              height="60"
+            />
+          }
           <Container>
-         {/*
+            {/*
           <img
                     
                     src={image}
@@ -196,17 +190,13 @@ export default function Header({ logout }) {
                  
          */}
             <NavbarBrand className="mr-lg-5">
-
-              <span className="font-weight-bold text-white">
-            
-              </span>
-              
+              <span className="font-weight-bold text-white"></span>
             </NavbarBrand>
 
-
-
-            
-            <button className="navbar-toggler  btn-danger bg-danger" id="navbar_global">
+            <button
+              className="navbar-toggler  btn-danger bg-danger"
+              id="navbar_global"
+            >
               <span className="navbar-toggler-icon" />
             </button>
             <UncontrolledCollapse toggler="#navbar_global" navbar>
@@ -214,17 +204,13 @@ export default function Header({ logout }) {
                 <Row>
                   <Col className="collapse-brand" xs="6">
                     {/* <Link to="/"> */}
-                      {/* <img
+                    {/* <img
                         alt="..."
                         src={require("../../assets/img/logo.jpg")}
                       /> */}
-      
-        
-                        
 
-                      <span className="font-weight-bold">Xsportsz</span>
+                    <span className="font-weight-bold">Xsportsz</span>
                     {/* </Link> */}
-                    
                   </Col>
                   <Col className="collapse-close" xs="6">
                     <button className="navbar-toggler " id="navbar_global">
@@ -249,8 +235,6 @@ export default function Header({ logout }) {
     </div>
   );
 }
-
-
 
 const mapDispatchToProps = {
   logout: logout,

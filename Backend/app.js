@@ -1,31 +1,29 @@
-const express = require('express');
-const path = require('path');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const fileUpload = require('express-fileupload');
+const express = require("express");
+const path = require("path");
+const logger = require("morgan");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const fileUpload = require("express-fileupload");
 
 const app = express();
-const port = process.env.PORT || '3000';
+const port = process.env.PORT || "3000";
 
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(cors());
 
-
 // all environments
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(fileUpload());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/users', require('./routes/users'));
-app.use('/registereduserdetails', require('./routes/registereduserdetails'));
-app.use('/admindetails', require('./routes/admindetails'));
-app.use('/TransferMoneyDetails', require('./routes/TransferMoneyDetails'));
-app.use('/dashboard', require('./routes/dashboard'));
-app.use('/payment', require('./routes/payment'));
-
+app.use("/users", require("./routes/users"));
+app.use("/registereduserdetails", require("./routes/registereduserdetails"));
+app.use("/admindetails", require("./routes/admindetails"));
+app.use("/TransferMoneyDetails", require("./routes/TransferMoneyDetails"));
+app.use("/dashboard", require("./routes/dashboard"));
+app.use("/payment", require("./routes/payment"));
 
 app.listen(port);
 
