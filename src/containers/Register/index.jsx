@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { submitRegisteredUser, getMasterBankList ,getState,getCountry} from "../../actions";
-import { Input, Container, Row, Col, Button, Modal,FormGroup,InputGroup,InputGroupAddon,InputGroupText } from "reactstrap";
+import { submitRegisteredUser, getMasterBankList, getState, getCountry } from "../../actions";
+import { Input, Container, Row, Col, Button, Modal, FormGroup, InputGroup, InputGroupAddon, InputGroupText } from "reactstrap";
 import { Form } from "react-bootstrap";
 import { useHistory } from "react-router";
 import axios from "axios";
@@ -31,7 +31,7 @@ export default function Register({
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
-  const [country,setCountry]=useState("");
+  const [country, setCountry] = useState("");
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
   const [date, setDate] = useState("");
@@ -43,7 +43,7 @@ export default function Register({
   const [role, setRole] = useState("");
 
 
-  
+
   /*
 const [sdata,setsdata]=useState();
 React.useEffect(() => {
@@ -54,29 +54,29 @@ React.useEffect(() => {
 }, [submitRegisteredUser]);
 */
 
-const [data,setdata]=useState();
-React.useEffect(()=>{
-  if(getstatesucces)
-    if(getstatesucces.status == 200){
-      
-      setdata(getstatesucces.data);
-    }
-},[getstatesucces]);
+  const [data, setdata] = useState();
+  React.useEffect(() => {
+    if (getstatesucces)
+      if (getstatesucces.status == 200) {
 
-const [countrydata,setcountrydata]=useState();
-React.useEffect(()=>{
-if(getcountrysuccess)
-  if(getcountrysuccess.status==200){
-    setcountrydata(getcountrysuccess.data);
-  }
+        setdata(getstatesucces.data);
+      }
+  }, [getstatesucces]);
+
+  const [countrydata, setcountrydata] = useState();
+  React.useEffect(() => {
+    if (getcountrysuccess)
+      if (getcountrysuccess.status == 200) {
+        setcountrydata(getcountrysuccess.data);
+      }
 
 
-},[getcountrysuccess]);
+  }, [getcountrysuccess]);
 
 
 
   var history = useHistory();
-  var pass,banks;
+  var pass, banks;
   var validateMsgValid = (
     // <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
     <div></div>
@@ -95,21 +95,21 @@ if(getcountrysuccess)
         localStorage.getItem("token")
       );
       setRole("bank_admin");
-    } 
+    }
     else if (history.location.pathname == "/register") {
-    
+
       setRole("user");
       console.log("get")
-      
+
     }
-    
+
     else {
       setEdit(true);
       submitRegisteredUser(
         { userid: localStorage.getItem("userid") },
         localStorage.getItem("token")
       );
-      
+
       /*
       getState(
         {userid:localStorage.getItem("userid")},
@@ -123,28 +123,28 @@ if(getcountrysuccess)
     }
   }, []);
 
-  
- 
-  useEffect(()=>{
- 
-  
+
+
+  useEffect(() => {
+
+
     getState(
-      {userid:localStorage.getItem("userid")},
+      { userid: localStorage.getItem("userid") },
       localStorage.getItem("token")
     );
     getCountry(
-      {userid:localStorage.getItem("userid")},
+      { userid: localStorage.getItem("userid") },
       localStorage.getItem("token")
     );
- 
 
 
-    
-  
-},[])
 
 
-  
+
+  }, [])
+
+
+
 
 
 
@@ -223,8 +223,8 @@ if(getcountrysuccess)
               <option value="">Select Bank</option>
               {data1
                 ? data1.map((item) => (
-                    <option value={item.id}>{item.bank}</option>
-                  ))
+                  <option value={item.id}>{item.bank}</option>
+                ))
                 : "Not Available"}
             </Input>
             {validateMsgValid}
@@ -235,7 +235,7 @@ if(getcountrysuccess)
     }
   }
 
-React.useEffect(() => {
+  React.useEffect(() => {
     if (RegisteredUserDetails)
       if (RegisteredUserDetails.status == 200) {
 
@@ -256,29 +256,29 @@ React.useEffect(() => {
         setState(RegisteredUserDetails.data.rows[0].state);
 
         setZip(RegisteredUserDetails.data.rows[0].zip_code);
-        setDate(new Date(RegisteredUserDetails.data.rows[0].year_of_birth+"-"+RegisteredUserDetails.data.rows[0].month_of_birth+"-"+RegisteredUserDetails.data.rows[0].date_of_birth));
+        setDate(new Date(RegisteredUserDetails.data.rows[0].year_of_birth + "-" + RegisteredUserDetails.data.rows[0].month_of_birth + "-" + RegisteredUserDetails.data.rows[0].date_of_birth));
         // setMonth(RegisteredUserDetails.data.rows[0].month_of_birth);
         // setYear(RegisteredUserDetails.data.rows[0].year_of_birth);
 
-       
+
       }
-      else{
-        
+      else {
+
       }
   }, [RegisteredUserDetails]);
 
 
 
-  
+
 
   function handleSubmit(e) {
     e.preventDefault();
     setIsSubmit(true);
 
     if (e.currentTarget.checkValidity()) {
-     //  var data = {
+      //  var data = {
       //   "profilename" :profile.name,
-       //    "email":email,
+      //    "email":email,
       //     "password":password,
       //     "confirmPassword":confirmPassword,
       //     "mobileNo":mobileNo,
@@ -292,97 +292,97 @@ React.useEffect(() => {
       //     "zip":zip,
       //   "date":date,
       //     "month":month,
-     //      "year" :year,
-     //  }
+      //      "year" :year,
+      //  }
 
-    //  submitRegisteredUser(data)
-    if(password==confirmPassword){
+      //  submitRegisteredUser(data)
+      if (password == confirmPassword) {
 
-      const profiledata = new FormData();
+        const profiledata = new FormData();
 
-      if (image) {
-        profiledata.append("file", image);
-        profiledata.append("profilename", image.name);
-      }
-      if (edit) {
-        profiledata.append("update", true);
-        profiledata.append("userid", localStorage.getItem("userid"));
-        profiledata.append("profile", profile);
-      } else {
-        profiledata.append("role", role);
-      }
+        if (image) {
+          profiledata.append("file", image);
+          profiledata.append("profilename", image.name);
+        }
+        if (edit) {
+          profiledata.append("update", true);
+          profiledata.append("userid", localStorage.getItem("userid"));
+          profiledata.append("profile", profile);
+        } else {
+          profiledata.append("role", role);
+        }
 
-      if (role == "bank_admin") {
-        profiledata.append("userid", localStorage.getItem("userid"));
-        profiledata.append("bankId", bankId);
-      }
-      
-      profiledata.append("email", email);
-      profiledata.append("password", password);
-      profiledata.append("confirmPassword", confirmPassword);
-      profiledata.append("mobileNo", mobileNo);
-      profiledata.append("alternateMobileNo", alternateMobileNo);
-      profiledata.append("firstName", firstName);
-      profiledata.append("middleName", middleName);
-      profiledata.append("lastName", lastName);
-      profiledata.append("address", address);
-      profiledata.append("city", city);
-      profiledata.append("country",country);
-      profiledata.append("state", state);
-      profiledata.append("zip", zip);
-      profiledata.append("date", date);
-      // profiledata.append("month", month);
-      // profiledata.append("year", year);
-      
-      axios
-        .post(
-          "http://localhost:3000/registereduserdetails/upload",
-          profiledata,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: localStorage.getItem("token"),
-            },
-          }
-        )
-        .then(function (response) {
-          console.log(response);
-          if (response.data.status == 200) {
-            NotificationModel("bg-success", response.data.msg);
-            if (!edit) {
-              setImage(null);
-              setViewImage(null);
-              setEmail("");
-              setProfile("");
-              setPassword("");
-              setConfirmPassword("");
-              setMobileNo("");
-              setAlternateMobileNo("");
-              setFirstName("");
-              setMiddleName("");
-              setLastName("");
-              setAddress("");
-              setCity("");
-              setCountry("");
-              setState("");
-              setZip("");
-              setDate("");
-              // setMonth("");
-              // setYear("");
-              setBankId("");
-              // history.push("/");
+        if (role == "bank_admin") {
+          profiledata.append("userid", localStorage.getItem("userid"));
+          profiledata.append("bankId", bankId);
+        }
+
+        profiledata.append("email", email);
+        profiledata.append("password", password);
+        profiledata.append("confirmPassword", confirmPassword);
+        profiledata.append("mobileNo", mobileNo);
+        profiledata.append("alternateMobileNo", alternateMobileNo);
+        profiledata.append("firstName", firstName);
+        profiledata.append("middleName", middleName);
+        profiledata.append("lastName", lastName);
+        profiledata.append("address", address);
+        profiledata.append("city", city);
+        profiledata.append("country", country);
+        profiledata.append("state", state);
+        profiledata.append("zip", zip);
+        profiledata.append("date", date);
+        // profiledata.append("month", month);
+        // profiledata.append("year", year);
+
+        axios
+          .post(
+            "http://localhost:3000/registereduserdetails/upload",
+            profiledata,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: localStorage.getItem("token"),
+              },
             }
-          } else {
-            NotificationModel("bg-danger", response.data.msg);
-          }
-          setIsSubmit(false);
-        })
-        .catch(function (error) {
-          console.log(error);
-          NotificationModel("bg-danger", "Server Error");
-        });
-      }else NotificationModel( "bg-danger" ,"Password Not Match")
+          )
+          .then(function (response) {
+            console.log(response);
+            if (response.data.status == 200) {
+              NotificationModel("bg-success", response.data.msg);
+              if (!edit) {
+                setImage(null);
+                setViewImage(null);
+                setEmail("");
+                setProfile("");
+                setPassword("");
+                setConfirmPassword("");
+                setMobileNo("");
+                setAlternateMobileNo("");
+                setFirstName("");
+                setMiddleName("");
+                setLastName("");
+                setAddress("");
+                setCity("");
+                setCountry("");
+                setState("");
+                setZip("");
+                setDate("");
+                // setMonth("");
+                // setYear("");
+                setBankId("");
+                // history.push("/");
+              }
+            } else {
+              NotificationModel("bg-danger", response.data.msg);
+            }
+            setIsSubmit(false);
+          })
+          .catch(function (error) {
+            console.log(error);
+            NotificationModel("bg-danger", "Server Error");
+          });
+      } else NotificationModel("bg-danger", "Password Not Match")
     }
   }
   return (
@@ -562,25 +562,25 @@ React.useEffect(() => {
                 {validateMsgValid}
                 {validateMsgInvalid}
               </Form.Group>
-                  
-                  <Form.Group as={Col} lg="3">
-                    <Input
-                      required
-                      value={country}
-                      className="form-control-alternative"
-                      type="select"
-                      placeholder="country"
-                      onChange={(e)=>setCountry(e.target.value)}
-                      >
-                        <option value="" >Choose Country</option>
+
+              <Form.Group as={Col} lg="3">
+                <Input
+                  required
+                  value={country}
+                  className="form-control-alternative"
+                  type="select"
+                  placeholder="country"
+                  onChange={(e) => setCountry(e.target.value)}
+                >
+                  <option value="" >Choose Country</option>
                   {countrydata
-                     ? countrydata.map((item)=>(
-                        <option value={item.id}>{item.name}</option>
-                          )):"not available"}
-                      </Input>
-                      {validateMsgValid}
-                      {validateMsgInvalid}
-                  </Form.Group>
+                    ? countrydata.map((item) => (
+                      <option value={item.id}>{item.name}</option>
+                    )) : "not available"}
+                </Input>
+                {validateMsgValid}
+                {validateMsgInvalid}
+              </Form.Group>
 
 
               <Form.Group as={Col} lg="3">
@@ -592,18 +592,18 @@ React.useEffect(() => {
                   placeholder="Select State"
                   onChange={(e) => {
                     setState(e.target.value);
-                    
-                    
-                   } }
+
+
+                  }}
                 >
-                
+
                   <option value="" >Choose State</option>
-                 {data
-                   ? data.map((item)=>(
-                   <option value={item.id}>{item.name}</option>
-                 )):"not available"}
-                 
-               
+                  {data
+                    ? data.map((item) => (
+                      <option value={item.id}>{item.name}</option>
+                    )) : "not available"}
+
+
                 </Input>
                 {validateMsgValid}
                 {validateMsgInvalid}
@@ -617,7 +617,7 @@ React.useEffect(() => {
                   type="text"
                   placeholder="Zip"
                   onChange={(e) => setZip(e.target.value)
-                  
+
                   }
                 />
                 {validateMsgValid}
@@ -626,24 +626,24 @@ React.useEffect(() => {
             </Row>
 
             <Row>
-            <FormGroup>
-          <InputGroup className="input-group-alternative">
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>
-                <i className="ni ni-calendar-grid-58" />
-              </InputGroupText>
-            </InputGroupAddon>
-            <ReactDatetime
-              inputProps={{
-                placeholder: "Date of Birth"
-              }}
-              value={date}
-              timeFormat={false}
-              onChange={e => {setDate(e._d);}}
-            />
-          </InputGroup>
-        </FormGroup>
-        </Row>
+              <FormGroup>
+                <InputGroup className="input-group-alternative">
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>
+                      <i className="ni ni-calendar-grid-58" />
+                    </InputGroupText>
+                  </InputGroupAddon>
+                  <ReactDatetime
+                    inputProps={{
+                      placeholder: "Date of Birth"
+                    }}
+                    value={date}
+                    timeFormat={false}
+                    onChange={e => { setDate(e._d); }}
+                  />
+                </InputGroup>
+              </FormGroup>
+            </Row>
 
             {/* <Row>
               <Form.Group as={Col} lg="4">
@@ -714,15 +714,15 @@ React.useEffect(() => {
 const mapDispatchToProps = {
   submitRegisteredUser: submitRegisteredUser,
   getMasterBankList: getMasterBankList,
-  getState:getState,
-  getCountry:getCountry
+  getState: getState,
+  getCountry: getCountry
 };
 
 const mapStateToProps = (state) => ({
   RegisteredUserDetails: state.registeredUserDetails,
   masterBankList: state.masterBankList,
-  getstatesucces:state.getstatesucces,
-  getcountrysuccess:state.getcountrysuccess
+  getstatesucces: state.getstatesucces,
+  getcountrysuccess: state.getcountrysuccess
 });
 
 Register = connect(mapStateToProps, mapDispatchToProps)(Register);

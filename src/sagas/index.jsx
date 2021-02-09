@@ -19,6 +19,7 @@ const devapi = {
   getAccounts: url + "TransferMoneyDetails/getAccounts",
   searchAccount: url + "TransferMoneyDetails/searchAccount",
   forgetPassword: url + "users/forgetPassword",
+  checkPasswordDate: url + "users/checkPasswordDate",
   resetPassword: url + "users/resetPassword",
   getHomeDetails: url + "dashboard/getHomeDetails",
   payment: url + "payment/payment",
@@ -200,6 +201,25 @@ function* forgetPassword(action) {
   yield put({ type: "forgetPasswordSucsses", json: json });
 }
 
+
+function* checkPasswordDate(action) {
+  const json = yield fetch(devapi.checkPasswordDate, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: action.token,
+    },
+    body: JSON.stringify(action.data),
+  }).then((response) => response.json());
+  yield put({ type: "checkPasswordDateSucsses", json: json });
+}
+
+
+
+
+
+
+
 function* resetPassword(action) {
   const json = yield fetch(devapi.resetPassword, {
     method: "POST",
@@ -339,6 +359,7 @@ function* actionWatcher() {
   yield takeLatest("getAccounts", getAccounts);
   yield takeLatest("searchAccount", searchAccount);
   yield takeLatest("forgetPassword", forgetPassword);
+  yield takeLatest("checkPasswordDate", checkPasswordDate);
   yield takeLatest("resetPassword", resetPassword);
   yield takeLatest("getHomeDetails", getHomeDetails);
   yield takeLatest("payment", payment);

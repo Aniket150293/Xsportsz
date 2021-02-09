@@ -136,6 +136,17 @@ export const forgetPassword = (data, token) =>
   }
 );
 
+export const checkPasswordDate = (data, token) =>
+(
+  {
+    type: 'checkPasswordDate',
+    token: token,
+    data: data
+  }
+);
+
+
+
 export const resetPassword = (data, token) =>
 (
   {
