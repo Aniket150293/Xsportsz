@@ -15,7 +15,8 @@ router.post("/payment", function (req, res, next) {
   params["ORDER_ID"] = "TEST_" + new Date().getTime();
   params["CUST_ID"] = req.body.userid;
   params["TXN_AMOUNT"] = "250.00";
-  params["CALLBACK_URL"] = "http://localhost:3000/payment/callback";
+  params["CALLBACK_URL"] =
+    "http://localhost:3000/payment/callback/" + req.body.userid;
   params["EMAIL"] = req.body.email;
   params["MOBILE_NO"] = req.body.mobile;
 
@@ -28,9 +29,10 @@ router.post("/payment", function (req, res, next) {
   );
 });
 
-router.post("/callback", (req, res) => {
+router.post("/callback/:id", (req, res) => {
   console.log(req.body);
-
+  console.log("%%%%%%%%%%%%%%%");
+  console.log(req.params.id);
   var result = checksum_lib.verifychecksum(
     req.body,
     config.PaytmConfig.key,
@@ -40,7 +42,8 @@ router.post("/callback", (req, res) => {
     if (result) {
       resolve(req.body);
       // res.send(req.body)
-      // console.log("checksum match");
+      console.log("---------------------");
+      console.log(req.body);
       var a = connection.query(
         "INSERT INTO  transaction_details " +
           "( user_id, transaction_id, bank_txn_id, order_id, amount, " +
@@ -48,7 +51,7 @@ router.post("/callback", (req, res) => {
           "refund_amount, transaction_date ) " +
           "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ",
         [
-          "1",
+          req.params.id,
           req.body.TXNID,
           req.body.BANKTXNID,
           req.body.ORDERID,
@@ -64,16 +67,6 @@ router.post("/callback", (req, res) => {
           req.body.REFUNDAMT,
           req.body.TXNDATE,
         ]
-
-        // function (err, rows) {
-        //   // console.log(a.sql)
-        //   if (err) {
-        //     // throw err
-
-        //   } else {
-        //     res.redirect('http://localhost:8080/#/payment/200');
-        //   }
-        // }
       );
 
       if (req.body.STATUS == "TXN_SUCCESS") {

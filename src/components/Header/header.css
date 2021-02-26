@@ -1,0 +1,25 @@
+@media only screen and (max-width: 768px) {
+  .logoClass {
+    margin-left: 16px;
+    margin-top: 9px;
+    margin-bottom: -26px;
+    margin-bottom: -37px;
+  }
+  .logoMiddle {
+    margin-left: 37%;
+  }
+
+  .navClass {
+    margin-top: -10px;
+    margin-bottom: 25px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .logoClass {
+    margin-left: 50px;
+  }
+  .logoMiddle {
+    margin-left: 10%;
+  }
+}

@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { logout } from "../../actions";
-//import logo from '../../assets/img/logo.jpeg';
-// reactstrap components
+import "./header.css";
 import {
   Button,
   UncontrolledCollapse,
@@ -95,20 +94,9 @@ export default function Header({ logout }) {
       </Nav>
     );
   }
-
   if (localStorage.getItem("role") != null) {
     logoutBtn = (
       <Nav className="align-items-lg-center ml-lg-auto" navbar>
-        {/* <NavItem className="d-none d-lg-block ml-lg-4">
-          <span className="mb-0 text-white  font-weight-bold">
-
-          </span>
-          &nbsp;
-          <Button className="btn btn-warning" onClick={logout1}>
-            Logout
-          </Button>
-        </NavItem> */}
-
         <UncontrolledDropdown nav>
           <DropdownToggle className="p-0 m-0" nav>
             <i className="ni ni-collection ml-lg-auto d-lg-none mr-1" />
@@ -120,11 +108,6 @@ export default function Header({ logout }) {
               Logout
             </Button>
           </DropdownToggle>
-          {/* <DropdownMenu>
-            <DropdownItem>
-
-            </DropdownItem>
-          </DropdownMenu> */}
         </UncontrolledDropdown>
       </Nav>
     );
@@ -164,72 +147,61 @@ export default function Header({ logout }) {
             margin: "4px 25px",
             padding: "0px 10px",
             "background-color": "white",
-            "min-height": "53px",
-            //"position":"relative"
+            "min-height": "80px",
           }}
         >
           {
             <img
               src={image}
-              class=" d-block float-right  "
-              style={{ marginLeft: "50px" }}
+              className={
+                localStorage.getItem("role") != null
+                  ? "logoClass d-block float-right"
+                  : "logoMiddle"
+              }
               alt="Responsive image"
               width="60"
               height="60"
             />
           }
-          <Container>
-            {/*
-          <img
-                    
-                    src={image}
-                    class=" mx-auto d-block position-relative  " alt="Responsive image" 
-               width="60" height="60" 
-                  
-                  />
-                 
-         */}
-            <NavbarBrand className="mr-lg-5">
-              <span className="font-weight-bold text-white"></span>
-            </NavbarBrand>
+          {localStorage.getItem("role") != null ? (
+            <Container>
+              <NavbarBrand className="mr-lg-5">
+                <span className="font-weight-bold text-white"></span>
+              </NavbarBrand>
 
-            <button
-              className="navbar-toggler  btn-danger bg-danger"
-              id="navbar_global"
-            >
-              <span className="navbar-toggler-icon" />
-            </button>
-            <UncontrolledCollapse toggler="#navbar_global" navbar>
-              <div className="navbar-collapse-header">
-                <Row>
-                  <Col className="collapse-brand" xs="6">
-                    {/* <Link to="/"> */}
-                    {/* <img
-                        alt="..."
-                        src={require("../../assets/img/logo.jpg")}
-                      /> */}
+              <button
+                className=" navClass navbar-toggler  btn-danger bg-danger"
+                id="navbar_global"
+              >
+                <span className="navbar-toggler-icon" />
+              </button>
+              <UncontrolledCollapse toggler="#navbar_global" navbar>
+                <div className="navbar-collapse-header">
+                  <Row>
+                    <Col className="collapse-brand" xs="6">
+                      <span className="font-weight-bold">Xsportsz</span>
+                    </Col>
+                    <Col className="collapse-close" xs="6">
+                      <button className="navbar-toggler " id="navbar_global">
+                        <span />
+                        <span />
+                      </button>
+                    </Col>
+                  </Row>
+                </div>
 
-                    <span className="font-weight-bold">Xsportsz</span>
-                    {/* </Link> */}
-                  </Col>
-                  <Col className="collapse-close" xs="6">
-                    <button className="navbar-toggler " id="navbar_global">
-                      <span />
-                      <span />
-                    </button>
-                  </Col>
-                </Row>
-              </div>
-
-              {tabBar}
-              {tabBar1}
-              {tabBar2}
-              {tabBar3}
-              {tabBar4}
-              {userSettings}
-              {logoutBtn}
-            </UncontrolledCollapse>
-          </Container>
+                {tabBar}
+                {tabBar1}
+                {tabBar2}
+                {tabBar3}
+                {tabBar4}
+                {userSettings}
+                {logoutBtn}
+              </UncontrolledCollapse>
+            </Container>
+          ) : (
+            ""
+          )}
         </Navbar>
       </header>
     </div>

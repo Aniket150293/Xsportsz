@@ -20,6 +20,7 @@ import {
   CardTitle,
 } from "reactstrap";
 import { Form } from "react-bootstrap";
+import "./registersport.css";
 
 export default function RegisterSport({
   registerBankByAdmin,
@@ -186,7 +187,7 @@ export default function RegisterSport({
         </div>
       </Modal>
 
-      <Container className="mt-5">
+      <Container className="cardPos">
         <Row>
           <Col lg="6">
             <Card
@@ -332,9 +333,7 @@ export default function RegisterSport({
                       {validateMsgInvalid}
                     </Form.Group>
                   </Row>
-
                   <br></br>
-
                   <Button color="danger" type="submit" className="">
                     Register Sport
                   </Button>
