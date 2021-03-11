@@ -8,21 +8,20 @@ var connection = require("./config/index");
 /* GET home page. */
 router.post("/payment", function (req, res, next) {
   var params = {};
-  params["MID"] = "dYCLtv04241463291282";
-  params["WEBSITE"] = "WEBSTAGING";
-  params["CHANNEL_ID"] = "WEB";
-  params["INDUSTRY_TYPE_ID"] = "Retail";
-  params["ORDER_ID"] = "TEST_" + new Date().getTime();
+  params["MID"] = config.PaytmConfig.mid;
+  params["WEBSITE"] = config.PaytmConfig.website;
+  params["CHANNEL_ID"] = config.PaytmConfig.channelId;
+  params["INDUSTRY_TYPE_ID"] = config.PaytmConfig.retail;
+  params["ORDER_ID"] = new Date().getTime();
   params["CUST_ID"] = req.body.userid;
-  params["TXN_AMOUNT"] = "250.00";
-  params["CALLBACK_URL"] =
-    "http://localhost:3000/payment/callback/" + req.body.userid;
+  params["TXN_AMOUNT"] = "1";
+  params["CALLBACK_URL"] = config.PaytmConfig.callbackUrl + req.body.userid;
   params["EMAIL"] = req.body.email;
   params["MOBILE_NO"] = req.body.mobile;
 
   checksum_lib.genchecksum(
     params,
-    "C7UK7o1je%fRZXSE",
+    config.PaytmConfig.key,
     function (err, checksum) {
       res.send({ status: 200, data: params, checksum: checksum });
     }
@@ -30,9 +29,6 @@ router.post("/payment", function (req, res, next) {
 });
 
 router.post("/callback/:id", (req, res) => {
-  console.log(req.body);
-  console.log("%%%%%%%%%%%%%%%");
-  console.log(req.params.id);
   var result = checksum_lib.verifychecksum(
     req.body,
     config.PaytmConfig.key,
@@ -41,9 +37,6 @@ router.post("/callback/:id", (req, res) => {
   return new Promise((resolve, reject) => {
     if (result) {
       resolve(req.body);
-      // res.send(req.body)
-      console.log("---------------------");
-      console.log(req.body);
       var a = connection.query(
         "INSERT INTO  transaction_details " +
           "( user_id, transaction_id, bank_txn_id, order_id, amount, " +
@@ -70,12 +63,11 @@ router.post("/callback/:id", (req, res) => {
       );
 
       if (req.body.STATUS == "TXN_SUCCESS") {
-        return res.redirect("http://localhost:8080/#/payment/200");
+        return res.redirect(config.PaytmConfig.redirectUrlSuccess);
       } else {
-        return res.redirect("http://localhost:8080/#/payment/500");
+        return res.redirect(config.PaytmConfig.redirectUrlFailure);
       }
     } else {
-      // console.log("checksum not match");
       return reject("ERROR");
     }
   });

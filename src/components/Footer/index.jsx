@@ -28,14 +28,11 @@ class SimpleFooter extends React.Component {
             <Col className="text-lg-center btn-wrapper" lg="6">
               <Button
                 className="btn-icon-only rounded-circle"
-                color="twitter"
+                color="white"
                 href="https://twitter.com/xsportsz"
                 id="tooltip475038074"
                 target="_blank"
               >
-                {/* <span className="btn-inner--icon">
-                  <i className="fa fa-twitter" />
-                </span> */}
                 <img
                   height="20"
                   width="20"
@@ -47,14 +44,11 @@ class SimpleFooter extends React.Component {
               </UncontrolledTooltip>
               <Button
                 className="btn-icon-only rounded-circle ml-1"
-                color="facebook"
-                href="#"
+                color="white"
+                href="https://www.facebook.com/XSportsz-103465745136250"
                 id="tooltip837440414"
                 target="_blank"
               >
-                {/* <span className="btn-inner--icon">
-                  <i className="fa fa-facebook-square" />
-                </span> */}
                 <img
                   height="20"
                   width="20"
@@ -66,14 +60,11 @@ class SimpleFooter extends React.Component {
               </UncontrolledTooltip>
               <Button
                 className="btn-icon-only rounded-circle ml-1"
-                color="dribbble"
+                color="white"
                 href="https://www.instagram.com/x_sportsz/"
                 id="tooltip829810202"
                 target="_blank"
               >
-                {/* <span className="btn-inner--icon">
-                  <i className="fa fa-dribbble" />
-                </span> */}
                 <img
                   height="20"
                   width="20"
@@ -82,6 +73,38 @@ class SimpleFooter extends React.Component {
               </Button>
               <UncontrolledTooltip delay={0} target="tooltip829810202">
                 Follow us
+              </UncontrolledTooltip>
+              <Button
+                className="btn-icon-only rounded-circle ml-1"
+                color="white"
+                href="https://www.linkedin.com/company/xsportsz/"
+                id="tooltip829810202"
+                target="_blank"
+              >
+                <img
+                  height="20"
+                  width="20"
+                  src={require("../../assets/img/s4.png")}
+                />
+              </Button>
+              <UncontrolledTooltip delay={0} target="tooltip829810202">
+                Follow us
+              </UncontrolledTooltip>
+              <Button
+                className="btn-icon-only rounded-circle ml-1"
+                color="white"
+                href="https://www.youtube.com/channel/UC0OYNHXNsLSNW8raw3-2IkQ"
+                id="tooltip829810202"
+                target="_blank"
+              >
+                <img
+                  height="20"
+                  width="20"
+                  src={require("../../assets/img/s5.png")}
+                />
+              </Button>
+              <UncontrolledTooltip delay={0} target="tooltip829810202">
+                Subscribe us
               </UncontrolledTooltip>
             </Col>
           </Row>

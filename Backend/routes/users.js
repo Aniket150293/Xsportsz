@@ -3,7 +3,7 @@ var router = express.Router();
 var jwt = require("jsonwebtoken");
 var connection = require("./config/index");
 var nodemailer = require("nodemailer");
-var config = require("./mailconfig");
+var config = require("./allConfig");
 var uuid = require("uuid");
 
 router.post("/validateUser", function (req, res, next) {
@@ -62,8 +62,8 @@ router.post("/forgetPassword", function (req, res, next) {
               secure: false,
               requireTLS: true,
               auth: {
-                user: config.Mailconfig.emailid,
-                pass: config.Mailconfig.passwd,
+                user: config.allConfig.emailid,
+                pass: config.allConfig.passwd,
               },
             });
             var generator = require("generate-password");

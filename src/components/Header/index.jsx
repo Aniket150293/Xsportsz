@@ -62,34 +62,24 @@ export default function Header({ logout }) {
     tabBar = (
       <Nav className="navbar-nav-hover align-items-lg-center" navbar>
         <UncontrolledDropdown nav>
-          <DropdownToggle nav>
+          <DropdownToggle nav to="/register-sport" tag={Link}>
             <i className="ni ni-collection d-lg-none mr-1" />
             <span className="font-weight-bold nav-link-inner--text text-danger">
               Register Sport
             </span>
           </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem to="/register-sport" tag={Link}>
-              Register Sport
-            </DropdownItem>
-          </DropdownMenu>
         </UncontrolledDropdown>
       </Nav>
     );
     tabBar4 = (
       <Nav className="navbar-nav-hover align-items-lg-center" navbar>
         <UncontrolledDropdown nav>
-          <DropdownToggle nav>
+          <DropdownToggle nav to="/myregisteredsport" tag={Link}>
             <i className="ni ni-collection d-lg-none mr-1" />
             <span className="font-weight-bold nav-link-inner--text text-danger">
               My Registered Sport
             </span>
           </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem to="/myregisteredsport" tag={Link}>
-              My Registered Sport
-            </DropdownItem>
-          </DropdownMenu>
         </UncontrolledDropdown>
       </Nav>
     );
@@ -100,7 +90,10 @@ export default function Header({ logout }) {
         <UncontrolledDropdown nav>
           <DropdownToggle className="p-0 m-0" nav>
             <i className="ni ni-collection ml-lg-auto d-lg-none mr-1" />
-            <span className="font-weight-bold nav-link-inner--text">
+            <span
+              className="font-weight-bold nav-link-inner--text"
+              style={{ color: "blue" }}
+            >
               {localStorage.getItem("firstname")} &nbsp;{" "}
               {localStorage.getItem("lastname")}&nbsp;
             </span>
@@ -179,7 +172,7 @@ export default function Header({ logout }) {
                 <div className="navbar-collapse-header">
                   <Row>
                     <Col className="collapse-brand" xs="6">
-                      <span className="font-weight-bold">Xsportsz</span>
+                      <span className="font-weight-bold">XSportsz</span>
                     </Col>
                     <Col className="collapse-close" xs="6">
                       <button className="navbar-toggler " id="navbar_global">

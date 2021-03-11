@@ -64,20 +64,22 @@ router.post("/getRegisteredUserList", function (req, res, next) {
           var y1 = e1.getFullYear();
           var m1 = e1.getMonth() + 1;
 
+          // var a = connection.query(
+          //   "SELECT specialization_master.name as sname, user_sport_mapping.user_id as id,user_details.first_name,user_details.email,user_details.mobile ,user_sport_mapping.years_age,user_sport_mapping.months_age,sports_master.name FROM user_sport_mapping INNER JOIN specialization_master ON specialization_master.id=user_sport_mapping.sport_id INNER JOIN user_details on user_details.id=user_sport_mapping.user_id INNER JOIN sports_master on sports_master.id=user_sport_mapping.sport_id and user_sport_mapping.created_date between '" +
+          //     y1 +
+          //     "-" +
+          //     getMonth1 +
+          //     "-" +
+          //     getDate1 +
+          //     "' and '" +
+          //     getFullYear1 +
+          //     "-" +
+          //     m1 +
+          //     "-" +
+          //     getDate1 +
+          //     "'",
           var a = connection.query(
-            "SELECT specialization_master.name as sname, user_sport_mapping.user_id as id,user_details.first_name,user_details.email,user_details.mobile ,user_sport_mapping.years_age,user_sport_mapping.months_age,sports_master.name FROM user_sport_mapping INNER JOIN specialization_master ON specialization_master.id=user_sport_mapping.sport_id INNER JOIN user_details on user_details.id=user_sport_mapping.user_id INNER JOIN sports_master on sports_master.id=user_sport_mapping.sport_id and user_sport_mapping.created_date between '" +
-              y1 +
-              "-" +
-              getMonth1 +
-              "-" +
-              getDate1 +
-              "' and '" +
-              getFullYear1 +
-              "-" +
-              m1 +
-              "-" +
-              getDate1 +
-              "'",
+            "SELECT specialization_master.name as sname, user_sport_mapping.user_id as id,user_details.first_name,user_details.email,user_details.mobile ,user_sport_mapping.years_age,user_sport_mapping.months_age,sports_master.name FROM user_sport_mapping INNER JOIN specialization_master ON specialization_master.id=user_sport_mapping.sport_id INNER JOIN user_details on user_details.id=user_sport_mapping.user_id INNER JOIN sports_master on sports_master.id=user_sport_mapping.sport_id ",
             function (err, rows) {
               if (err) {
                 res.send({ status: 500, data: {} });
@@ -86,7 +88,7 @@ router.post("/getRegisteredUserList", function (req, res, next) {
                   res.send({
                     status: 200,
                     data: rows,
-                    msg: "Listsssssssssssssssssssss Fetched Successfully",
+                    msg: "List Fetched Successfully",
                   });
                 } else {
                   res.send({ status: 500, data: {} });

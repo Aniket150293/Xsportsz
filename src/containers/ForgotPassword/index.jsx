@@ -87,23 +87,6 @@ export default function ForgetPassword({
       }
   }, [forgetPasswordSucsses]);
 
-  // React.useEffect(() => {
-  //   if (checkPasswordDateSucsses)
-  //     if (checkPasswordDateSucsses.status == 200) {
-  //       console.log(checkPasswordDateSucsses.data)
-  //       // setdata(checkPasswordDateSucsses.data);
-  //     }
-  // }, [checkPasswordDateSucsses]);
-
-  // React.useEffect(() => {
-  //   checkPasswordDate(
-  //     { 'email': localStorage.getItem(email), userid: localStorage.getItem("userid"), },
-  //     localStorage.getItem("token")
-  //     //({ email: email, userId: localStorage.getItem("userid") }, localStorage.getItem("token"))
-  //     //(data, localStorage.getItem("token"))
-  //   );
-  // }, []);
-
   if (path == "/forgot-password") {
     form = (
       <div className="bg-secondary shadow card">
@@ -116,14 +99,15 @@ export default function ForgetPassword({
                 onChange={(e) => setEmail(e.target.value)}
                 className="form-control-alternative"
                 type="email"
-                placeholder="Enter email"
+                placeholder="Enter Email"
               />
+              <br></br>
               <Input
                 required
                 onChange={(e) => setmobile(e.target.value)}
                 className="form-control-alternative"
                 type="tel"
-                placeholder="Enter phone number"
+                placeholder="Enter Phone Number"
                 pattern="^[789]\d{9,9}$"
               />
               {validateMsgValid}

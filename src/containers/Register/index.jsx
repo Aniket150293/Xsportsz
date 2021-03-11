@@ -160,17 +160,13 @@ React.useEffect(() => {
     }, 5000);
   }
 
-  function loadimage(e) {
-    setImage(e.target.files[0]);
-    var reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onloadend = (e) => setViewImage(reader.result);
-  }
-
   if (!edit) {
     pass = (
       <Row>
-        <Form.Group as={Col} lg="6">
+        <Form.Group as={Col} lg="1" sm="1">
+          <span style={{ color: "red" }}>*</span>
+        </Form.Group>
+        <Form.Group as={Col} lg="5">
           <Input
             required
             value={password}
@@ -182,7 +178,10 @@ React.useEffect(() => {
           {validateMsgValid}
           {validateMsgInvalid}
         </Form.Group>
-        <Form.Group as={Col} lg="6">
+        <Form.Group as={Col} lg="1" sm="1">
+          <span style={{ color: "red" }}>*</span>
+        </Form.Group>
+        <Form.Group as={Col} lg="5">
           <Input
             required
             value={confirmPassword}
@@ -402,7 +401,10 @@ React.useEffect(() => {
             <Row>
               <Form.Group as={Col} lg="12">
                 <Row>
-                  <Form.Group as={Col} lg="12">
+                  <Form.Group as={Col} lg="1" sm="1">
+                    <span style={{ color: "red" }}>*</span>
+                  </Form.Group>
+                  <Form.Group as={Col} lg="11">
                     <Input
                       required
                       value={email}
@@ -420,7 +422,10 @@ React.useEffect(() => {
                 {banks}
 
                 <Row>
-                  <Form.Group as={Col} lg="6">
+                  <Form.Group as={Col} lg="1" sm="1">
+                    <span style={{ color: "red" }}>*</span>
+                  </Form.Group>
+                  <Form.Group as={Col} lg="5">
                     <Input
                       required
                       value={mobileNo}
@@ -432,43 +437,21 @@ React.useEffect(() => {
                     {validateMsgValid}
                     {validateMsgInvalid}
                   </Form.Group>
-
-                  <Form.Group as={Col} lg="6">
+                  <Form.Group as={Col} lg="1" sm="1"></Form.Group>
+                  <Form.Group as={Col} lg="5">
                     <Input
-                      required
                       value={alternateMobileNo}
                       className="form-control-alternative"
                       type="text"
                       placeholder="Alternate Mobile No"
                       onChange={(e) => setAlternateMobileNo(e.target.value)}
                     />
-                    {validateMsgValid}
-                    {validateMsgInvalid}
                   </Form.Group>
 
                   {validateMsgValid}
                   {validateMsgInvalid}
                 </Row>
               </Form.Group>
-
-              {/* <Form.Group as={Col} lg="3">
-                      <div className="row justify-content-center card-profile-image">
-                          <img
-                            alt={profile}
-                            height="150px"
-                            width="150px"
-                            className="rounded-circle"
-                            src={viewimage ? viewimage : (profile ? "http://localhost:3000/uploads/"+profile+".jpg" : require("./../../assets/img/avatar.png"))}
-                          />
-                          
-                        <div className="custom-file">
-                            <Input name="image" className="custom-file-input" type="file" onChange={loadimage}/>
-                            <label className="custom-file-label" htmlFor="customFile">Choose file</label>
-                          </div>
-
-                {validateMsgValid}
-                {validateMsgInvalid}      </div>
-                </Form.Group> */}
             </Row>
 
             <div className="mb-3">
@@ -478,7 +461,10 @@ React.useEffect(() => {
             </div>
 
             <Row>
-              <Form.Group as={Col} lg="4">
+              <Form.Group as={Col} lg="1" sm="1">
+                <span style={{ color: "red" }}>*</span>
+              </Form.Group>
+              <Form.Group as={Col} lg="3">
                 <Input
                   required
                   value={firstName}
@@ -490,8 +476,8 @@ React.useEffect(() => {
                 {validateMsgValid}
                 {validateMsgInvalid}
               </Form.Group>
-
-              <Form.Group as={Col} lg="4">
+              <Form.Group as={Col} lg="1" sm="1"></Form.Group>
+              <Form.Group as={Col} lg="3">
                 <Input
                   required
                   value={middleName}
@@ -503,8 +489,10 @@ React.useEffect(() => {
                 {validateMsgValid}
                 {validateMsgInvalid}
               </Form.Group>
-
-              <Form.Group as={Col} lg="4">
+              <Form.Group as={Col} lg="1" sm="1">
+                <span style={{ color: "red" }}>*</span>
+              </Form.Group>
+              <Form.Group as={Col} lg="3">
                 <Input
                   required
                   value={lastName}
@@ -518,7 +506,10 @@ React.useEffect(() => {
               </Form.Group>
             </Row>
             <Row>
-              <Form.Group as={Col} lg="12">
+              <Form.Group as={Col} lg="1" sm="1">
+                <span style={{ color: "red" }}>*</span>
+              </Form.Group>
+              <Form.Group as={Col} lg="11">
                 <Input
                   required
                   value={address}
@@ -532,6 +523,9 @@ React.useEffect(() => {
               </Form.Group>
             </Row>
             <Row>
+              <Form.Group as={Col} lg="1" sm="1">
+                <span style={{ color: "red" }}>*</span>
+              </Form.Group>
               <Form.Group as={Col} lg="3">
                 <Input
                   required
@@ -546,7 +540,9 @@ React.useEffect(() => {
                 {validateMsgValid}
                 {validateMsgInvalid}
               </Form.Group>
-
+              <Form.Group as={Col} lg="1" sm="1">
+                <span style={{ color: "red" }}>*</span>
+              </Form.Group>
               <Form.Group as={Col} lg="3">
                 <Input
                   required
@@ -566,7 +562,9 @@ React.useEffect(() => {
                 {validateMsgValid}
                 {validateMsgInvalid}
               </Form.Group>
-
+              <Form.Group as={Col} lg="1" sm="1">
+                <span style={{ color: "red" }}>*</span>
+              </Form.Group>
               <Form.Group as={Col} lg="3">
                 <Input
                   required
@@ -588,23 +586,28 @@ React.useEffect(() => {
                 {validateMsgValid}
                 {validateMsgInvalid}
               </Form.Group>
+            </Row>
 
+            <Row>
+              <Form.Group as={Col} lg="1" sm="1">
+                <span style={{ color: "red" }}>*</span>
+              </Form.Group>
               <Form.Group as={Col} lg="3">
                 <Input
                   required
                   value={zip}
                   className="form-control-alternative"
                   type="text"
-                  placeholder="Zip"
+                  placeholder="Pin Code"
                   onChange={(e) => setZip(e.target.value)}
                 />
                 {validateMsgValid}
                 {validateMsgInvalid}
               </Form.Group>
-            </Row>
-
-            <Row>
-              <FormGroup>
+              <Form.Group as={Col} lg="1" sm="1">
+                <span style={{ color: "red" }}>*</span>
+              </Form.Group>
+              <Form.Group as={Col} lg="7">
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
@@ -622,7 +625,7 @@ React.useEffect(() => {
                     }}
                   />
                 </InputGroup>
-              </FormGroup>
+              </Form.Group>
             </Row>
 
             {/* <Row>

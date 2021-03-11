@@ -168,7 +168,15 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
                   <Card className="bg-secondary shadow border-0 mt-5 floating">
                     <CardHeader className="bg-white">
                       <div className="text-muted text-center">
-                        <h2>Sign in with</h2>
+                        <h2>
+                          Sign In /
+                          <a
+                            className="text-muted text-center text-light"
+                            href="/#/register"
+                          >
+                            <small> Sign Up</small>
+                          </a>
+                        </h2>
                       </div>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
@@ -205,19 +213,7 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
                           {validateMsgValid}
                           {validateMsgInvalid}
                         </Form.Group>
-                        <div className="custom-control custom-control-alternative custom-checkbox">
-                          <input
-                            className="custom-control-input"
-                            id=" customCheckLogin"
-                            type="checkbox"
-                          />
-                          <label
-                            className="custom-control-label"
-                            htmlFor=" customCheckLogin"
-                          >
-                            <span>Remember me</span>
-                          </label>
-                        </div>
+
                         <div className="text-center">
                           <Button className="my-4" color="danger" type="submit">
                             Sign in
@@ -227,14 +223,10 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
                     </CardBody>
                   </Card>
                   <Row className="mt-3">
-                    <Col xs="6">
+                    <Col className="text-right" xs="8"></Col>
+                    <Col xs="4">
                       <a className="text-light" href="/#/forgot-password">
-                        <small>Forgot password?</small>
-                      </a>
-                    </Col>
-                    <Col className="text-right" xs="6">
-                      <a className="text-light" href="/#/register">
-                        <small>Create new account</small>
+                        <small>Forgot Password?</small>
                       </a>
                     </Col>
                   </Row>

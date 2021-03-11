@@ -76,7 +76,7 @@ export default function Payment({ payment, paymentParams }) {
   } else {
     paybutton = (
       <button type="button" className="btn btn-dark" onClick={handleSubmit}>
-        Pay Rs.250 Only
+        Pay Rs.294 To XSportsz Pvt Ltd
       </button>
     );
   }
@@ -147,7 +147,8 @@ export default function Payment({ payment, paymentParams }) {
       var parametrs = paymentParams.data;
       parametrs["CHECKSUMHASH"] = paymentParams.checksum;
       var details = {
-        action: "https://securegw-stage.paytm.in/order/process",
+        //action: "https://securegw-stage.paytm.in/order/process",
+        action: "https://securegw.paytm.in/order/process",
         params: parametrs,
       };
       post(details);
@@ -204,9 +205,6 @@ export default function Payment({ payment, paymentParams }) {
                   <hr />
                   {paybutton}
                 </Row>
-                {/* <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-white text-nowrap">Since last month</span>
-                      </p> */}
               </CardBody>
             </Card>
           </Col>

@@ -39,16 +39,39 @@ export default function RegisterSport({
   const [years, setYears] = useState("");
   const [months, setMonths] = useState("");
   const [spetialization, setSpetialization] = useState("");
-  // const [location, setLocation] = useState("");
+  const [gender, setGender] = useState();
+  const [first_name, setfirst_name] = useState();
+  const [middle_name, setmiddle_name] = useState();
+  const [last_name, setlast_name] = useState();
+  const [email, setemail] = useState();
+  const [mobile, setmobile] = useState();
+  const [address, setAddress] = useState();
+  const [city, setCity] = useState();
+  const [birthDate, setBirthDate] = useState();
+  const [weight, setWeight] = useState();
+  const [height, setHeight] = useState();
+  const [bloodGroup, setBloodGroup] = useState();
+  const [education, setEducation] = useState();
+  const [experience, setExperience] = useState();
+  const [disability, setDisability] = useState();
+  const [disabilityDetails, setDisabilityDetails] = useState();
+  const [achievement, setAchievement] = useState();
+  const [levelPlayedOn, setLevelPlayedOn] = useState();
+  const [accountNo, setAccountNo] = useState();
+  const [ifsc, setIfsc] = useState();
+  const [futurePlan, setFuturePlan] = useState();
+  const [category, setCategory] = useState();
+  const [clubName, setClubName] = useState();
+  const [familyDetails, setFamilyDetails] = useState();
+  const [termsAccept, setTermsAccept] = useState(false);
+
   var history = useHistory();
   var validateMsgValid = (
     // <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
     <div></div>
   );
   var validateMsgInvalid = (
-    <Form.Control.Feedback type="invalid">
-      Please provide a valid Input.
-    </Form.Control.Feedback>
+    <Form.Control.Feedback type="invalid">Required</Form.Control.Feedback>
   );
 
   useEffect(() => {
@@ -67,12 +90,6 @@ export default function RegisterSport({
     );
   }, []);
 
-  const [first_name, setfirst_name] = useState();
-  const [middle_name, setmiddle_name] = useState();
-  const [last_name, setlast_name] = useState();
-  const [email, setemail] = useState();
-  const [mobile, setmobile] = useState();
-
   React.useEffect(() => {
     if (submitRegisteredUserSucsses)
       if (submitRegisteredUserSucsses.status == 200) {
@@ -81,6 +98,9 @@ export default function RegisterSport({
         setlast_name(submitRegisteredUserSucsses.data.rows[0].last_name);
         setemail(submitRegisteredUserSucsses.data.rows[0].email);
         setmobile(submitRegisteredUserSucsses.data.rows[0].mobile);
+        setAddress(submitRegisteredUserSucsses.data.rows[0].address);
+        setCity(submitRegisteredUserSucsses.data.rows[0].city);
+        setBirthDate(submitRegisteredUserSucsses.data.rows[0].year_of_birth);
       }
   }, [submitRegisteredUserSucsses]);
 
@@ -120,7 +140,22 @@ export default function RegisterSport({
         role: role,
         months: months,
         spetialization: spetialization,
-        // "location":location,
+        gender: gender,
+        weight: weight,
+        height: height,
+        bloodGroup: bloodGroup,
+        education: education,
+        experience: experience,
+        disability: disability,
+        disabilityDetails: disabilityDetails,
+        clubName: clubName,
+        achievement: achievement,
+        levelPlayedOn: levelPlayedOn,
+        accountNo: accountNo,
+        ifsc: ifsc,
+        familyDetails: familyDetails,
+        futurePlan: futurePlan,
+        category: category,
       };
       registerBankByAdmin(data, localStorage.getItem("token"));
     }
@@ -150,16 +185,20 @@ export default function RegisterSport({
           localStorage.setItem("middle_name", middle_name);
           localStorage.setItem("email", email);
           localStorage.setItem("mobile", mobile);
-          // NotificationModel("bg-success", "User Added Sucssesfully");
+          NotificationModel("bg-success", "Details Added Sucssesfully");
           setRole("");
           setSport("");
           setYears("");
           setMonths("");
           setSpetialization("");
-          // setLocation("");
-          history.push("/payment");
+          setTimeout(() => {
+            history.push("/payment");
+          }, 2000);
         } else {
-          NotificationModel("bg-danger", "Bank Not Added");
+          NotificationModel(
+            "bg-danger",
+            "User Registration Failed. Please Try Again"
+          );
         }
         setIsSubmit(false);
       }
@@ -189,7 +228,7 @@ export default function RegisterSport({
 
       <Container className="cardPos">
         <Row>
-          <Col lg="6">
+          <Col lg="5">
             <Card
               className="shadow card-stats mb-4 mb-xl-0"
               style={{ "background-color": "#E92929" }}
@@ -213,6 +252,12 @@ export default function RegisterSport({
                       <br />
                       {"Mobile : " + mobile}
                       <br />
+                      {"Address : " + address}
+                      <br />
+                      {"City : " + city}
+                      <br />
+                      {"Birth Year : " + birthDate}
+                      <br />
                     </span>
                   </div>
                 </Row>
@@ -221,8 +266,30 @@ export default function RegisterSport({
                       </p> */}
               </CardBody>
             </Card>
+            <br></br>
+            <Card
+              className="shadow card-stats mb-4 mb-xl-0"
+              style={{ "background-color": "#E92929" }}
+            >
+              <CardBody>
+                <Row>
+                  <div className="col">
+                    <CardTitle
+                      tag="h5"
+                      className="text-white text-uppercase text-muted mb-0"
+                    >
+                      Trial Form Fees
+                    </CardTitle>
+                    <hr />
+                    <span className="mt-3 text-white font-weight-bold mb-0">
+                      Rs. 294
+                    </span>
+                  </div>
+                </Row>
+              </CardBody>
+            </Card>
           </Col>
-          <Col lg="6">
+          <Col lg="7">
             <div class="bg-secondary shadow card">
               <div className="card-body">
                 <div className="mb-3">
@@ -233,7 +300,10 @@ export default function RegisterSport({
 
                 <Form noValidate validated={isSubmit} onSubmit={handleSubmit}>
                   <Row>
-                    <Form.Group as={Col} lg="12" sm="12">
+                    <Form.Group as={Col} lg="1" sm="1">
+                      <span style={{ color: "red" }}>*</span>
+                    </Form.Group>
+                    <Form.Group as={Col} lg="11" sm="11">
                       <Input
                         required
                         value={role}
@@ -254,9 +324,80 @@ export default function RegisterSport({
                       {validateMsgInvalid}
                     </Form.Group>
                   </Row>
-
                   <Row>
-                    <Form.Group as={Col} lg="12" sm="12">
+                    <div class="form-check form-check-inline">
+                      <Form.Group as={Col} lg="1" sm="1">
+                        <span style={{ color: "red" }}>*</span>
+                      </Form.Group>
+                      <Form.Group as={Col} lg="3">
+                        <Input
+                          required
+                          value="male"
+                          className="form-control-alternative form-check-inline"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio1"
+                          onChange={(e) => setGender(e.target.value)}
+                        />
+                        <label
+                          class="form-check-label"
+                          for="inlineRadio1"
+                          value={gender}
+                        >
+                          Male
+                        </label>
+                      </Form.Group>
+                      {validateMsgValid}
+                      {validateMsgInvalid}
+                      <Form.Group as={Col} lg="5">
+                        <Input
+                          required
+                          value="female"
+                          className="form-control-alternative form-check-inline"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio2"
+                          onChange={(e) => setGender(e.target.value)}
+                        />
+                        <label
+                          class="form-check-label"
+                          for="inlineRadio2"
+                          value={gender}
+                        >
+                          Female
+                        </label>
+                      </Form.Group>
+                      {validateMsgValid}
+                      {validateMsgInvalid}
+                      <Form.Group as={Col} lg="4">
+                        <Input
+                          required
+                          value="other"
+                          className="form-control-alternative form-check-inline"
+                          type="radio"
+                          name="inlineRadioOptions"
+                          id="inlineRadio3"
+                          onChange={(e) => setGender(e.target.value)}
+                        />
+                        <label
+                          class="form-check-label"
+                          for="inlineRadio3"
+                          value={gender}
+                        >
+                          Other
+                        </label>
+                        {validateMsgValid}
+                        {validateMsgInvalid}
+                      </Form.Group>
+                      {validateMsgValid}
+                      {validateMsgInvalid}
+                    </div>
+                  </Row>
+                  <Row>
+                    <Form.Group as={Col} lg="1" sm="1">
+                      <span style={{ color: "red" }}>*</span>
+                    </Form.Group>
+                    <Form.Group as={Col} lg="6" sm="6">
                       <Input
                         required
                         value={sport}
@@ -284,38 +425,8 @@ export default function RegisterSport({
                       {validateMsgValid}
                       {validateMsgInvalid}
                     </Form.Group>
-                  </Row>
-                  <Row>
-                    <Form.Group as={Col} lg="6" sm="6">
+                    <Form.Group as={Col} lg="5" sm="5">
                       <Input
-                        required
-                        value={years}
-                        className="form-control-alternative"
-                        type="text"
-                        placeholder="Enter Age Years"
-                        onChange={(e) => setYears(e.target.value)}
-                      />
-                      {validateMsgValid}
-                      {validateMsgInvalid}
-                    </Form.Group>
-
-                    <Form.Group as={Col} lg="6" sm="6">
-                      <Input
-                        required
-                        value={months}
-                        className="form-control-alternative"
-                        type="text"
-                        placeholder="Enter Age Months"
-                        onChange={(e) => setMonths(e.target.value)}
-                      />
-                      {validateMsgValid}
-                      {validateMsgInvalid}
-                    </Form.Group>
-                  </Row>
-                  <Row>
-                    <Form.Group as={Col} lg="12" sm="12">
-                      <Input
-                        required
                         value={spetialization}
                         className="form-control-alternative"
                         type="select"
@@ -329,12 +440,234 @@ export default function RegisterSport({
                             ))
                           : "Not Available"}
                       </Input>
+                    </Form.Group>
+                  </Row>
+                  <Row>
+                    <Form.Group as={Col} lg="1" sm="1">
+                      <span style={{ color: "red" }}>*</span>
+                    </Form.Group>
+                    <Form.Group as={Col} lg="5" sm="5">
+                      <Input
+                        required
+                        value={years}
+                        className="form-control-alternative"
+                        type="text"
+                        placeholder="Enter Age Years"
+                        onChange={(e) => setYears(e.target.value)}
+                      />
+                      {validateMsgValid}
+                      {validateMsgInvalid}
+                    </Form.Group>
+                    <Form.Group as={Col} lg="1" sm="1">
+                      <span style={{ color: "red" }}>*</span>
+                    </Form.Group>
+                    <Form.Group as={Col} lg="5" sm="5">
+                      <Input
+                        required
+                        value={months}
+                        className="form-control-alternative"
+                        type="text"
+                        placeholder="Enter Age Months"
+                        onChange={(e) => setMonths(e.target.value)}
+                      />
                       {validateMsgValid}
                       {validateMsgInvalid}
                     </Form.Group>
                   </Row>
+                  <Row></Row>
+                  <Row>
+                    <Form.Group as={Col} lg="1" sm="1">
+                      <span style={{ color: "red" }}>*</span>
+                    </Form.Group>
+                    <Form.Group as={Col} lg="3" sm="3">
+                      <Input
+                        required
+                        value={weight}
+                        className="form-control-alternative"
+                        type="text"
+                        placeholder="Weight in Kgs"
+                        onChange={(e) => setWeight(e.target.value)}
+                      />
+                      {validateMsgValid}
+                      {validateMsgInvalid}
+                    </Form.Group>
+                    <Form.Group as={Col} lg="1" sm="1">
+                      <span style={{ color: "red" }}>*</span>
+                    </Form.Group>
+                    <Form.Group as={Col} lg="3" sm="3">
+                      <Input
+                        required
+                        value={height}
+                        className="form-control-alternative"
+                        type="height"
+                        placeholder="Height in Inches"
+                        onChange={(e) => setHeight(e.target.value)}
+                      />
+                      {validateMsgValid}
+                      {validateMsgInvalid}
+                    </Form.Group>
+                    <Form.Group as={Col} lg="1" sm="1">
+                      <span style={{ color: "red" }}>*</span>
+                    </Form.Group>
+                    <Form.Group as={Col} lg="3" sm="3">
+                      <Input
+                        required
+                        value={bloodGroup}
+                        className="form-control-alternative"
+                        type="select"
+                        placeholder="Blood Group"
+                        onChange={(e) => setBloodGroup(e.target.value)}
+                      >
+                        <option value="">Blood Group</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B+">B+</option>
+                        <option value="B+">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                      </Input>
+                      {validateMsgValid}
+                      {validateMsgInvalid}
+                    </Form.Group>
+                  </Row>
+                  <Row>
+                    <Form.Group as={Col} lg="1" sm="1">
+                      <span style={{ color: "red" }}>*</span>
+                    </Form.Group>
+                    <Form.Group as={Col} lg="5" sm="5">
+                      <Input
+                        required
+                        value={education}
+                        className="form-control-alternative"
+                        type="text"
+                        placeholder="Education/Qualification"
+                        onChange={(e) => setEducation(e.target.value)}
+                      />
+                      {validateMsgValid}
+                      {validateMsgInvalid}
+                    </Form.Group>
+                    <Form.Group as={Col} lg="6" sm="6">
+                      <Input
+                        value={experience}
+                        className="form-control-alternative"
+                        type="text"
+                        placeholder="Experience"
+                        onChange={(e) => setExperience(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row>
+                    <Form.Group as={Col} lg="1" sm="1">
+                      <span style={{ color: "red" }}>*</span>
+                    </Form.Group>
+                    <Form.Group as={Col} lg="4" sm="4">
+                      <Input
+                        required
+                        value={disability}
+                        className="form-control-alternative"
+                        type="select"
+                        placeholder="Select Disability"
+                        onChange={(e) => setDisability(e.target.value)}
+                      >
+                        <option value="">Select Disability</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </Input>
+                      {validateMsgValid}
+                      {validateMsgInvalid}
+                    </Form.Group>
+                    <Form.Group as={Col} lg="7" sm="7">
+                      <Input
+                        value={disabilityDetails}
+                        className="form-control-alternative"
+                        type="text"
+                        placeholder="Details of Disability"
+                        onChange={(e) => setDisabilityDetails(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row>
+                    <Form.Group as={Col} lg="12" sm="12">
+                      <Input
+                        value={clubName}
+                        className="form-control-alternative"
+                        type="text"
+                        placeholder="Club's/Institution's Played For"
+                        onChange={(e) => setClubName(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row>
+                    <Form.Group as={Col} lg="6" sm="6">
+                      <Input
+                        value={achievement}
+                        className="form-control-alternative"
+                        type="text"
+                        placeholder="Achievements"
+                        onChange={(e) => setAchievement(e.target.value)}
+                      />
+                    </Form.Group>
+                    <Form.Group as={Col} lg="6" sm="6">
+                      <Input
+                        value={levelPlayedOn}
+                        className="form-control-alternative"
+                        type="text"
+                        placeholder="Level's Played"
+                        onChange={(e) => setLevelPlayedOn(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row>
+                    <Form.Group as={Col} lg="6" sm="6">
+                      <Input
+                        value={familyDetails}
+                        className="form-control-alternative"
+                        type="text"
+                        placeholder="Family Background"
+                        onChange={(e) => setFamilyDetails(e.target.value)}
+                      />
+                    </Form.Group>
+                    <Form.Group as={Col} lg="6" sm="6">
+                      <Input
+                        value={futurePlan}
+                        className="form-control-alternative"
+                        type="text"
+                        placeholder="Future Plan"
+                        onChange={(e) => setFuturePlan(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Row>
+                  <Row>
+                    <div class="form-check form-check-inline">
+                      <Form.Group as={Col} lg="12">
+                        <Input
+                          required
+                          value="termsAccept"
+                          className="form-control-alternative form-check-inline"
+                          type="checkbox"
+                          onChange={(e) => {
+                            setTermsAccept(e.target.checked);
+                            console.log(e.target.checked);
+                          }}
+                        />
+                        &nbsp;
+                        <label class="form-check-label">
+                          I Accept Terms of Services
+                        </label>
+                      </Form.Group>
+                    </div>
+                  </Row>
+
                   <br></br>
-                  <Button color="danger" type="submit" className="">
+                  <Button
+                    color="danger"
+                    type="submit"
+                    className=""
+                    disabled={termsAccept !== false ? false : true}
+                  >
                     Register Sport
                   </Button>
                 </Form>
