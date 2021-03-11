@@ -1,21 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
--- https://www.phpmyadmin.net/
+-- version 4.1.14
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2021 at 03:04 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.34
+-- Generation Time: Mar 11, 2021 at 09:39 AM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `xsportsz`
@@ -27,13 +26,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `contact_details`
 --
 
-CREATE TABLE `contact_details` (
-  `id` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `contact_details` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
   `email` text NOT NULL,
   `message` text NOT NULL,
-  `added_on` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `added_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -41,7 +41,7 @@ CREATE TABLE `contact_details` (
 -- Table structure for table `country_master`
 --
 
-CREATE TABLE `country_master` (
+CREATE TABLE IF NOT EXISTS `country_master` (
   `id` int(10) NOT NULL,
   `name` varchar(150) NOT NULL,
   `is_active` tinyint(1) NOT NULL
@@ -79,11 +79,12 @@ INSERT INTO `country_master` (`id`, `name`, `is_active`) VALUES
 -- Table structure for table `role_master`
 --
 
-CREATE TABLE `role_master` (
-  `id` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `role_master` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `role` varchar(150) NOT NULL,
-  `is_active` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `is_active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `role_master`
@@ -99,12 +100,13 @@ INSERT INTO `role_master` (`id`, `role`, `is_active`) VALUES
 -- Table structure for table `specialization_master`
 --
 
-CREATE TABLE `specialization_master` (
-  `id` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `specialization_master` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `sport_id` int(10) NOT NULL,
   `name` varchar(500) NOT NULL,
-  `is_active` tinyint(4) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `is_active` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `specialization_master`
@@ -126,11 +128,12 @@ INSERT INTO `specialization_master` (`id`, `sport_id`, `name`, `is_active`) VALU
 -- Table structure for table `sports_master`
 --
 
-CREATE TABLE `sports_master` (
-  `id` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `sports_master` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(500) NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `sports_master`
@@ -148,11 +151,12 @@ INSERT INTO `sports_master` (`id`, `name`, `is_active`) VALUES
 -- Table structure for table `state_master`
 --
 
-CREATE TABLE `state_master` (
-  `id` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `state_master` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(10) DEFAULT NULL,
-  `is_active` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `is_active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 --
 -- Dumping data for table `state_master`
@@ -202,8 +206,8 @@ INSERT INTO `state_master` (`id`, `name`, `is_active`) VALUES
 -- Table structure for table `transaction_details`
 --
 
-CREATE TABLE `transaction_details` (
-  `id` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `transaction_details` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
   `transaction_id` varchar(500) NOT NULL,
   `bank_txn_id` varchar(500) NOT NULL,
@@ -218,8 +222,9 @@ CREATE TABLE `transaction_details` (
   `mid` text NOT NULL,
   `payment_mode` varchar(500) NOT NULL,
   `refund_amount` varchar(500) DEFAULT NULL,
-  `transaction_date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `transaction_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
 
 --
 -- Dumping data for table `transaction_details`
@@ -257,7 +262,8 @@ INSERT INTO `transaction_details` (`id`, `user_id`, `transaction_id`, `bank_txn_
 (52, 1, '20201224111212800110168877502196439', '10546449841', 'TEST_1608786505974', '250.00', 'TXN_SUCCESS', NULL, 'SBI', '01', 'Txn Success', 'SBI', 'dYCLtv04241463291282', 'NB', NULL, '2020-12-24 10:38:26'),
 (53, 1, '20201224111212800110168274102190135', '10631990529', 'TEST_1608788213004', '250.00', 'TXN_FAILURE', NULL, 'ICICI', '227', 'Your payment has been declined by your bank. Please try again or use a different method to complete the payment.', 'ICICI', 'dYCLtv04241463291282', 'NB', NULL, '2020-12-24 11:06:53'),
 (54, 1, '20201228111212800110168107602196945', '18629334981', 'TEST_1609155502861', '250.00', 'TXN_SUCCESS', NULL, 'PNB', '01', 'Txn Success', 'PNB', 'dYCLtv04241463291282', 'NB', NULL, '2020-12-28 17:08:24'),
-(55, 1, '20201228111212800110168136802218178', '12787223743', 'TEST_1609155792593', '250.00', 'TXN_SUCCESS', NULL, 'SBI', '01', 'Txn Success', 'SBI', 'dYCLtv04241463291282', 'NB', NULL, '2020-12-28 17:13:13');
+(55, 1, '20201228111212800110168136802218178', '12787223743', 'TEST_1609155792593', '250.00', 'TXN_SUCCESS', NULL, 'SBI', '01', 'Txn Success', 'SBI', 'dYCLtv04241463291282', 'NB', NULL, '2020-12-28 17:13:13'),
+(56, 8, '20210306111212800110168609487387187', '70622239635', 'TEST_1615018019005', '1.00', 'TXN_SUCCESS', NULL, 'ICICIPAY', '01', 'Txn Success', 'ICICI Bank', 'VcIqMo00127550993107', 'DC', NULL, '2021-03-06 13:37:02');
 
 -- --------------------------------------------------------
 
@@ -265,15 +271,15 @@ INSERT INTO `transaction_details` (`id`, `user_id`, `transaction_id`, `bank_txn_
 -- Table structure for table `user_details`
 --
 
-CREATE TABLE `user_details` (
-  `id` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `user_details` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `profile` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `mobile` varchar(20) NOT NULL,
-  `alternate_mobile` varchar(20) NOT NULL,
+  `alternate_mobile` varchar(20) DEFAULT NULL,
   `first_name` varchar(50) NOT NULL,
-  `middle_name` varchar(50) NOT NULL,
+  `middle_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) NOT NULL,
   `address` text NOT NULL,
   `city` text NOT NULL,
@@ -283,15 +289,16 @@ CREATE TABLE `user_details` (
   `month_of_birth` int(10) NOT NULL,
   `year_of_birth` int(10) NOT NULL,
   `role` varchar(10) NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT 1,
-  `is_blocked` tinyint(1) NOT NULL DEFAULT 0,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `is_blocked` tinyint(1) NOT NULL DEFAULT '0',
   `last_login` datetime NOT NULL,
   `created_at` datetime NOT NULL,
   `modified_at` datetime NOT NULL,
   `country` varchar(20) NOT NULL,
-  `pcdate` datetime NOT NULL DEFAULT current_timestamp(),
-  `pudate` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `pcdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `pudate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `user_details`
@@ -302,7 +309,8 @@ INSERT INTO `user_details` (`id`, `profile`, `email`, `password`, `mobile`, `alt
 (3, '8b53e37d-9b34-4242-900d-52c8a19ac13f', 'ashukatkar24@gmail.com', 'XhAR08ru', '9765602975', '123456789', 'ashutosh', 'arun', 'katkar', 'hadapsar', 'pune', 20, '411028', 24, 5, 2000, 'user', 1, 0, '2020-11-10 19:11:53', '2020-11-10 19:11:53', '2020-11-27 11:46:32', '9', '2020-12-30 16:59:54', '2021-01-04 19:33:08'),
 (4, 'a6553989-c5d9-469c-a73e-a9b388aaadcd', 'b@gmail.com', 'sYQfhhbC', '9765602985', '54545445545', 'ba', 'c', 'd', 'e', 'f', 18, '54664', 10, 11, 2020, 'user', 1, 0, '2020-11-20 19:07:13', '2020-11-20 19:07:13', '2020-12-03 10:57:22', '2', '2020-12-30 16:59:54', '2021-01-04 19:22:58'),
 (6, '0f9562a0-3f5f-46fb-9cd9-db59fa52a8ab', 'sample@gmail.com', '1', '111', '111', 'sa', 's', 's', 's', 's', 14, 'sss', 29, 10, 2020, 'user', 1, 0, '2020-11-30 18:26:21', '2020-11-30 18:26:21', '2020-11-30 18:26:21', '12', '2020-12-30 16:59:54', '2020-12-30 17:06:21'),
-(7, '175798f4-5bad-4fa2-9adf-c0e45efa6756', 'sample1@gmail.com', 'oA0SESLq', '7894561233', '123654987', 'sample', 'sample', 'sample', 'sample', 'sample', 22, '122', 28, 10, 2020, 'user', 1, 0, '2020-11-30 22:15:15', '2020-11-30 22:15:15', '2020-11-30 22:15:15', '14', '2020-12-30 16:59:54', '2021-01-04 19:14:45');
+(7, '175798f4-5bad-4fa2-9adf-c0e45efa6756', 'sample1@gmail.com', 'oA0SESLq', '7894561233', '123654987', 'sample', 'sample', 'sample', 'sample', 'sample', 22, '122', 28, 10, 2020, 'user', 1, 0, '2020-11-30 22:15:15', '2020-11-30 22:15:15', '2020-11-30 22:15:15', '14', '2020-12-30 16:59:54', '2021-01-04 19:14:45'),
+(8, 'a0024e5a-26da-4f58-995f-4d6b6043d1a0', 'aniketbansode15@gmail.com', '12345', '8237440506', '9922341815', 'Aniket', 'M', 'Bansode', 'Ravi Darshan, B-501', 'Pune', 1, '411028', 2, 3, 2021, 'user', 1, 0, '2021-03-06 13:25:32', '2021-03-06 13:25:32', '2021-03-06 13:25:32', '1', '2021-03-06 13:25:32', '2021-03-06 13:25:32');
 
 -- --------------------------------------------------------
 
@@ -310,147 +318,63 @@ INSERT INTO `user_details` (`id`, `profile`, `email`, `password`, `mobile`, `alt
 -- Table structure for table `user_sport_mapping`
 --
 
-CREATE TABLE `user_sport_mapping` (
-  `id` int(10) NOT NULL,
+CREATE TABLE IF NOT EXISTS `user_sport_mapping` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `user_id` int(10) NOT NULL,
   `sport_id` int(10) NOT NULL,
   `years_age` int(10) NOT NULL,
   `months_age` int(10) NOT NULL,
-  `specialization_id` int(10) NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT 1,
-  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_date` datetime NOT NULL DEFAULT current_timestamp(),
-  `role_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `specialization_id` int(10) DEFAULT NULL,
+  `gender` varchar(20) NOT NULL,
+  `weight` varchar(30) NOT NULL,
+  `height` varchar(30) NOT NULL,
+  `blood_group` varchar(30) NOT NULL,
+  `education` varchar(500) DEFAULT NULL,
+  `experience` varchar(500) DEFAULT NULL,
+  `disability` varchar(20) NOT NULL,
+  `disability_details` varchar(1000) DEFAULT NULL,
+  `achievement` varchar(1000) DEFAULT NULL,
+  `level_palyed_on` varchar(500) DEFAULT NULL,
+  `account_no` varchar(1000) DEFAULT NULL,
+  `ifsc` varchar(500) DEFAULT NULL,
+  `future_plan` varchar(1000) DEFAULT NULL,
+  `category` int(11) DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `role_id` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=107 ;
 
 --
 -- Dumping data for table `user_sport_mapping`
 --
 
-INSERT INTO `user_sport_mapping` (`id`, `user_id`, `sport_id`, `years_age`, `months_age`, `specialization_id`, `is_active`, `created_date`, `updated_date`, `role_id`) VALUES
-(12, 3, 1, 21, 8, 1, 1, '2020-11-10 19:13:16', '2020-11-10 19:13:16', 0),
-(13, 3, 1, 22, 3, 2, 1, '2020-11-19 10:06:57', '2020-11-19 10:06:57', 0),
-(14, 3, 2, 1, 1, 5, 1, '2020-11-21 19:46:42', '2020-11-21 19:46:42', 0),
-(15, 3, 1, 1, 1, 1, 1, '2020-11-21 19:47:10', '2020-11-21 19:47:10', 0),
-(16, 4, 1, 22, 2, 1, 1, '2020-09-01 00:00:00', '2020-11-26 11:15:02', 0),
-(17, 4, 1, 22, 2, 1, 1, '2020-09-01 00:00:00', '2020-12-01 11:04:53', 0),
-(19, 4, 1, 1, 1, 1, 1, '2020-09-01 00:00:00', '2020-12-01 19:17:50', 1),
-(55, 4, 2, 18, 2, 5, 1, '2020-12-22 13:50:28', '2020-12-22 13:50:28', 1),
-(56, 4, 1, 111, 1, 1, 1, '2020-12-22 13:54:54', '2020-12-22 13:54:54', 1),
-(57, 4, 4, 19, 2, 8, 1, '2020-12-22 13:55:57', '2020-12-22 13:55:57', 1),
-(58, 4, 1, 44, 4, 2, 1, '2020-12-22 14:01:39', '2020-12-22 14:01:39', 1),
-(69, 4, 2, 22, 2, 5, 1, '2020-12-23 11:22:16', '2020-12-23 11:22:16', 1),
-(95, 4, 1, 33, 3, 1, 1, '2020-12-24 16:59:47', '2020-12-24 16:59:47', 1),
-(96, 7, 1, 20, 0, 1, 1, '2020-12-28 09:39:54', '2020-12-28 09:39:54', 1),
-(97, 7, 4, 33, 3, 8, 1, '2020-12-28 09:40:10', '2020-12-28 09:40:10', 1),
-(98, 7, 2, 50, 0, 4, 1, '2020-12-28 09:41:22', '2020-12-28 09:41:22', 2),
-(99, 7, 2, 55, 5, 4, 1, '2020-12-28 17:08:14', '2020-12-28 17:08:14', 1),
-(100, 7, 4, 25, 5, 8, 1, '2020-12-28 17:13:10', '2020-12-28 17:13:10', 1);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `contact_details`
---
-ALTER TABLE `contact_details`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `role_master`
---
-ALTER TABLE `role_master`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `specialization_master`
---
-ALTER TABLE `specialization_master`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `sports_master`
---
-ALTER TABLE `sports_master`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `state_master`
---
-ALTER TABLE `state_master`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `transaction_details`
---
-ALTER TABLE `transaction_details`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `user_details`
---
-ALTER TABLE `user_details`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `user_sport_mapping`
---
-ALTER TABLE `user_sport_mapping`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `contact_details`
---
-ALTER TABLE `contact_details`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `role_master`
---
-ALTER TABLE `role_master`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `specialization_master`
---
-ALTER TABLE `specialization_master`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `sports_master`
---
-ALTER TABLE `sports_master`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `state_master`
---
-ALTER TABLE `state_master`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
-
---
--- AUTO_INCREMENT for table `transaction_details`
---
-ALTER TABLE `transaction_details`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
-
---
--- AUTO_INCREMENT for table `user_details`
---
-ALTER TABLE `user_details`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `user_sport_mapping`
---
-ALTER TABLE `user_sport_mapping`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
-COMMIT;
+INSERT INTO `user_sport_mapping` (`id`, `user_id`, `sport_id`, `years_age`, `months_age`, `specialization_id`, `gender`, `weight`, `height`, `blood_group`, `education`, `experience`, `disability`, `disability_details`, `achievement`, `level_palyed_on`, `account_no`, `ifsc`, `future_plan`, `category`, `is_active`, `created_date`, `updated_date`, `role_id`) VALUES
+(12, 3, 1, 21, 8, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-11-10 19:13:16', '2020-11-10 19:13:16', 0),
+(13, 3, 1, 22, 3, 2, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-11-19 10:06:57', '2020-11-19 10:06:57', 0),
+(14, 3, 2, 1, 1, 5, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-11-21 19:46:42', '2020-11-21 19:46:42', 0),
+(15, 3, 1, 1, 1, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-11-21 19:47:10', '2020-11-21 19:47:10', 0),
+(16, 4, 1, 22, 2, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-09-01 00:00:00', '2020-11-26 11:15:02', 0),
+(17, 4, 1, 22, 2, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-09-01 00:00:00', '2020-12-01 11:04:53', 0),
+(19, 4, 1, 1, 1, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-09-01 00:00:00', '2020-12-01 19:17:50', 1),
+(55, 4, 2, 18, 2, 5, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-12-22 13:50:28', '2020-12-22 13:50:28', 1),
+(56, 4, 1, 111, 1, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-12-22 13:54:54', '2020-12-22 13:54:54', 1),
+(57, 4, 4, 19, 2, 8, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-12-22 13:55:57', '2020-12-22 13:55:57', 1),
+(58, 4, 1, 44, 4, 2, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-12-22 14:01:39', '2020-12-22 14:01:39', 1),
+(69, 4, 2, 22, 2, 5, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-12-23 11:22:16', '2020-12-23 11:22:16', 1),
+(95, 4, 1, 33, 3, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-12-24 16:59:47', '2020-12-24 16:59:47', 1),
+(96, 7, 1, 20, 0, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-12-28 09:39:54', '2020-12-28 09:39:54', 1),
+(97, 7, 4, 33, 3, 8, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-12-28 09:40:10', '2020-12-28 09:40:10', 1),
+(98, 7, 2, 50, 0, 4, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-12-28 09:41:22', '2020-12-28 09:41:22', 2),
+(99, 7, 2, 55, 5, 4, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-12-28 17:08:14', '2020-12-28 17:08:14', 1),
+(100, 7, 4, 25, 5, 8, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2020-12-28 17:13:10', '2020-12-28 17:13:10', 1),
+(101, 8, 1, 27, 12, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2021-03-06 13:26:22', '2021-03-06 13:26:22', 1),
+(102, 8, 1, 12, 1, 1, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, 1, '2021-03-06 13:36:57', '2021-03-06 13:36:57', 1),
+(103, 8, 1, 27, 1, 1, 'BE', '4 years', 'Yes', 'No Disability', 'Not Yet', '0', '123456789', 'ICICI001', 'NA', '1', '1', '2021-03-07 12:15:40', '2021-03-07 12:15:40', 0, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
+(104, 8, 2, 21, 11, 5, 'female', '12', '5 Inch', 'A+', 'BE', '4 Years', 'Yes', 'Nio', 'NA', 'NA', '123467890', 'ICICI001', 'NA', 1, 1, '2021-03-07 12:18:33', '2021-03-07 12:18:33', 0),
+(105, 8, 2, 34, 1, 5, 'male', '50', '5 inch 4', 'A-', 'BE', '4', 'Yes', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2021-03-07 14:11:22', '2021-03-07 14:11:22', 0),
+(106, 8, 2, 23, 6, 5, 'male', '45', '5''6', 'A-', 'BE', '4 Years', 'No', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, '2021-03-07 14:19:24', '2021-03-07 14:19:24', 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
