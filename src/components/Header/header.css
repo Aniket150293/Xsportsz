@@ -13,6 +13,12 @@
     margin-top: -10px;
     margin-bottom: 25px;
   }
+  .active {
+    background: #5e72e4;
+  }
+  .fontColor {
+    color: #e92929 !important;
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -21,5 +27,11 @@
   }
   .logoMiddle {
     margin-left: 10%;
+  }
+  .active {
+    background: #5e72e4;
+  }
+  .fontColor {
+    color: #e92929 !important;
   }
 }

@@ -5,14 +5,13 @@ const checksum_lib = require("./checksum/checksum.js");
 const config = require("./checksum/config.js");
 var connection = require("./config/index");
 
-/* GET home page. */
 router.post("/payment", function (req, res, next) {
   var params = {};
   params["MID"] = config.PaytmConfig.mid;
   params["WEBSITE"] = config.PaytmConfig.website;
   params["CHANNEL_ID"] = config.PaytmConfig.channelId;
   params["INDUSTRY_TYPE_ID"] = config.PaytmConfig.retail;
-  params["ORDER_ID"] = new Date().getTime();
+  params["ORDER_ID"] = req.body.userid + "_" + new Date().getTime();
   params["CUST_ID"] = req.body.userid;
   params["TXN_AMOUNT"] = "1";
   params["CALLBACK_URL"] = config.PaytmConfig.callbackUrl + req.body.userid;

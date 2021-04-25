@@ -4,7 +4,7 @@ var jwt = require("jsonwebtoken");
 var connection = require("./config/index");
 var uuid = require("uuid");
 
-router.post("/registerBankByAdmin", function (req, res, next) {
+router.post("/registerSportDetails", function (req, res, next) {
   jwt.verify(
     req.headers["authorization"],
     toString(req.body.userid),

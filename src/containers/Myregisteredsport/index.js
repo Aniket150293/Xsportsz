@@ -4,25 +4,13 @@ import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Form, Table, Modal, Row, Input, ButtonToolbar } from "reactstrap";
 import { getMysport } from "../../actions/index";
+import MyDocument from "../../components/PDFCreation";
+import { PDFViewer } from "@react-pdf/renderer";
 
 export default function Myregisteredsport({ getMysport, getMysportSuccess }) {
-  // const data = [
-  //   {
-  //     id: 1,
-  //     name: "a",
-  //     age: 22,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "b",
-  //     age: 44,
-  //   },
-  // ];
-
   const [data, setData] = useState([]);
   React.useEffect(() => {
     if (getMysportSuccess) {
-      console.log("!!!!!!!!!!!!11");
       if (getMysportSuccess.status == 200) {
         console.log(getMysportSuccess);
         setData(getMysportSuccess.data);
@@ -37,6 +25,15 @@ export default function Myregisteredsport({ getMysport, getMysportSuccess }) {
     );
   }, []);
 
+  let pdfData = {
+    name:
+      localStorage.getItem("firstname") +
+      " " +
+      localStorage.getItem("lastname"),
+    mobile: localStorage.getItem("mobile"),
+    email: localStorage.getItem("email"),
+  };
+
   return (
     <div
       className="container-fluid py-5 "
@@ -47,9 +44,10 @@ export default function Myregisteredsport({ getMysport, getMysportSuccess }) {
         <Table responsive striped bordered hover>
           <thead>
             <tr>
-              <th>sport Name</th>
-              <th>specilization</th>
-              <th>date</th>
+              <th>Sport Name</th>
+              <th>Specilization</th>
+              <th>Registration Date</th>
+              <th>Receipt Details</th>
             </tr>
           </thead>
           <tbody>
@@ -60,10 +58,15 @@ export default function Myregisteredsport({ getMysport, getMysportSuccess }) {
                       <td>{item.name}</td>
                       <td>{item.sname}</td>
                       <td>{item.cddate}</td>
+                      <td>
+                        <PDFViewer>
+                          <MyDocument pdfData={pdfData} itemData={item} />
+                        </PDFViewer>
+                      </td>
                     </tr>
                   );
                 })
-              : "notfound"}
+              : "No Data Found"}
           </tbody>
         </Table>
         {/* </div> */}

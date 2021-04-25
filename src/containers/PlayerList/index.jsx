@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Form, Table, Modal, Row, Input } from "reactstrap";
 import {
-  submitRegisteredUser,
   getRegisteredUserList,
   getSports,
   getSpetialization,
@@ -11,8 +10,7 @@ import { IoMdLock, IoIosCheckmarkCircle } from "react-icons/io";
 import { CSVLink } from "react-csv";
 import { useHistory } from "react-router";
 
-export default function CreatedCustomerList({
-  submitRegisteredUser,
+export default function PlayerList({
   registeredUserDetails,
   getRegisteredUserList,
   RegisteredUserList,
@@ -27,6 +25,7 @@ export default function CreatedCustomerList({
   const [Notification, SetNotification] = useState(false);
   const NotificationClose = () => SetNotification(false);
   const NotificationShow = () => SetNotification(true);
+
   function NotificationModel(Class, Msg) {
     SetClass(Class);
     SetMsg(Msg);
@@ -98,22 +97,6 @@ export default function CreatedCustomerList({
         );
       }
   }, [registeredUserDetails]);
-
-  function verify(id) {
-    setIsSubmit(true);
-    submitRegisteredUser(
-      { verify: true, userid: id },
-      localStorage.getItem("token")
-    );
-  }
-
-  function block(id) {
-    setIsSubmit(true);
-    submitRegisteredUser(
-      { block: true, userid: id },
-      localStorage.getItem("token")
-    );
-  }
 
   return (
     <div
@@ -250,7 +233,7 @@ export default function CreatedCustomerList({
 
 const mapDispatchToProps = {
   getRegisteredUserList: getRegisteredUserList,
-  submitRegisteredUser: submitRegisteredUser,
+
   getSports: getSports,
   getSpetialization: getSpetialization,
 };
@@ -262,7 +245,4 @@ const mapStateToProps = (state) => ({
   getSpetializationSucsses: state.getSpetializationSucsses,
 });
 
-CreatedCustomerList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreatedCustomerList);
+PlayerList = connect(mapStateToProps, mapDispatchToProps)(PlayerList);

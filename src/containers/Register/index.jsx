@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import {
-  submitRegisteredUser,
-  getMasterBankList,
-  getState,
-  getCountry,
-} from "../../actions";
+import { submitRegisteredUser, getState, getCountry } from "../../actions";
+import { url } from "../../config/index";
 import {
   Input,
   Container,
@@ -27,7 +23,6 @@ import { Link } from "react-router-dom";
 export default function Register({
   submitRegisteredUser,
   RegisteredUserDetails,
-  getMasterBankList,
   getState,
   getstatesucces,
   getCountry,
@@ -51,24 +46,11 @@ export default function Register({
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
   const [date, setDate] = useState("");
-  // const [month, setMonth] = useState("");
-  // const [year, setYear] = useState("");
   const [bankId, setBankId] = useState("");
-
   const [edit, setEdit] = useState(false);
   const [role, setRole] = useState("");
-
-  /*
-const [sdata,setsdata]=useState();
-React.useEffect(() => {
-  if (submitRegisteredUser)
-    if (submitRegisteredUser.status == 200) {
-      setsdata(submitRegisteredUser.data);
-    }
-}, [submitRegisteredUser]);
-*/
-
   const [data, setdata] = useState();
+
   React.useEffect(() => {
     if (getstatesucces)
       if (getstatesucces.status == 200) {
@@ -98,13 +80,7 @@ React.useEffect(() => {
   const [isSubmit, setIsSubmit] = useState(false);
 
   useEffect(() => {
-    if (history.location.pathname == "/register-bank-admin") {
-      getMasterBankList(
-        { userId: localStorage.getItem("userid") },
-        localStorage.getItem("token")
-      );
-      setRole("bank_admin");
-    } else if (history.location.pathname == "/register") {
+    if (history.location.pathname == "/register") {
       setRole("user");
       console.log("get");
     } else {
@@ -113,17 +89,6 @@ React.useEffect(() => {
         { userid: localStorage.getItem("userid") },
         localStorage.getItem("token")
       );
-
-      /*
-      getState(
-        {userid:localStorage.getItem("userid")},
-        localStorage.getItem("token")
-      );
-      getCountry(
-        {userid:localStorage.getItem("userid")},
-        localStorage.getItem("token")
-      );
-      */
     }
   }, []);
 
@@ -320,17 +285,13 @@ React.useEffect(() => {
         // profiledata.append("year", year);
 
         axios
-          .post(
-            "http://localhost:3000/registereduserdetails/upload",
-            profiledata,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "multipart/form-data",
-                Authorization: localStorage.getItem("token"),
-              },
-            }
-          )
+          .post(url + "registereduserdetails/upload", profiledata, {
+            method: "POST",
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: localStorage.getItem("token"),
+            },
+          })
           .then(function (response) {
             console.log(response);
             if (response.data.status == 200) {
@@ -707,7 +668,6 @@ React.useEffect(() => {
 
 const mapDispatchToProps = {
   submitRegisteredUser: submitRegisteredUser,
-  getMasterBankList: getMasterBankList,
   getState: getState,
   getCountry: getCountry,
 };

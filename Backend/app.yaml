@@ -1,0 +1,9 @@
+runtime: nodejs12
+
+env_variables:
+  DB_USER: "root"
+  DB_NAME: "xsportsz"
+  DB_PASS: "Noki@6233"
+  DB_INSTANCE: "xsportsz-backend:asia-south1:xsportsz"
+beta_settings:
+  cloud_sql_instances: xsportsz-backend:asia-south1:xsportsz

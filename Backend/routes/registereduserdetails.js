@@ -201,21 +201,6 @@ router.post("/upload", function (req, res, next) {
     );
   } else {
     const profileID = uuid.v4();
-    // if (req.files != null) {
-    //   var file = req.files.file;
-    //   var imageName=profileID+".jpg"
-    //   var imageSize="20X20"
-    //   var imageUrl="http://localhost:3000/uploads/"+imageName
-    //   if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png"||file.mimetype == "image/jpg" ){
-    //       file.mv(`${__dirname}/../public/uploads/${imageName}`, err => {
-    //         if (!err) {
-    //           var sql = "INSERT INTO `user_profiles`(`id`,`size`,`image`,`url`) VALUES ('" + profileID + "','" + imageSize + "','" + imageName + "','" + imageUrl + "')";
-    //           var query = connection.query(sql);
-    //         }
-    //       });
-    //   }
-    // }
-
     var a = connection.query(
       "INSERT INTO  user_details " +
         "( profile, email, password, mobile, alternate_mobile, " +
@@ -245,6 +230,8 @@ router.post("/upload", function (req, res, next) {
         if (err) {
           res.send({
             status: 500,
+            error: err,
+            connection: connection,
             data: { sql: a.sql, msg: "Enter Corrent Information" },
           });
         } else {
@@ -341,38 +328,6 @@ router.post("/submitBankDetailsByUser", function (req, res, next) {
   );
 });
 
-router.post("/getRegisteredUsersBankList", function (req, res, next) {
-  jwt.verify(
-    req.headers["authorization"],
-    toString(req.body.userId),
-    function (err, data) {
-      if (err) {
-        res.send({ status: 403, msg: "Forbidden" });
-      } else {
-        var a = connection.query(
-          "SELECT ubm.id, ubm.is_active, rb.bank, ubm.account_no from user_bank_mapping ubm INNER JOIN registered_bank rb ON ubm.bank_id = rb.id where ubm.user_id = ?",
-          [req.body.userId],
-          function (err, rows) {
-            if (err) {
-              res.send({ status: 500, data: {} });
-            } else {
-              if (typeof rows != "undefined" && rows != "" && rows != null) {
-                res.send({
-                  status: 200,
-                  data: rows,
-                  msg: "User Bank List Fetched Successfully",
-                });
-              } else {
-                res.send({ status: 500, data: {} });
-              }
-            }
-          }
-        );
-      }
-    }
-  );
-});
-
 router.post("/getMasterBankList", function (req, res, next) {
   jwt.verify(
     req.headers["authorization"],
@@ -407,7 +362,7 @@ router.post("/getMasterBankList", function (req, res, next) {
 router.post("/getState", (req, res, next) => {
   connection.query("SELECT * FROM state_master ", function (err, rows) {
     if (err) {
-      res.send({ status: 500, data: {} });
+      res.send({ status: 500, error: err, data: {} });
     } else {
       res.send({ status: 200, data: rows, msg: "get Successfully" });
     }
@@ -417,9 +372,9 @@ router.post("/getState", (req, res, next) => {
 router.post("/getCountry", function (req, res, next) {
   connection.query("SELECT * FROM country_master", function (err, rows) {
     if (err) {
-      res.send({ status: 403, data: {} });
+      res.send({ status: 500, error: err, data: {} });
     } else {
-      res.send({ status: 200, data: rows, msg: "getcountrysuccessfull" });
+      res.send({ status: 200, data: rows, msg: "getcountrysuccessfully" });
     }
   });
 });

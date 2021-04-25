@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { checkLoginDetails } from "../../actions";
+import { url } from "../../config/index";
 import axios from "axios";
 import {
   Button,
@@ -40,10 +41,13 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
       if (LoginDetails.valid_user) {
         localStorage.setItem("token", LoginDetails.token);
         localStorage.setItem("firstname", LoginDetails.data.first_name);
+        localStorage.setItem("middlename", LoginDetails.data.middle_name);
         localStorage.setItem("lastname", LoginDetails.data.last_name);
         localStorage.setItem("lastlogin", LoginDetails.data.last_login);
         localStorage.setItem("role", LoginDetails.data.role);
         localStorage.setItem("userid", LoginDetails.data.id);
+        localStorage.setItem("email", LoginDetails.data.email);
+        localStorage.setItem("mobile", LoginDetails.data.mobile);
 
         if (LoginDetails.data.role === "super_user") {
           history.push("/player-list");
@@ -83,17 +87,13 @@ export default function Login({ checkLoginDetails, LoginDetails }) {
     profiledata.append("cname", cname);
     profiledata.append("cmessage", cmessage);
     axios
-      .post(
-        "http://localhost:3000/registereduserdetails/contact",
-        profiledata,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: localStorage.getItem("token"),
-          },
-        }
-      )
+      .post(url + "registereduserdetails/contact", profiledata, {
+        method: "POST",
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: localStorage.getItem("token"),
+        },
+      })
       .then(function (response) {
         if (response.data.status == 200) {
           NotificationModel("bg-success", response.data.msg);

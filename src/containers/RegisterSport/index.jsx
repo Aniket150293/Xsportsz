@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import {
-  registerBankByAdmin,
+  registerSportDetails,
   getRole,
   getSports,
   getSpetialization,
@@ -23,8 +23,8 @@ import { Form } from "react-bootstrap";
 import "./registersport.css";
 
 export default function RegisterSport({
-  registerBankByAdmin,
-  registeredBankDetailsByAdmin,
+  registerSportDetails,
+  sportRegistrationSuccess,
   getRole,
   getRolesuccess,
   getSports,
@@ -157,7 +157,7 @@ export default function RegisterSport({
         futurePlan: futurePlan,
         category: category,
       };
-      registerBankByAdmin(data, localStorage.getItem("token"));
+      registerSportDetails(data, localStorage.getItem("token"));
     }
     setIsSubmit(true);
   }
@@ -177,14 +177,9 @@ export default function RegisterSport({
   }
 
   React.useEffect(() => {
-    if (registeredBankDetailsByAdmin)
+    if (sportRegistrationSuccess)
       if (isSubmit) {
-        if (registeredBankDetailsByAdmin.status == 200) {
-          localStorage.setItem("first_name", first_name);
-          localStorage.setItem("last_name", last_name);
-          localStorage.setItem("middle_name", middle_name);
-          localStorage.setItem("email", email);
-          localStorage.setItem("mobile", mobile);
+        if (sportRegistrationSuccess.status == 200) {
           NotificationModel("bg-success", "Details Added Sucssesfully");
           setRole("");
           setSport("");
@@ -202,7 +197,7 @@ export default function RegisterSport({
         }
         setIsSubmit(false);
       }
-  }, [registeredBankDetailsByAdmin]);
+  }, [sportRegistrationSuccess]);
 
   return (
     <div className="py-5 " style={{ "background-color": "#333333" }}>
@@ -261,9 +256,6 @@ export default function RegisterSport({
                     </span>
                   </div>
                 </Row>
-                {/* <p className="mt-3 mb-0 text-muted text-sm">
-                        <span className="text-white text-nowrap">Since last month</span>
-                      </p> */}
               </CardBody>
             </Card>
             <br></br>
@@ -681,7 +673,7 @@ export default function RegisterSport({
 }
 
 const mapDispatchToProps = {
-  registerBankByAdmin: registerBankByAdmin,
+  registerSportDetails: registerSportDetails,
   getRole: getRole,
   getSports: getSports,
   getSpetialization: getSpetialization,
@@ -689,7 +681,7 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = (state) => ({
-  registeredBankDetailsByAdmin: state.registeredBankDetailsByAdmin,
+  sportRegistrationSuccess: state.sportRegistrationSuccess,
   getRolesuccess: state.getRolesuccess,
   getSportsSucsses: state.getSportsSucsses,
   getSpetializationSucsses: state.getSpetializationSucsses,

@@ -18,11 +18,13 @@ import {
   Container,
   Row,
   Col,
+  TabContent,
+  TabPane,
 } from "reactstrap";
 
 export default function Header({ logout }) {
   var history = useHistory();
-  function logout1(event) {
+  function logoutCall(event) {
     event.preventDefault();
     logout();
     localStorage.clear();
@@ -31,36 +33,34 @@ export default function Header({ logout }) {
 
   var image = require("../../assets/img/logo1.jpg");
 
-  let tabBar,
-    tabBar1,
-    tabBar2,
-    tabBar3,
-    tabBar4,
-    logoutBtn,
-    userSettings,
-    contactUS,
-    aboutUS;
+  let tabFirst, tabSecond, logoutBtn, userSettings;
+  console.log("!!!!!!!!!!11");
+  console.log(localStorage.getItem("role"));
+  const [activeTab, setActiveTab] = useState("1");
   if (localStorage.getItem("role") === "super_user") {
-    tabBar = (
-      <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+    tabFirst = (
+      <Nav
+        className={activeTab == "1" ? "active" : ""}
+        navbar
+        onClick={() => setActiveTab("1")}
+      >
         <UncontrolledDropdown nav>
-          <DropdownToggle nav>
+          <DropdownToggle nav to="/player-list" tag={Link}>
             <i className="ni ni-collection d-lg-none mr-1" />
             <span className="font-weight-bold nav-link-inner--text text-danger">
               Player List
             </span>
           </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem to="/player-list" tag={Link}>
-              Player List
-            </DropdownItem>
-          </DropdownMenu>
         </UncontrolledDropdown>
       </Nav>
     );
   } else if (localStorage.getItem("role") === "user") {
-    tabBar = (
-      <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+    tabFirst = (
+      <Nav
+        className={activeTab == "1" ? "active" : ""}
+        navbar
+        onClick={() => setActiveTab("1")}
+      >
         <UncontrolledDropdown nav>
           <DropdownToggle nav to="/register-sport" tag={Link}>
             <i className="ni ni-collection d-lg-none mr-1" />
@@ -71,10 +71,14 @@ export default function Header({ logout }) {
         </UncontrolledDropdown>
       </Nav>
     );
-    tabBar4 = (
-      <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+    tabSecond = (
+      <Nav
+        className={activeTab == "2" ? "active" : ""}
+        navbar
+        onClick={() => setActiveTab("2")}
+      >
         <UncontrolledDropdown nav>
-          <DropdownToggle nav to="/myregisteredsport" tag={Link}>
+          <DropdownToggle nav to="/my-registered-sports" tag={Link}>
             <i className="ni ni-collection d-lg-none mr-1" />
             <span className="font-weight-bold nav-link-inner--text text-danger">
               My Registered Sport
@@ -97,7 +101,7 @@ export default function Header({ logout }) {
               {localStorage.getItem("firstname")} &nbsp;{" "}
               {localStorage.getItem("lastname")}&nbsp;
             </span>
-            <Button className="btn btn-danger" onClick={logout1}>
+            <Button className="btn btn-danger" onClick={logoutCall}>
               Logout
             </Button>
           </DropdownToggle>
@@ -105,11 +109,11 @@ export default function Header({ logout }) {
       </Nav>
     );
     userSettings = (
-      <Nav className="navbar-nav-hover align-items-lg-center  " navbar>
+      <Nav className="navbar-nav-hover align-items-lg-center" navbar>
         <UncontrolledDropdown nav>
           <DropdownToggle nav>
             <i className="ni ni-collection d-lg-none mr-1 " />
-            <span className="font-weight-bold nav-link-inner--text text-danger ">
+            <span className="font-weight-bold nav-link-inner--text fontColor">
               User Settings
             </span>
           </DropdownToggle>
@@ -117,10 +121,17 @@ export default function Header({ logout }) {
             <DropdownItem
               to={"/register/" + localStorage.getItem("userid")}
               tag={Link}
+              className={activeTab == "3" ? "active fontColor" : "fontColor"}
+              onClick={() => setActiveTab("3")}
             >
               Edit Profile
             </DropdownItem>
-            <DropdownItem to="/changePassword" tag={Link}>
+            <DropdownItem
+              to="/changePassword"
+              tag={Link}
+              className={activeTab == "4" ? "active fontColor" : "fontColor"}
+              onClick={() => setActiveTab("4")}
+            >
               Change Password
             </DropdownItem>
           </DropdownMenu>
@@ -132,6 +143,24 @@ export default function Header({ logout }) {
   return (
     <div>
       <header>
+        {/* <Nav
+          tabs
+          className="shadow navbar-main fixed-top navbar-expand-lg navbar-dark headroom "
+          expand="lg"
+          style={{
+            "border-radius": "100px",
+            margin: "4px 25px",
+            padding: "0px 10px",
+            "background-color": "white",
+            "min-height": "80px",
+          }}
+        >
+          {tabBar}
+        </Nav> */}
+        {/* <TabContent activeTab={activeTab}>
+          <TabPane tabId="1">Tab 1 Content</TabPane>
+          <TabPane tabId="2">Tab 2 Content</TabPane>
+        </TabContent> */}
         <Navbar
           className="shadow navbar-main fixed-top navbar-expand-lg navbar-dark headroom "
           expand="lg"
@@ -183,11 +212,8 @@ export default function Header({ logout }) {
                   </Row>
                 </div>
 
-                {tabBar}
-                {tabBar1}
-                {tabBar2}
-                {tabBar3}
-                {tabBar4}
+                {tabFirst}
+                {tabSecond}
                 {userSettings}
                 {logoutBtn}
               </UncontrolledCollapse>

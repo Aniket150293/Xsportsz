@@ -47,7 +47,4 @@ contract bank {
         bal = bal + num;
     }
     
-    function getBalence() view public returns(int){
-        return bal;
-    }
 }

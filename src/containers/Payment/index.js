@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { payment } from "../../actions";
 import { useHistory } from "react-router";
+import { paymentUrl } from "../../config/index";
 import {
   Input,
   Container,
@@ -92,7 +93,6 @@ export default function Payment({ payment, paymentParams }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // var txn_url = "https://securegw-stage.paytm.in/order/process";
     var data = {
       userid: localStorage.getItem("userid"),
       email: localStorage.getItem("email"),
@@ -147,8 +147,7 @@ export default function Payment({ payment, paymentParams }) {
       var parametrs = paymentParams.data;
       parametrs["CHECKSUMHASH"] = paymentParams.checksum;
       var details = {
-        //action: "https://securegw-stage.paytm.in/order/process",
-        action: "https://securegw.paytm.in/order/process",
+        action: paymentUrl,
         params: parametrs,
       };
       post(details);
@@ -192,9 +191,9 @@ export default function Payment({ payment, paymentParams }) {
                     </CardTitle>
                     <hr />
                     <span className="mt-3 text-white font-weight-bold mb-0">
-                      {"Username : " + localStorage.getItem("first_name")}
-                      {" " + localStorage.getItem("middle_name")}
-                      {" " + localStorage.getItem("last_name")}
+                      {"Username : " + localStorage.getItem("firstname")}
+                      {" " + localStorage.getItem("middlename")}
+                      {" " + localStorage.getItem("lastname")}
                       <br />
                       {"Email : " + localStorage.getItem("email")}
                       <br />
